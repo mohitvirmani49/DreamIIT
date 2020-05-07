@@ -1,0 +1,30 @@
+{
+ "Questions" : {
+ "1" : {
+ "question" : "2 + 2 is equal to",
+ "option1" : "4",
+ "option2" : "5",
+ "option3" : "6",
+ "option4" : "5",
+ "answer" : "4"
+ },
+ "2" : {
+ "question" : "7 + 2 is equal to",
+ "option1" : "4",
+ "option2" : "5",
+ "option3" : "9",
+ "option4" : "5",
+ "answer" : "9"
+
+ },
+ "3" : {
+ "question" : "12 + 2 is equal to",
+ "option1" : "14",
+ "option2" : "5",
+ "option3" : "6",
+ "option4" : "5",
+ "answer" : "14"
+ }
+
+ }
+}

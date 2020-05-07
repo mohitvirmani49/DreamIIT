@@ -16,5 +16,49 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"/>
 
+    <LinearLayout android:id="@+id/linearLayout1"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent">
+
+        <Button
+            android:id="@+id/physics"
+            android:text="Physics"
+            android:layout_weight="1"
+            android:layout_height="50dp"
+            android:layout_width="0dp"/>
+
+        <Button
+            android:id="@+id/chemistry"
+            android:text="Chemistry"
+            android:layout_weight="1"
+            android:layout_height="50dp"
+            android:layout_width="0dp"/>
+   </LinearLayout>
+
+
+
+    <LinearLayout android:id="@+id/linearLayout2"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent">
+
+        <Button
+            android:id="@+id/maths"
+            android:text="Maths"
+            android:layout_weight="1"
+            android:layout_height="50dp"
+            android:layout_width="0dp"
+            android:layout_marginTop="60dp"/>
+
+        <Button
+            android:id="@+id/full_paper"
+            android:text="Full Test Paper"
+            android:layout_weight="1"
+            android:layout_height="50dp"
+            android:layout_width="0dp"
+            android:layout_marginTop="60dp"/>
+
+    </LinearLayout>
+
+
 
 </RelativeLayout>
