@@ -3,12 +3,12 @@ package com.example.quiz;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -16,36 +16,35 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 import Model.Question;
 
-public class Main6Activity extends AppCompatActivity {
+public class Main8Activity extends AppCompatActivity {
 
-
-    DatabaseReference reference;
-    Button nxt, submit;
-    Button optn1, optn2, optn3, optn4;
-    TextView questions, timer;
     int total = 1;
-    int correct = 0;
-    int wrong = 0;
+    DatabaseReference reference;
+    ImageView imageView;
+    Button optn1, optn2, optn3, optn4, nxt, sbmt;
+    TextView questions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main6);
+        setContentView(R.layout.activity_main8);
 
-        nxt = (Button) findViewById(R.id.next);
-        submit = (Button) findViewById(R.id.submit);
+        imageView = (ImageView) findViewById(R.id.img);
 
         optn1 = (Button) findViewById(R.id.radio_btn1);
         optn2 = (Button) findViewById(R.id.radio_btn2);
         optn3 = (Button) findViewById(R.id.radio_btn3);
         optn4 = (Button) findViewById(R.id.radio_btn4);
-//        res = (TextView)findViewById(R.id.res);
+
+        nxt = (Button) findViewById(R.id.next);
+        sbmt = (Button) findViewById(R.id.submit);
 
         questions = (TextView) findViewById(R.id.qstns);
-        timer = (TextView) findViewById(R.id.timer);
 
         updateQuestions();
         nxt.setOnClickListener(new View.OnClickListener() {
@@ -67,31 +66,26 @@ public class Main6Activity extends AppCompatActivity {
 
             }
         });
-        submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent myIntent = new Intent(Main6Activity.this, Main3Activity.class);
-                myIntent.putExtra("intVariableName", correct);
-                startActivity(myIntent);
 
-//                res.setText(String.valueOf(correct));
-
-            }
-        });
 
     }
 
     public void updateQuestions() {
-        if (total > 2) {
+        String a = "create_own";
+        if (total > 3) {
 
         } else {
-            reference = FirebaseDatabase.getInstance().getReference().child("Sequence_medium").child(String.valueOf(total));
+
+            reference = FirebaseDatabase.getInstance().getReference().child(a).child(String.valueOf(total));
             total++;
             reference.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     final Question question = dataSnapshot.getValue(Question.class);
+
                     questions.setText(question.getQuestion());
+                    Picasso.get().load(question.getImage()).into(imageView);
+
                     optn1.setText(question.getOption1());
                     optn2.setText(question.getOption2());
                     optn3.setText(question.getOption3());
@@ -107,7 +101,7 @@ public class Main6Activity extends AppCompatActivity {
                                 handler.postDelayed(new Runnable() {
                                     @Override
                                     public void run() {
-                                        correct++;
+//                                        correct++;
 //                                        optn1.setBackgroundColor(Color.parseColor("#03A9F4"));
 
 //
@@ -115,7 +109,7 @@ public class Main6Activity extends AppCompatActivity {
                                     }
                                 }, 1500);
                             } else {
-                                wrong++;
+//                                wrong++;
 //                                optn1.setBackgroundColor(Color.BLUE);
 //                                if(optn2.getText().toString().equals(question.getAnswer())){
 //                                    optn2.setBackgroundColor(Color.CYAN);
@@ -151,7 +145,7 @@ public class Main6Activity extends AppCompatActivity {
                                 handler.postDelayed(new Runnable() {
                                     @Override
                                     public void run() {
-                                        correct++;
+//                                        correct++;
 //                                        optn1.setBackgroundColor(Color.parseColor("#03A9F4"));
 
 //
@@ -159,7 +153,7 @@ public class Main6Activity extends AppCompatActivity {
                                     }
                                 }, 1500);
                             } else {
-                                wrong++;
+//                                wrong++;
 //                                optn1.setBackgroundColor(Color.BLUE);
 //                                if(optn2.getText().toString().equals(question.getAnswer())){
 //                                    optn2.setBackgroundColor(Color.CYAN);
@@ -196,7 +190,7 @@ public class Main6Activity extends AppCompatActivity {
                                 handler.postDelayed(new Runnable() {
                                     @Override
                                     public void run() {
-                                        correct++;
+//                                        correct++;
 //                                        optn1.setBackgroundColor(Color.parseColor("#03A9F4"));
 
 //
@@ -204,7 +198,7 @@ public class Main6Activity extends AppCompatActivity {
                                     }
                                 }, 1500);
                             } else {
-                                wrong++;
+//                                wrong++;
 //                                optn1.setBackgroundColor(Color.BLUE);
 //                                if(optn2.getText().toString().equals(question.getAnswer())){
 //                                    optn2.setBackgroundColor(Color.CYAN);
@@ -241,7 +235,7 @@ public class Main6Activity extends AppCompatActivity {
                                 handler.postDelayed(new Runnable() {
                                     @Override
                                     public void run() {
-                                        correct++;
+//                                        correct++;
 //                                        optn1.setBackgroundColor(Color.parseColor("#03A9F4"));
 
 //
@@ -249,7 +243,7 @@ public class Main6Activity extends AppCompatActivity {
                                     }
                                 }, 1500);
                             } else {
-                                wrong++;
+//                                wrong++;
 //                                optn1.setBackgroundColor(Color.BLUE);
 //                                if(optn2.getText().toString().equals(question.getAnswer())){
 //                                    optn2.setBackgroundColor(Color.CYAN);
@@ -285,7 +279,6 @@ public class Main6Activity extends AppCompatActivity {
             });
         }
 
-
-
     }
+
 }

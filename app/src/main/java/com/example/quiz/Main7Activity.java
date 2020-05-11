@@ -21,7 +21,6 @@ import Model.Question;
 
 public class Main7Activity extends AppCompatActivity {
 
-
     DatabaseReference reference;
     Button nxt, submit;
     Button optn1, optn2, optn3, optn4;
@@ -83,7 +82,7 @@ public class Main7Activity extends AppCompatActivity {
     }
 
     public void updateQuestions() {
-        if (total > 3) {
+        if (total > 2) {
 
         } else {
             reference = FirebaseDatabase.getInstance().getReference().child("Sequence_hard").child(String.valueOf(total));
@@ -92,7 +91,9 @@ public class Main7Activity extends AppCompatActivity {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     final Question question = dataSnapshot.getValue(Question.class);
+
                     questions.setText(question.getQuestion());
+
                     optn1.setText(question.getOption1());
                     optn2.setText(question.getOption2());
                     optn3.setText(question.getOption3());

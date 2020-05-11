@@ -10,6 +10,7 @@ import android.widget.Button;
 public class MainActivity extends AppCompatActivity {
     Button b1;
     Button phy,chem,maths,full;
+    Button own_test;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
         chem = (Button)findViewById(R.id.chemistry);
         maths = (Button)findViewById(R.id.maths);
         full = (Button) findViewById(R.id.full_paper);
+        own_test = (Button)findViewById(R.id.own_test);
 
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -36,6 +38,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        own_test.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,Main8Activity.class);
+                startActivity(intent);
+
+            }
+        });
+
 
     }
     private void startQuiz(){
@@ -47,4 +58,5 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
 
     }
+
 }

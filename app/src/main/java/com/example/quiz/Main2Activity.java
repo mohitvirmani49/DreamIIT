@@ -86,10 +86,11 @@ public class Main2Activity extends AppCompatActivity {
     }
 
     public void updateQuestions() {
-        if (total > 3) {
+        String a = "Questions";
+        if (total > 2) {
 
         } else {
-            reference = FirebaseDatabase.getInstance().getReference().child("Questions").child(String.valueOf(total));
+            reference = FirebaseDatabase.getInstance().getReference().child(a).child(String.valueOf(total));
             total++;
             reference.addValueEventListener(new ValueEventListener() {
                 @Override
