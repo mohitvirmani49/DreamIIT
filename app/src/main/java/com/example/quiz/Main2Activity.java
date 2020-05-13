@@ -90,7 +90,9 @@ public class Main2Activity extends AppCompatActivity {
         if (total > 2) {
 
         } else {
+            System.out.println("Total value is " + total);
             reference = FirebaseDatabase.getInstance().getReference().child(a).child(String.valueOf(total));
+            System.out.println("I executed" + total);
             total++;
             reference.addValueEventListener(new ValueEventListener() {
                 @Override

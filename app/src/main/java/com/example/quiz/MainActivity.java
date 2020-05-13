@@ -11,6 +11,7 @@ public class MainActivity extends AppCompatActivity {
     Button b1;
     Button phy,chem,maths,full;
     Button own_test;
+    Button random_ques;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
         maths = (Button)findViewById(R.id.maths);
         full = (Button) findViewById(R.id.full_paper);
         own_test = (Button)findViewById(R.id.own_test);
+        random_ques = (Button) findViewById(R.id.random_questions);
 
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,6 +44,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this,Main8Activity.class);
+                startActivity(intent);
+
+            }
+        });
+
+        random_ques.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,Main9Activity.class);
                 startActivity(intent);
 
             }
