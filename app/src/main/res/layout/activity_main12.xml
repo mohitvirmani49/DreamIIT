@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Main12Activity"
+    android:background="@color/Backgrnd"
+
+    >
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/mohitpic"
+        android:layout_above="@+id/lv1"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="75dp"
+        android:id="@+id/imagea"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/lv1"
+        android:text="Start your learning journey, Now !"
+        android:textColor="#FFFFFF"
+        android:fontFamily="cursive"
+        android:textAlignment="center"
+        android:textSize="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_centerInParent="true"/>
+
+
+    <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="5dp"
+    android:layout_centerInParent="true"
+    android:id="@+id/lv1">
+
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="10"
+        android:digits="0123456789"
+        android:hint="Enter your Phone Number"
+        android:maxLength="10"
+        android:id="@+id/mobile"
+        android:background="@drawable/edit_text_bottom_line"
+        android:textColor="#FFFFFF"
+        android:textAlignment="center"
+        android:textColorHint="#FFFFFF"
+        android:inputType="number"
+        android:fontFamily="sans-serif-light"
+
+
+        />
+
+        <Button
+            android:id="@+id/go"
+            android:layout_width="58dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.011"
+            android:background="@drawable/rounded_button"
+            android:fontFamily="sans-serif-light"
+            android:text="Go" />
+
+
+</LinearLayout>
+
+
+    <TextView
+        android:id="@+id/cont"
+        android:layout_width="51dp"
+        android:layout_height="51dp"
+        android:layout_below="@+id/lv1"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="21dp"
+        android:fontFamily="sans-serif-light"
+        android:text="Or"
+
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="25dp"
+
+
+        />
+
+    <com.google.android.gms.common.SignInButton
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/cont"
+        android:layout_marginTop="25dp"
+        android:layout_centerInParent="true"
+        android:id="@+id/google_sign_in"
+        />
+
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/facebook_login"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/google_sign_in"
+        android:layout_marginTop="15dp"
+        android:layout_centerHorizontal="true"/>
+
+
+
+
+
+
+
+
+</RelativeLayout>

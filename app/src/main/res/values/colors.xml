@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
+<!--    <color name="colorPrimary">#008577</color>-->
+    <color name="colorPrimary">#1b3a64</color>
+    <color name="colorPrimaryDark">#21467a</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="btColor">#f4de15</color>
 
     <color name="Button">#003366</color>
+    <color name="Backgrnd">#21467A</color>
+
 </resources>

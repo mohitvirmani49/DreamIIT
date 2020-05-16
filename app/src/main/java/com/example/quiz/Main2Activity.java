@@ -1,6 +1,8 @@
 package com.example.quiz;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -12,6 +14,7 @@ import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -28,7 +31,8 @@ public class Main2Activity extends AppCompatActivity {
 
     DatabaseReference reference;
     Button nxt, submit;
-    Button optn1, optn2, optn3, optn4;
+    RadioButton optn1, optn2, optn3, optn4;
+    RadioGroup radioGroup;
     TextView questions, timer;
     int total = 1;
     int correct = 0;
@@ -42,29 +46,61 @@ public class Main2Activity extends AppCompatActivity {
         nxt = (Button) findViewById(R.id.next);
         submit = (Button) findViewById(R.id.submit);
 
-        optn1 = (Button) findViewById(R.id.radio_btn1);
-        optn2 = (Button) findViewById(R.id.radio_btn2);
-        optn3 = (Button) findViewById(R.id.radio_btn3);
-        optn4 = (Button) findViewById(R.id.radio_btn4);
+        optn1 = (RadioButton) findViewById(R.id.radio_btn1);
+        optn2 = (RadioButton) findViewById(R.id.radio_btn2);
+        optn3 = (RadioButton) findViewById(R.id.radio_btn3);
+        optn4 = (RadioButton) findViewById(R.id.radio_btn4);
+        radioGroup = (RadioGroup) findViewById(R.id.rg1);
 //        res = (TextView)findViewById(R.id.res);
 
         questions = (TextView) findViewById(R.id.qstns);
         timer = (TextView) findViewById(R.id.timer);
 
         updateQuestions();
+
         nxt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                if(optn1.isSelected()||optn2.isSelected()||optn3.isSelected()||optn4.isSelected()){
-//                    optn1.setSelected(false);
-//                    optn2.setSelected(false);
-//                    optn3.setSelected(false);
-//                    optn4.setSelected(false);
-//                }
+
+                SharedPreferences sharedPreferences = getSharedPreferences("SaveData", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                System.out.println("1"+optn1.getId());
+                System.out.println("2"+optn2.getId());
+                System.out.println("3"+optn3.getId());
+                System.out.println("4"+optn4.getId());
+
+                if (optn1.isChecked()) {
+                    editor.putString("Value", optn1.getText().toString());
+                    editor.apply();
+                }
+                if (optn3.isChecked()) {
+                    editor.putString("Value1", optn3.getText().toString());
+                    editor.apply();
+
+                }
+                if (optn2.isChecked()) {
+                    editor.apply();
+                    System.out.println("Mai tera hero" + optn2.getId());
+
+
+                }
+                if (optn4.isChecked()) {
+                    editor.putInt("Value3", optn4.getId());
+//                    optn1.
+                    editor.apply();
+
+                }
+//                editor.putString("Value", String.valueOf(radioGroup.getCheckedRadioButtonId()));
+//                editor.apply();
                 optn1.setBackgroundColor(getResources().getColor(R.color.Button));
                 optn2.setBackgroundColor(getResources().getColor(R.color.Button));
                 optn3.setBackgroundColor(getResources().getColor(R.color.Button));
                 optn4.setBackgroundColor(getResources().getColor(R.color.Button));
+
+                optn1.setChecked(false);
+                optn2.setChecked(false);
+                optn3.setChecked(false);
+                optn4.setChecked(false);
 
                 updateQuestions();
 
@@ -74,7 +110,7 @@ public class Main2Activity extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent myIntent = new Intent(Main2Activity.this, Main3Activity.class);
+                Intent myIntent = new Intent(Main2Activity.this, Main10Activity.class);
                 myIntent.putExtra("intVariableName", correct);
                 startActivity(myIntent);
 
@@ -87,13 +123,17 @@ public class Main2Activity extends AppCompatActivity {
 
     public void updateQuestions() {
         String a = "Questions";
-        if (total > 2) {
+        if (total > 10) {
 
         } else {
+
+
             System.out.println("Total value is " + total);
             reference = FirebaseDatabase.getInstance().getReference().child(a).child(String.valueOf(total));
             System.out.println("I executed" + total);
             total++;
+
+
             reference.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -104,91 +144,38 @@ public class Main2Activity extends AppCompatActivity {
                     optn3.setText(question.getOption3());
                     optn4.setText(question.getOption4());
 
+
                     optn1.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+                            optn2.setChecked(false);
+                            optn2.setBackgroundColor(getResources().getColor(R.color.Button));
+                            optn3.setChecked(false);
+                            optn3.setBackgroundColor(getResources().getColor(R.color.Button));
+                            optn4.setChecked(false);
+                            optn4.setBackgroundColor(getResources().getColor(R.color.Button));
                             optn1.setBackgroundColor(Color.GREEN);
-                            if (optn1.getText().toString().equals(question.getAnswer())) {
-//                                optn1.setBackgroundColor(Color.RED);
-                                Handler handler = new Handler();
-                                handler.postDelayed(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        correct++;
-//                                        optn1.setBackgroundColor(Color.parseColor("#03A9F4"));
 
-//
-//
-                                    }
-                                }, 1500);
-                            } else {
-                                wrong++;
-//                                optn1.setBackgroundColor(Color.BLUE);
-//                                if(optn2.getText().toString().equals(question.getAnswer())){
-//                                    optn2.setBackgroundColor(Color.CYAN);
-//                                }else if(optn3.getText().toString().equals(question.getAnswer())){
-//                                    optn3.setBackgroundColor(Color.CYAN);
-//                                }else if(optn4.getText().toString().equals(question.getAnswer())){
-//                                    optn4.setBackgroundColor(Color.CYAN);
-//                                }
-                                Handler handler = new Handler();
-                                handler.postDelayed(new Runnable() {
-                                    @Override
-                                    public void run() {
-//                                        optn1.setBackgroundColor(Color.parseColor("#03A9F4"));
-//                                        optn2.setBackgroundColor(Color.parseColor("#03A9F4"));
-//                                        optn3.setBackgroundColor(Color.parseColor("#03A9F4"));
-//                                        optn4.setBackgroundColor(Color.parseColor("#03A9F4"));
-                                        updateQuestions();
-//
-                                    }
-                                }, 1500);
-////                                updateQuestions();
-                            }
+//                            editor.putString("Value", String.valueOf(optn1.getText()));
+//                            editor.apply();
+
                         }
                     });
 
                     optn2.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+                            optn1.setChecked(false);
+                            optn1.setBackgroundColor(getResources().getColor(R.color.Button));
+                            optn4.setChecked(false);
+                            optn4.setBackgroundColor(getResources().getColor(R.color.Button));
+                            optn3.setChecked(false);
+                            optn3.setBackgroundColor(getResources().getColor(R.color.Button));
                             optn2.setBackgroundColor(Color.GREEN);
-                            if (optn2.getText().toString().equals(question.getAnswer())) {
-//                                optn1.setBackgroundColor(Color.RED);
-                                Handler handler = new Handler();
-                                handler.postDelayed(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        correct++;
-//                                        optn1.setBackgroundColor(Color.parseColor("#03A9F4"));
 
-//
-//
-                                    }
-                                }, 1500);
-                            } else {
-                                wrong++;
-//                                optn1.setBackgroundColor(Color.BLUE);
-//                                if(optn2.getText().toString().equals(question.getAnswer())){
-//                                    optn2.setBackgroundColor(Color.CYAN);
-//                                }else if(optn3.getText().toString().equals(question.getAnswer())){
-//                                    optn3.setBackgroundColor(Color.CYAN);
-//                                }else if(optn4.getText().toString().equals(question.getAnswer())){
-//                                    optn4.setBackgroundColor(Color.CYAN);
-//                                }
-                                Handler handler = new Handler();
-                                handler.postDelayed(new Runnable() {
-                                    @Override
-                                    public void run() {
-//                                        optn1.setBackgroundColor(Color.parseColor("#03A9F4"));
-//                                        optn2.setBackgroundColor(Color.parseColor("#03A9F4"));
-//                                        optn3.setBackgroundColor(Color.parseColor("#03A9F4"));
-//                                        optn4.setBackgroundColor(Color.parseColor("#03A9F4"));
-                                        updateQuestions();
-//
-                                    }
-                                }, 1500);
-////                                updateQuestions();
-                            }
+//                            editor.putString("Value", String.valueOf(optn1.getText()));
+//                            editor.apply();
+
                         }
                     });
 
@@ -196,44 +183,17 @@ public class Main2Activity extends AppCompatActivity {
                     optn3.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+                            optn1.setChecked(false);
+                            optn1.setBackgroundColor(getResources().getColor(R.color.Button));
+                            optn2.setChecked(false);
+                            optn2.setBackgroundColor(getResources().getColor(R.color.Button));
+                            optn4.setChecked(false);
+                            optn4.setBackgroundColor(getResources().getColor(R.color.Button));
                             optn3.setBackgroundColor(Color.GREEN);
-                            if (optn3.getText().toString().equals(question.getAnswer())) {
-//                                optn1.setBackgroundColor(Color.RED);
-                                Handler handler = new Handler();
-                                handler.postDelayed(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        correct++;
-//                                        optn1.setBackgroundColor(Color.parseColor("#03A9F4"));
 
-//
-//
-                                    }
-                                }, 1500);
-                            } else {
-                                wrong++;
-//                                optn1.setBackgroundColor(Color.BLUE);
-//                                if(optn2.getText().toString().equals(question.getAnswer())){
-//                                    optn2.setBackgroundColor(Color.CYAN);
-//                                }else if(optn3.getText().toString().equals(question.getAnswer())){
-//                                    optn3.setBackgroundColor(Color.CYAN);
-//                                }else if(optn4.getText().toString().equals(question.getAnswer())){
-//                                    optn4.setBackgroundColor(Color.CYAN);
-//                                }
-                                Handler handler = new Handler();
-                                handler.postDelayed(new Runnable() {
-                                    @Override
-                                    public void run() {
-//                                        optn1.setBackgroundColor(Color.parseColor("#03A9F4"));
-//                                        optn2.setBackgroundColor(Color.parseColor("#03A9F4"));
-//                                        optn3.setBackgroundColor(Color.parseColor("#03A9F4"));
-//                                        optn4.setBackgroundColor(Color.parseColor("#03A9F4"));
-                                        updateQuestions();
-//
-                                    }
-                                }, 1500);
-////                                updateQuestions();
-                            }
+//                            editor.putString("Value", String.valueOf(optn1.getText()));
+//                            editor.apply();
+
                         }
                     });
 
@@ -241,47 +201,19 @@ public class Main2Activity extends AppCompatActivity {
                     optn4.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+                            optn1.setChecked(false);
+                            optn1.setBackgroundColor(getResources().getColor(R.color.Button));
+                            optn2.setChecked(false);
+                            optn2.setBackgroundColor(getResources().getColor(R.color.Button));
+                            optn3.setChecked(false);
+                            optn3.setBackgroundColor(getResources().getColor(R.color.Button));
                             optn4.setBackgroundColor(Color.GREEN);
-                            if (optn4.getText().toString().equals(question.getAnswer())) {
-//                                optn1.setBackgroundColor(Color.RED);
-                                Handler handler = new Handler();
-                                handler.postDelayed(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        correct++;
-//                                        optn1.setBackgroundColor(Color.parseColor("#03A9F4"));
+//
+//                            editor.putString("Value", String.valueOf(optn1.getText()));
+//                            editor.apply();
 
-//
-//
-                                    }
-                                }, 1500);
-                            } else {
-                                wrong++;
-//                                optn1.setBackgroundColor(Color.BLUE);
-//                                if(optn2.getText().toString().equals(question.getAnswer())){
-//                                    optn2.setBackgroundColor(Color.CYAN);
-//                                }else if(optn3.getText().toString().equals(question.getAnswer())){
-//                                    optn3.setBackgroundColor(Color.CYAN);
-//                                }else if(optn4.getText().toString().equals(question.getAnswer())){
-//                                    optn4.setBackgroundColor(Color.CYAN);
-//                                }
-                                Handler handler = new Handler();
-                                handler.postDelayed(new Runnable() {
-                                    @Override
-                                    public void run() {
-//                                        optn1.setBackgroundColor(Color.parseColor("#03A9F4"));
-//                                        optn2.setBackgroundColor(Color.parseColor("#03A9F4"));
-//                                        optn3.setBackgroundColor(Color.parseColor("#03A9F4"));
-//                                        optn4.setBackgroundColor(Color.parseColor("#03A9F4"));
-                                        updateQuestions();
-//
-                                    }
-                                }, 1500);
-////                                updateQuestions();
-                            }
                         }
                     });
-
 
                 }
 
@@ -292,7 +224,9 @@ public class Main2Activity extends AppCompatActivity {
             });
         }
 
+
     }
 
 
 }
+
