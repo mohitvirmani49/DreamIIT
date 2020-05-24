@@ -35,6 +35,8 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
         Upload uploadCurrent = mUploads.get(position);
         holder.textView.setText(uploadCurrent.getmName());
         Picasso.get().load(uploadCurrent.getmImageUrl()).fit().centerCrop().into(holder.imageView);
+        holder.textView1.setText(uploadCurrent.getmDisplayName());
+        Picasso.get().load(uploadCurrent.getmDisplayImage()).fit().centerCrop().into(holder.im1);
 
 
     }
@@ -47,11 +49,17 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
     public class ImageViewHolder extends RecyclerView.ViewHolder {
         public TextView textView;
         public ImageView imageView;
+        public ImageView im1;
+        public TextView textView1;
+
 
         public ImageViewHolder(@NonNull View itemView) {
             super(itemView);
             textView = itemView.findViewById(R.id.text_view_name);
             imageView = itemView.findViewById(R.id.image_view_upload);
+            im1 = itemView.findViewById(R.id.display_image5);
+            textView1 = itemView.findViewById(R.id.display_name5);
+
         }
     }
 }

@@ -1,27 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ImagesActivity"
-    android:layout_margin="20dp">
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:background="@drawable/doubt_background">
+
     <ProgressBar
+        android:id="@+id/pg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/pg"
-        android:layout_centerInParent="true"/>
+        android:layout_centerInParent="true" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/recycler_view"/>
+        android:layout_height="match_parent" />
 
+    <Button
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="40dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginEnd="15dp"
+        android:text="+"
+        android:textSize="30dp"
+        android:elevation="20dp"
+        android:textAlignment="center"
+
+        android:id="@+id/floatwithme"
+
+        android:background="@drawable/color_add"/>
 
 
 </RelativeLayout>
-
-</androidx.cardview.widget.CardView>

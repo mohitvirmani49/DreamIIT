@@ -22,11 +22,14 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.facebook.appevents.internal.InAppPurchaseActivityLifecycleTracker;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -124,36 +127,56 @@ public class Main16Activity extends AppCompatActivity {
 
     private void uploadFile() {
         if (mImageUri != null) {
-            final StorageReference fileReference = mStorageRef.child(System.currentTimeMillis()
-                    + "." + getFileExtension(mImageUri));
+            FirebaseAuth firebaseAuth;
+            firebaseAuth = FirebaseAuth.getInstance();
+            final FirebaseUser user = firebaseAuth.getCurrentUser();
+            
+            if (user.getDisplayName() != null) {
 
-            fileReference.putFile(mImageUri).continueWithTask(
-                    new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
-                        @Override
-                        public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                            if (!task.isSuccessful()) {
-                                throw task.getException(); }
-                            return fileReference.getDownloadUrl();
-                        } })
-                    .addOnCompleteListener(new OnCompleteListener<Uri>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Uri> task) {
-                            if (task.isSuccessful()) { Uri downloadUri = task.getResult();
-                                Upload upload = new Upload(mEditTextFileName.getText().toString().trim(), downloadUri.toString());
-                                mDatabaseRef.push().setValue(upload);
-                                Toast.makeText(Main16Activity.this, "Upload successful", Toast.LENGTH_LONG).show();
+
+                final StorageReference fileReference = mStorageRef.child(System.currentTimeMillis()
+                        + "." + getFileExtension(mImageUri));
+
+                fileReference.putFile(mImageUri).continueWithTask(
+                        new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                            @Override
+                            public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                                if (!task.isSuccessful()) {
+                                    throw task.getException();
+                                }
+                                return fileReference.getDownloadUrl();
                             }
-                            else { Toast.makeText(Main16Activity.this, "upload failed: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                        })
+                        .addOnCompleteListener(new OnCompleteListener<Uri>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Uri> task) {
+                                if (task.isSuccessful()) {
+                                    Uri downloadUri = task.getResult();
+                                    String username = user.getDisplayName();
+                                    Uri pic = user.getPhotoUrl();
+                                    Upload upload = new Upload(mEditTextFileName.getText().toString().trim(), downloadUri.toString(),username.trim(),pic.toString());
+//                                    DispName dispName = new DispName(username.trim(), downloadUri.toString());
+//                                    mDatabaseRef.push().setValue(dispName);
+//                                    Upload upload = new Upload(mEditTextFileName.getText().toString().trim(), downloadUri.toString());
+
+                                    mDatabaseRef.push().setValue(upload);
+//                                    mDatabaseRef.push().setValue(upload1);
+                                    Toast.makeText(Main16Activity.this, "Upload successful", Toast.LENGTH_LONG).show();
+                                } else {
+                                    Toast.makeText(Main16Activity.this, "upload failed: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                                }
                             }
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(Main16Activity.this, e.getMessage(), Toast.LENGTH_LONG).show();
-                        }
-                    });
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(Main16Activity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                            }
+                        });
+            }
         } else {
+
+
             Toast.makeText(this, "No file selected", Toast.LENGTH_LONG).show();
         }
     }

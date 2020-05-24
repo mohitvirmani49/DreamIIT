@@ -36,7 +36,7 @@ public class Main14Activity extends AppCompatActivity {
         doubt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Main14Activity.this, Main16Activity.class);
+                Intent intent = new Intent(Main14Activity.this, ImagesActivity.class);
                 startActivity(intent);
             }
         });
