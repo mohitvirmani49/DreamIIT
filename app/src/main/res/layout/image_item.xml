@@ -4,7 +4,8 @@
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
     android:elevation="8dp"
-    android:background="@drawable/cardview_color">
+    android:background="@drawable/cardview_color"
+    android:id="@+id/card_view_main_doubt">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -35,6 +36,13 @@
             android:textStyle="normal"
             android:layout_toRightOf="@+id/display_image5"
             android:layout_marginStart="5dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:textSize="15dp"
+            android:id="@+id/date_doubt"/>
     </RelativeLayout>
 
         <TextView

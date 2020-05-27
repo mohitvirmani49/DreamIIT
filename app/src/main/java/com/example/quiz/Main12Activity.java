@@ -31,6 +31,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.FirebaseUserMetadata;
 import com.google.firebase.auth.GoogleAuthProvider;
 
 import com.facebook.FacebookSdk;
@@ -194,6 +195,9 @@ public class Main12Activity extends AppCompatActivity {
             GoogleSignInAccount acc = completed_task.getResult(ApiException.class);
             Toast.makeText(getApplicationContext(), "Signing Success", Toast.LENGTH_SHORT).show();
             FirebaseGoogleAuth(acc);
+            //email
+            firebaseAuth.sendPasswordResetEmail(acc.getEmail());
+
             Intent intent = new Intent(Main12Activity.this,Main14Activity.class);
             intent.putExtra("message", acc.getDisplayName());
             startActivity(intent);

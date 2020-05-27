@@ -6,12 +6,13 @@ public class Upload {
     private String mImageUrl;
     private String mDisplayName;
     private String mDisplayImage;
+    private String mDate;
 
     public Upload() {
     }
 
 
-    public Upload(String name, String imageUrl, String username, String image) {
+    public Upload(String name, String imageUrl, String username, String image, String date) {
         if (name.trim().equals("")) {
             name = "No Text Description";
         }
@@ -19,6 +20,7 @@ public class Upload {
         mImageUrl = imageUrl;
         mDisplayName = username;
         mDisplayImage = image;
+        mDate = date;
 
 
     }
@@ -54,5 +56,13 @@ public class Upload {
 
     public void setmDisplayImage(String mDisplayImage) {
         this.mDisplayImage = mDisplayImage;
+    }
+
+    public String getmDate() {
+        return mDate;
+    }
+
+    public void setmDate(String mDate) {
+        this.mDate = mDate;
     }
 }

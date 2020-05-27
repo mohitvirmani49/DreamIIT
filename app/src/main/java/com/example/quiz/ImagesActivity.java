@@ -12,7 +12,6 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -22,14 +21,12 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ImagesActivity extends AppCompatActivity {
+public class ImagesActivity extends AppCompatActivity implements ImageAdapter.OnItemClickListener {
     private RecyclerView mRecyclerView;
     private ImageAdapter mAdapter;
     private Button floatingActionButton;
-//    private NameAdapter nAdapter;
     private DatabaseReference mDatabaseRef;
     private List<Upload> mUploads;
-//    private List<DispName> mdispNames;
     private ProgressBar progressBar;
 
 
@@ -39,13 +36,13 @@ public class ImagesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_images);
         mRecyclerView = findViewById(R.id.recycler_view);
         progressBar = findViewById(R.id.pg);
-        floatingActionButton = (Button)findViewById(R.id.floatwithme);
+        floatingActionButton = (Button) findViewById(R.id.floatwithme);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ImagesActivity.this,Main16Activity.class);
+                Intent intent = new Intent(ImagesActivity.this, Main16Activity.class);
                 startActivity(intent);
             }
         });
@@ -65,6 +62,7 @@ public class ImagesActivity extends AppCompatActivity {
 
                 }
                 mAdapter = new ImageAdapter(ImagesActivity.this, mUploads);
+                mAdapter.setOnItemClickListener(ImagesActivity.this);
 
 //                nAdapter = new NameAdapter(ImagesActivity.this, mdispNames);
                 mRecyclerView.setAdapter(mAdapter);
@@ -80,5 +78,12 @@ public class ImagesActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public void itemClicked(int position) {
+        Intent intent = new Intent(this, Main17Activity.class);
+        startActivity(intent);
+
     }
 }

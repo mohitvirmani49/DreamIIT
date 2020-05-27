@@ -1,6 +1,7 @@
 package com.example.quiz;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,20 @@ import java.util.List;
 public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHolder> {
     private Context mContext;
     private List<Upload> mUploads;
+    private OnItemClickListener itemClickListener;
+    //    OtemClickListener
+
+
+    public interface OnItemClickListener {
+        void itemClicked(int position);
+
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        itemClickListener = listener;
+
+    }
+
 
     public ImageAdapter(Context context, List<Upload> uploads) {
         mContext = context;
@@ -38,7 +53,6 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
         holder.textView1.setText(uploadCurrent.getmDisplayName());
         Picasso.get().load(uploadCurrent.getmDisplayImage()).fit().centerCrop().into(holder.im1);
 
-
     }
 
     @Override
@@ -59,7 +73,18 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
             imageView = itemView.findViewById(R.id.image_view_upload);
             im1 = itemView.findViewById(R.id.display_image5);
             textView1 = itemView.findViewById(R.id.display_name5);
-
+//            itemView.setOnClickListener(this);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (itemClickListener != null) {
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+                            itemClickListener.itemClicked(position);
+                        }
+                    }
+                }
+            });
         }
     }
 }

@@ -1,19 +1,15 @@
 package com.example.quiz;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentResolver;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+
 import android.os.Handler;
-import android.provider.MediaStore;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
+import android.text.format.DateUtils;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
@@ -22,25 +18,30 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.facebook.appevents.internal.InAppPurchaseActivityLifecycleTracker;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
+
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.OnProgressListener;
+
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
-import java.io.IOException;
-import java.net.URI;
+import org.ocpsoft.prettytime.PrettyTime;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.TimeZone;
+
 
 public class Main16Activity extends AppCompatActivity {
     private static final int PICK_IMAGE_REQUEST = 1;
@@ -130,7 +131,35 @@ public class Main16Activity extends AppCompatActivity {
             FirebaseAuth firebaseAuth;
             firebaseAuth = FirebaseAuth.getInstance();
             final FirebaseUser user = firebaseAuth.getCurrentUser();
-            
+
+            // Date
+
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+
+                }
+            },2000);
+
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd kk:mm:ss");
+            String dateString = dateFormat.format(Calendar.getInstance().getTime());;
+
+
+            Date convertedDate = new Date();
+
+            try {
+                convertedDate = dateFormat.parse(dateString);
+            } catch (ParseException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+
+            PrettyTime p = new PrettyTime();
+
+            final String datetime = p.format(convertedDate);
+
+
             if (user.getDisplayName() != null) {
 
 
@@ -154,7 +183,7 @@ public class Main16Activity extends AppCompatActivity {
                                     Uri downloadUri = task.getResult();
                                     String username = user.getDisplayName();
                                     Uri pic = user.getPhotoUrl();
-                                    Upload upload = new Upload(mEditTextFileName.getText().toString().trim(), downloadUri.toString(),username.trim(),pic.toString());
+                                    Upload upload = new Upload(mEditTextFileName.getText().toString().trim(), downloadUri.toString(), username.trim(), pic.toString(), datetime.trim());
 //                                    DispName dispName = new DispName(username.trim(), downloadUri.toString());
 //                                    mDatabaseRef.push().setValue(dispName);
 //                                    Upload upload = new Upload(mEditTextFileName.getText().toString().trim(), downloadUri.toString());
@@ -185,4 +214,8 @@ public class Main16Activity extends AppCompatActivity {
         Intent intent = new Intent(this, ImagesActivity.class);
         startActivity(intent);
     }
+    private void time(){
+
+    }
+
 }
