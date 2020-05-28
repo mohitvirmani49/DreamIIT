@@ -1,15 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".Main17Activity">
+    android:layout_height="wrap_content"
+    tools:context=".Main17Activity"
+    android:background="@drawable/doubt_background"
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/rl1">
 
-    <TextView
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/popup"
+            android:layout_alignParentRight="true"
+            android:id="@+id/pop1"
+            android:background="#00000000"
+            android:layout_marginEnd="15dp"
+            android:layout_marginTop="10dp"
+            android:onClick="showPopup1"
+
+            />
+
+        <ImageButton
+            android:id="@+id/question_image"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/pop1"
+            />
+
+        <TextView
+            android:id="@+id/question_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="25dp"
+
+            android:layout_below="@id/question_image"/>
+
+        <com.mikhaellopez.circularimageview.CircularImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:id="@+id/answer_pg_image"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/question_text"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/answer_pg_image"
+            android:text="hello"
+            android:textSize="15dp"
+            android:id="@+id/answer_pg_name"
+            android:layout_below="@+id/question_text"
+            android:textAllCaps="false"
+            android:layout_marginLeft="15dp"
+            />
+    </RelativeLayout>
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="hola"
-        android:textSize="50dp"/>
+        android:layout_below="@+id/rl1"
+        android:layout_marginTop="20dp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <include
+        layout="@layout/answer_pg"/>
+
+    </RelativeLayout>
+
+
+
+</RelativeLayout>

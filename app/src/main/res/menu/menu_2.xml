@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <item
-        android:id="@+id/i1"
-        android:title="show Uploads"
-        app:showAsAction="ifRoom"/>
+        android:id="@+id/report_ques"
+        android:title="Report Question"
+        app:showAsAction="never"
+        android:orderInCategory="100">
+    </item>
+
+
 </menu>

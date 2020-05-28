@@ -30,6 +30,7 @@ public class ImagesActivity extends AppCompatActivity implements ImageAdapter.On
     private ProgressBar progressBar;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,6 +84,12 @@ public class ImagesActivity extends AppCompatActivity implements ImageAdapter.On
     @Override
     public void itemClicked(int position) {
         Intent intent = new Intent(this, Main17Activity.class);
+        Upload clickedItem = mUploads.get(position);
+        intent.putExtra("question",clickedItem.getmName());
+        intent.putExtra("image_q",clickedItem.getmImageUrl());
+        intent.putExtra("username",clickedItem.getmDisplayName());
+        intent.putExtra("userpic",clickedItem.getmDisplayImage());
+
         startActivity(intent);
 
     }
