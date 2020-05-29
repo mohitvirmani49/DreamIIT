@@ -33,30 +33,52 @@ public class Main17Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main17);
 
-        imageButton = (ImageButton)findViewById(R.id.question_image);
-        answer = (Button)findViewById(R.id.answer_question);
-        question = (TextView)findViewById(R.id.question_text);
-        name_person = (TextView)findViewById(R.id.answer_pg_name);
-        circularImageView_photo = (CircularImageView)findViewById(R.id.answer_pg_image);
+        imageButton = (ImageButton) findViewById(R.id.question_image);
+        answer = (Button) findViewById(R.id.answer_question);
+        question = (TextView) findViewById(R.id.question_text);
+        name_person = (TextView) findViewById(R.id.answer_pg_name);
+        circularImageView_photo = (CircularImageView) findViewById(R.id.answer_pg_image);
+
 
         Intent intent = getIntent();
-        String ques = intent.getStringExtra("question");
+        final String ques = intent.getStringExtra("question");
         String userN = intent.getStringExtra("username");
-        String img_qs = intent.getStringExtra("image_q");
+        final String img_qs = intent.getStringExtra("image_q");
         String user_pic = intent.getStringExtra("userpic");
 //        Uri uri = intent.get
+        if (img_qs.isEmpty()) {
+            imageButton.requestLayout();
+            imageButton.getLayoutParams().height = 0;
+            imageButton.getLayoutParams().width = 0;
+//            holder.imageView.setImageBitmap(null);
+            imageButton.setVisibility(View.INVISIBLE);
+            question.setText(ques);
+            name_person.setText(userN);
+            Picasso.get().load(user_pic).into(circularImageView_photo);
 
-        question.setText(ques);
-        name_person.setText(userN);
-        Picasso.get().load(img_qs).fit().centerCrop().into(imageButton);
-        Picasso.get().load(user_pic).into(circularImageView_photo);
+        } else {
+            imageButton.setVisibility(View.VISIBLE);
+            imageButton.requestLayout();
+            imageButton.getLayoutParams().height = 380;
 
-
-
-
+            question.setText(ques);
+            name_person.setText(userN);
+            Picasso.get().load(img_qs).fit().centerCrop().into(imageButton);
+            Picasso.get().load(user_pic).into(circularImageView_photo);
+        }
+        answer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Main17Activity.this,Main18Activity.class);
+                intent.putExtra("qs",ques);
+                intent.putExtra("ig",img_qs);
+                startActivity(intent);
+            }
+        });
 
 
     }
+
     public void showPopup1(View v) {
         PopupMenu popup = new PopupMenu(this, v);
         MenuInflater inflater = popup.getMenuInflater();

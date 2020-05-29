@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -47,12 +49,32 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
 
     @Override
     public void onBindViewHolder(@NonNull ImageViewHolder holder, int position) {
-        Upload uploadCurrent = mUploads.get(position);
-        holder.textView.setText(uploadCurrent.getmName());
-        Picasso.get().load(uploadCurrent.getmImageUrl()).fit().centerCrop().into(holder.imageView);
-        holder.textView1.setText(uploadCurrent.getmDisplayName());
-        Picasso.get().load(uploadCurrent.getmDisplayImage()).fit().centerCrop().into(holder.im1);
 
+        Upload uploadCurrent = mUploads.get(position);
+        if (uploadCurrent.getmImageUrl().trim().isEmpty()) {
+            holder.imageView.requestLayout();
+            holder.imageView.getLayoutParams().height = 0;
+            holder.imageView.getLayoutParams().width = 0;
+//            holder.imageView.setImageBitmap(null);
+//            holder.imageView.setVisibility(View.INVISIBLE);
+
+            holder.textView.setText(uploadCurrent.getmName());
+            holder.textView1.setText(uploadCurrent.getmDisplayName());
+            Picasso.get().load(uploadCurrent.getmDisplayImage()).fit().centerCrop().into(holder.im1);
+
+
+        } else {
+            holder.imageView.requestLayout();
+            holder.imageView.getLayoutParams().height = 460;
+            holder.imageView.getLayoutParams().width = 1050;
+
+
+            holder.textView.setText(uploadCurrent.getmName());
+            Picasso.get().load(uploadCurrent.getmImageUrl()).fit().centerCrop().into(holder.imageView);
+            holder.textView1.setText(uploadCurrent.getmDisplayName());
+            Picasso.get().load(uploadCurrent.getmDisplayImage()).fit().centerCrop().into(holder.im1);
+
+        }
     }
 
     @Override

@@ -140,10 +140,11 @@ public class Main16Activity extends AppCompatActivity {
                 public void run() {
 
                 }
-            },2000);
+            }, 500);
 
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd kk:mm:ss");
-            String dateString = dateFormat.format(Calendar.getInstance().getTime());;
+            String dateString = dateFormat.format(Calendar.getInstance().getTime());
+
 
 
             Date convertedDate = new Date();
@@ -204,9 +205,19 @@ public class Main16Activity extends AppCompatActivity {
                         });
             }
         } else {
+            FirebaseAuth firebaseAuth;
+            firebaseAuth = FirebaseAuth.getInstance();
+            FirebaseUser user2 = firebaseAuth.getCurrentUser();
+            String username = user2.getDisplayName();
+
+            Uri pic = user2.getPhotoUrl();
+            Upload upload = new Upload(mEditTextFileName.getText().toString().trim(), "", username.trim(), pic.toString(), "");
+            mDatabaseRef.push().setValue(upload);
+            Toast.makeText(Main16Activity.this, "Upload successful", Toast.LENGTH_LONG).show();
 
 
-            Toast.makeText(this, "No file selected", Toast.LENGTH_LONG).show();
+
+//            Toast.makeText(this, "No file selected", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -214,8 +225,6 @@ public class Main16Activity extends AppCompatActivity {
         Intent intent = new Intent(this, ImagesActivity.class);
         startActivity(intent);
     }
-    private void time(){
 
-    }
 
 }

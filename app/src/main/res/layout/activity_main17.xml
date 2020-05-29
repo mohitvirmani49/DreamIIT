@@ -29,7 +29,7 @@
         <ImageButton
             android:id="@+id/question_image"
             android:layout_width="match_parent"
-            android:layout_height="120dp"
+            android:layout_height="0dp"
             android:layout_marginTop="10dp"
             android:layout_below="@+id/pop1"
             />
@@ -39,6 +39,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="25dp"
+            android:layout_marginStart="10dp"
 
             android:layout_below="@id/question_image"/>
 
@@ -47,7 +48,8 @@
             android:layout_height="30dp"
             android:id="@+id/answer_pg_image"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/question_text"/>
+            android:layout_below="@+id/question_text"
+            android:layout_marginStart="10dp"/>
 
         <TextView
             android:layout_width="wrap_content"
