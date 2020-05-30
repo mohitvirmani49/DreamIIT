@@ -65,6 +65,15 @@ public class Main17Activity extends AppCompatActivity {
         Picasso.get().load(result.getString("userpic", "3")).fit().centerCrop().into(question_user_pic);
 
 
+        answer_question.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Main17Activity.this,Main18Activity.class);
+                startActivity(intent);
+            }
+        });
+
+
     }
 
     public void showPopup1(View v) {
