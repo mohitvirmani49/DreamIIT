@@ -1,10 +1,13 @@
 package com.example.quiz;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.MenuInflater;
 import android.view.View;
 import android.widget.Button;
@@ -12,20 +15,18 @@ import android.widget.ImageButton;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
-import com.google.firebase.database.DatabaseReference;
 import com.mikhaellopez.circularimageview.CircularImageView;
 import com.squareup.picasso.Picasso;
 
-import java.util.List;
+import java.util.prefs.PreferenceChangeEvent;
 
 public class Main17Activity extends AppCompatActivity {
-    ImageButton imageButton;
-    Button answer;
-    TextView question, name_person;
-    CircularImageView circularImageView_photo;
-
-    private DatabaseReference mDatabaseRef;
-    private List<Upload> mUploads;
+    private ImageButton question_image;
+    private TextView question_text;
+    private CircularImageView question_user_pic;
+    private TextView question_user_name;
+    private Button answer_question;
+    private RecyclerView mRecyclerView;
 
 
     @Override
@@ -33,48 +34,35 @@ public class Main17Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main17);
 
-        imageButton = (ImageButton) findViewById(R.id.question_image);
-        answer = (Button) findViewById(R.id.answer_question);
-        question = (TextView) findViewById(R.id.question_text);
-        name_person = (TextView) findViewById(R.id.answer_pg_name);
-        circularImageView_photo = (CircularImageView) findViewById(R.id.answer_pg_image);
+        question_image = (ImageButton) findViewById(R.id.question_image);
+        question_text = (TextView) findViewById(R.id.question_text);
+        question_user_pic = (CircularImageView) findViewById(R.id.answer_pg_image);
+        question_user_name = (TextView) findViewById(R.id.answer_pg_name);
+        answer_question = (Button) findViewById(R.id.answer_question);
+        mRecyclerView = (RecyclerView) findViewById(R.id.answer_recycler);
 
+        SharedPreferences result = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
-        Intent intent = getIntent();
-        final String ques = intent.getStringExtra("question");
-        String userN = intent.getStringExtra("username");
-        final String img_qs = intent.getStringExtra("image_q");
-        String user_pic = intent.getStringExtra("userpic");
-//        Uri uri = intent.get
-        if (img_qs.isEmpty()) {
-            imageButton.requestLayout();
-            imageButton.getLayoutParams().height = 0;
-            imageButton.getLayoutParams().width = 0;
-//            holder.imageView.setImageBitmap(null);
-            imageButton.setVisibility(View.INVISIBLE);
-            question.setText(ques);
-            name_person.setText(userN);
-            Picasso.get().load(user_pic).into(circularImageView_photo);
+        if (result.getString("image_q", "0").isEmpty()) {
+
+            question_image.requestLayout();
+            question_image.getLayoutParams().height = 0;
+            question_image.getLayoutParams().width = 0;
+            question_image.setVisibility(View.INVISIBLE);
+
 
         } else {
-            imageButton.setVisibility(View.VISIBLE);
-            imageButton.requestLayout();
-            imageButton.getLayoutParams().height = 380;
+            question_image.requestLayout();
+            question_image.getLayoutParams().height = 380;
 
-            question.setText(ques);
-            name_person.setText(userN);
-            Picasso.get().load(img_qs).fit().centerCrop().into(imageButton);
-            Picasso.get().load(user_pic).into(circularImageView_photo);
+            Picasso.get().load(result.getString("image_q", "0")).fit().centerCrop().into(question_image);
+
+
         }
-        answer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Main17Activity.this,Main18Activity.class);
-                intent.putExtra("qs",ques);
-                intent.putExtra("ig",img_qs);
-                startActivity(intent);
-            }
-        });
+        String txt = result.getString("question", "1");
+        question_text.setText(txt);
+        question_user_name.setText(result.getString("username", "2"));
+        Picasso.get().load(result.getString("userpic", "3")).fit().centerCrop().into(question_user_pic);
 
 
     }

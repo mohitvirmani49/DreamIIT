@@ -192,6 +192,7 @@ public class Main16Activity extends AppCompatActivity {
                                     mDatabaseRef.push().setValue(upload);
 //                                    mDatabaseRef.push().setValue(upload1);
                                     Toast.makeText(Main16Activity.this, "Upload successful", Toast.LENGTH_LONG).show();
+
                                 } else {
                                     Toast.makeText(Main16Activity.this, "upload failed: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
                                 }
@@ -214,6 +215,7 @@ public class Main16Activity extends AppCompatActivity {
             Upload upload = new Upload(mEditTextFileName.getText().toString().trim(), "", username.trim(), pic.toString(), "");
             mDatabaseRef.push().setValue(upload);
             Toast.makeText(Main16Activity.this, "Upload successful", Toast.LENGTH_LONG).show();
+            openImagesActivity();
 
 
 

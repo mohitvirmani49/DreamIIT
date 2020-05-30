@@ -5,10 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -28,7 +32,6 @@ public class ImagesActivity extends AppCompatActivity implements ImageAdapter.On
     private DatabaseReference mDatabaseRef;
     private List<Upload> mUploads;
     private ProgressBar progressBar;
-
 
 
     @Override
@@ -83,14 +86,19 @@ public class ImagesActivity extends AppCompatActivity implements ImageAdapter.On
 
     @Override
     public void itemClicked(int position) {
-        Intent intent = new Intent(this, Main17Activity.class);
+
         Upload clickedItem = mUploads.get(position);
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
-        intent.putExtra("question",clickedItem.getmName());
-        intent.putExtra("image_q",clickedItem.getmImageUrl());
-        intent.putExtra("username",clickedItem.getmDisplayName());
-        intent.putExtra("userpic",clickedItem.getmDisplayImage());
+        SharedPreferences.Editor editor = sharedPreferences.edit();
 
+        editor.putString("question", clickedItem.getmName());
+        editor.putString("image_q", clickedItem.getmImageUrl());
+        editor.putString("username", clickedItem.getmDisplayName());
+        editor.putString("userpic", clickedItem.getmDisplayImage());
+        editor.apply();
+
+        Intent intent = new Intent(this, Main17Activity.class);
         startActivity(intent);
 
     }

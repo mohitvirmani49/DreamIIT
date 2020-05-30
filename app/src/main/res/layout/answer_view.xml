@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="10dp"
+    android:elevation="8dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/solv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Solution:"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <ImageButton
+            android:id="@+id/ans_image5"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_below="@+id/solv"
+
+            />
+
+        <TextView
+            android:id="@+id/answer_text5"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_below="@+id/ans_image5"
+            android:textSize="20dp"
+            android:background="@color/colorAccent"/>
+
+        <com.mikhaellopez.circularimageview.CircularImageView
+            android:id="@+id/answer_person_image"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_below="@+id/answer_text5" />
+
+        <TextView
+            android:id="@+id/answer_user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/answer_text5"
+            android:layout_marginLeft="3dp"
+            android:layout_toRightOf="@+id/answer_person_image" />
+
+
+        <com.like.LikeButton
+            android:id="@+id/like"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/answer_user_name"
+            app:circle_end_color="@color/colorAccent"
+            app:circle_start_color="#FFFFFF"
+            app:icon_size="20dp"
+            app:icon_type="heart"
+            app:liked="false" />
+
+        <TextView
+            android:id="@+id/no_of_likes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/answer_user_name"
+            android:layout_toRightOf="@+id/like"
+            android:text="0"
+            android:textSize="10dp" />
+
+        <TextView
+            android:id="@+id/comments"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/like"
+            android:drawableLeft="@drawable/msg"
+            android:text=" Comments"
+            android:textSize="20dp" />
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

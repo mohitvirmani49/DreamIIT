@@ -29,7 +29,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/answer_are_question_image"
-        android:textSize="15dp" />
+        android:textSize="15dp"
+        android:layout_marginStart="5dp"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:id="@+id/verify_image"
+        android:layout_below="@+id/answer_are_text"/>
 
     <EditText
         android:id="@+id/main_answers"
@@ -55,6 +62,13 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="10dp"
         android:background="@drawable/camera" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30dp"
+        android:text="nxt"
+        android:layout_above="@+id/camera"
+        android:id="@+id/nxt"/>
 
 
 </RelativeLayout>
