@@ -31,8 +31,10 @@
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:layout_below="@+id/ans_image5"
-            android:textSize="20dp"
-            android:background="@color/colorAccent"/>
+            android:background="@color/colorAccent"
+            android:text="answer"
+            android:textAlignment="center"
+            android:textSize="20dp" />
 
         <com.mikhaellopez.circularimageview.CircularImageView
             android:id="@+id/answer_person_image"

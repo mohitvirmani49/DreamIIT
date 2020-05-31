@@ -1,6 +1,8 @@
 package com.example.quiz;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
@@ -14,10 +16,18 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.mikhaellopez.circularimageview.CircularImageView;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.prefs.PreferenceChangeEvent;
 
 public class Main17Activity extends AppCompatActivity {
@@ -27,6 +37,11 @@ public class Main17Activity extends AppCompatActivity {
     private TextView question_user_name;
     private Button answer_question;
     private RecyclerView mRecyclerView;
+    private AnswerAdapter mAdapter;
+    //    private Button floatingActionButton;
+    private DatabaseReference mDatabaseRef;
+    private List<Ans_Upload> mUploads;
+//    private AnswerAdapter mAdapter;
 
 
     @Override
@@ -40,6 +55,31 @@ public class Main17Activity extends AppCompatActivity {
         question_user_name = (TextView) findViewById(R.id.answer_pg_name);
         answer_question = (Button) findViewById(R.id.answer_question);
         mRecyclerView = (RecyclerView) findViewById(R.id.answer_recycler);
+
+        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        mUploads = new ArrayList<>();
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference("uploadsAns");
+        mDatabaseRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                    Ans_Upload uploadsAns = postSnapshot.getValue(Ans_Upload.class);
+                    mUploads.add(uploadsAns);
+                }
+//                Ans_Upload upload = dataSnapshot.getValue(Ans_Upload.class);
+//                mUploads.add(upload);
+                mAdapter = new AnswerAdapter(Main17Activity.this, mUploads);
+                mRecyclerView.setAdapter(mAdapter);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(Main17Activity.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+
+            }
+        });
 
         SharedPreferences result = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
@@ -68,7 +108,7 @@ public class Main17Activity extends AppCompatActivity {
         answer_question.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Main17Activity.this,Main18Activity.class);
+                Intent intent = new Intent(Main17Activity.this, Main18Activity.class);
                 startActivity(intent);
             }
         });

@@ -23,13 +23,19 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class Main18Activity extends AppCompatActivity {
@@ -148,9 +154,22 @@ public class Main18Activity extends AppCompatActivity {
                                     Uri downloadUri = task.getResult();
                                     String username = user.getDisplayName();
                                     Uri pic = user.getPhotoUrl();
-                                    Ans_Upload upload = new Ans_Upload(main_ans.getText().toString().trim(), downloadUri.toString(), username.trim(), pic.toString(), "");
 
-                                    mDatabaseRef.push().setValue(upload);
+                                    mDatabaseRef.addValueEventListener(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                            mDatabaseRef.child(dataSnapshot.getKey().toString().trim()).child("answer_text").setValue(main_ans.getText().toString());
+
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                        }
+                                    });
+//                                    Ans_Upload upload = new Ans_Upload(main_ans.getText().toString().trim(), downloadUri.toString(), username.trim(), pic.toString(), "");
+
+//                                    mDatabaseRef.push().setValue(upload);
 
                                     Toast.makeText(Main18Activity.this, "Upload successful", Toast.LENGTH_LONG).show();
 
@@ -173,6 +192,25 @@ public class Main18Activity extends AppCompatActivity {
             String username = user2.getDisplayName();
 
             Uri pic = user2.getPhotoUrl();
+//            mDatabaseRef.addValueEventListener(new ValueEventListener() {
+//                @Override
+//                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                    for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+//                        System.out.println(postSnapshot.getKey());
+//                    }
+//
+//                    mDatabaseRef.child(dataSnapshot.getKey()).child("mAnswerText").push().setValue(main_ans.getText().toString());
+//
+//                }
+
+//                HashMap<String, String> map1 = new HashMap<>();
+//                map1.put("rsvp","going");
+
+//                @Override
+//                public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//                }
+//            });
             Ans_Upload upload = new Ans_Upload(main_ans.getText().toString().trim(), "", username.trim(), pic.toString(), "");
             mDatabaseRef.push().setValue(upload);
             Toast.makeText(Main18Activity.this, "Upload successful", Toast.LENGTH_LONG).show();

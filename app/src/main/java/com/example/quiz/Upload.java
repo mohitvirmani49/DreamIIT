@@ -8,6 +8,7 @@ public class Upload {
     private String mDisplayImage;
     private String mDate;
 
+
     public Upload() {
     }
 
@@ -21,6 +22,7 @@ public class Upload {
         mDisplayName = username;
         mDisplayImage = image;
         mDate = date;
+//        mAnswerText = answer;
 
 
     }
@@ -65,4 +67,5 @@ public class Upload {
     public void setmDate(String mDate) {
         this.mDate = mDate;
     }
+
 }
