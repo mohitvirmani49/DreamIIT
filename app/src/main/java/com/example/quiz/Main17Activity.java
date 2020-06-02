@@ -38,7 +38,7 @@ public class Main17Activity extends AppCompatActivity {
     private List<Upload> mUploads;
     private ImageButton answer_image;
     private TextView answer_text;
-    private CircularImageView circularImageView;
+
     private TextView userNameA;
 
 
@@ -56,7 +56,6 @@ public class Main17Activity extends AppCompatActivity {
         answer_image = (ImageButton) findViewById(R.id.ans_image5);
         answer_text = (TextView) findViewById(R.id.answer_text5);
         userNameA = (TextView) findViewById(R.id.answer_user_name);
-        circularImageView = (CircularImageView) findViewById(R.id.answer_person_image);
 
 
         final View vw = (View) findViewById(R.id.l123);
@@ -97,7 +96,7 @@ public class Main17Activity extends AppCompatActivity {
                             String myAnsImage = dataSnapshot.child("mAnsImage").getValue().toString();
 //                            String myImage = dataSnapshot.child("mAnsDisImg").getValue().toString();
                             System.out.println("My Answer::::::::" + myAnswer);
-                            if (myAnswer.matches("")) {
+                            if (myAnswer.matches("") && myAnsImage.matches("")) {
                                 vw.setVisibility(View.INVISIBLE);
                             } else {
                                 vw.setVisibility(View.VISIBLE);

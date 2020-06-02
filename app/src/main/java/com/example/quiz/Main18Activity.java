@@ -172,9 +172,16 @@ public class Main18Activity extends AppCompatActivity {
                                                 System.out.println(":::::::::::::" + key);
                                                 DatabaseReference fbdatabase = FirebaseDatabase.getInstance().getReference().child("uploads").child(key);
                                                 Map<String, Object> updates = new HashMap<String, Object>();
-                                                updates.put("mAnswer", main_ans.getText().toString());
-                                                updates.put("mAnsImage", downloadUri.toString());
-                                                updates.put("mDisplayName", user2.getDisplayName());
+                                                if (main_ans.getText().toString().matches("")) {
+                                                    updates.put("mAnswer", "");
+                                                    updates.put("mAnsImage", downloadUri.toString());
+                                                    updates.put("mAnsDisName", user2.getDisplayName());
+
+                                                } else {
+                                                    updates.put("mAnswer", main_ans.getText().toString());
+                                                    updates.put("mAnsImage", downloadUri.toString());
+                                                    updates.put("mAnsDisName", user2.getDisplayName());
+                                                }
 //                                                updates.put("mDisplayImage",user2.getPhotoUrl());
                                                 fbdatabase.updateChildren(updates);
 

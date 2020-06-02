@@ -17,17 +17,20 @@
 
         <TextView
             android:id="@+id/solv"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Solution:"
             android:textSize="20dp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:background="@drawable/sol"
+            />
 
         <ImageButton
             android:id="@+id/ans_image5"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:layout_below="@+id/solv"
+            android:background="#FFFFFF"
 
             />
 
@@ -36,36 +39,33 @@
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:layout_below="@+id/ans_image5"
-            android:background="@color/colorAccent"
             android:text="answer"
             android:textAlignment="center"
             android:textSize="20dp" />
 
-        <com.mikhaellopez.circularimageview.CircularImageView
-            android:id="@+id/answer_person_image"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_below="@+id/answer_text5" />
 
         <TextView
             android:id="@+id/answer_user_name"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/answer_text5"
-            android:layout_marginLeft="3dp"
-            android:layout_toRightOf="@+id/answer_person_image" />
+            android:layout_margin="5dp"
+            android:text="My nmae"
+            android:background="@drawable/name_bottom_line"
+            />
 
 
         <com.like.LikeButton
             android:id="@+id/like"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="15dp"
             android:layout_below="@+id/answer_user_name"
             app:circle_end_color="@color/colorAccent"
             app:circle_start_color="#FFFFFF"
-            app:icon_size="20dp"
+            app:icon_size="15dp"
             app:icon_type="heart"
-            app:liked="false" />
+            app:liked="false"
+            android:layout_marginStart="5dp"/>
 
         <TextView
             android:id="@+id/no_of_likes"
@@ -74,16 +74,20 @@
             android:layout_below="@+id/answer_user_name"
             android:layout_toRightOf="@+id/like"
             android:text="0"
-            android:textSize="10dp" />
+            android:textSize="10dp"
+            android:layout_marginBottom="2dp"/>
 
         <TextView
             android:id="@+id/comments"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/like"
+            android:layout_below="@+id/answer_user_name"
             android:drawableLeft="@drawable/msg"
             android:text=" Comments"
-            android:textSize="20dp" />
+            android:textSize="20dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="1dp"/>
     </RelativeLayout>
 </androidx.cardview.widget.CardView>
 </ScrollView>
