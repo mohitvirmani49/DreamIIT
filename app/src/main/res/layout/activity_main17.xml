@@ -8,6 +8,7 @@
     tools:context=".Main17Activity">
 
 
+
     <ImageButton
         android:id="@+id/pop1"
         android:layout_width="wrap_content"
@@ -70,13 +71,19 @@
         android:shadowColor="#FFFFFF"
         android:text="Answer" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/answer_pg_name"
-        android:layout_marginTop="50dp"
-        android:id="@+id/answer_recycler"/>
+
+        <include
+            android:id="@+id/l123"
+            layout="@layout/answer_view"
+            android:layout_below="@+id/answer_pg_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:visibility="gone"
+
+            />
+
+    </RelativeLayout>
 
 
 
-</RelativeLayout>

@@ -83,8 +83,8 @@ public class Main8Activity extends AppCompatActivity {
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     final Question question = dataSnapshot.getValue(Question.class);
 
-                    questions.setText(question.getQuestion());
-                    Picasso.get().load(question.getImage()).into(imageView);
+//                    questions.setText(question.getQuestion());
+//                    Picasso.get().load(question.getImage()).into(imageView);
 
                     optn1.setText(question.getOption1());
                     optn2.setText(question.getOption2());

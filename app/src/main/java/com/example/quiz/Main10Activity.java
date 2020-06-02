@@ -83,7 +83,7 @@ public class Main10Activity extends AppCompatActivity {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     final Question question = dataSnapshot.getValue(Question.class);
-                    questions.setText(question.getQuestion());
+//                    questions.setText(question.getQuestion());
                     optn1.setText(question.getOption1());
                     optn2.setText(question.getOption2());
                     optn3.setText(question.getOption3());

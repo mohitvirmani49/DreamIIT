@@ -102,4 +102,10 @@ public class ImagesActivity extends AppCompatActivity implements ImageAdapter.On
         startActivity(intent);
 
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(ImagesActivity.this,Main14Activity.class);
+        startActivity(intent);
+    }
 }

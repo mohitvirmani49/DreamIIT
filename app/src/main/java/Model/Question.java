@@ -2,28 +2,28 @@ package Model;
 
 public class Question {
     public String question,option1,option2,option3,option4,answer;
-    public String image;
+    public String mimage;
 
-    public Question(String question, String option1, String option2, String option3, String option4, String answer, String image) {
-        this.question = question;
+    public Question(String option1, String option2, String option3, String option4, String answer, String image) {
+//        this.question = question;
         this.option1 = option1;
         this.option2 = option2;
         this.option3 = option3;
         this.option4 = option4;
         this.answer = answer;
-        this.image = image;
+        this.mimage = image;
     }
 
     public Question(){
 
     }
-    public String getQuestion() {
-        return question;
-    }
-
-    public void setQuestion(String question) {
-        this.question = question;
-    }
+//    public String getQuestion() {
+//        return question;
+//    }
+//
+//    public void setQuestion(String question) {
+//        this.question = question;
+//    }
 
     public String getOption1() {
         return option1;
@@ -64,10 +64,20 @@ public class Question {
     public void setAnswer(String answer) {
         this.answer = answer;
     }
-    public String getImage(){
-        return image;
+
+    public String getQuestion() {
+        return question;
     }
-    public void setImage(String image){
-        this.image = image;
+
+    public void setQuestion(String question) {
+        this.question = question;
+    }
+
+    public String getMimage() {
+        return mimage;
+    }
+
+    public void setMimage(String mimage) {
+        this.mimage = mimage;
     }
 }

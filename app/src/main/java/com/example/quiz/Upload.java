@@ -7,13 +7,18 @@ public class Upload {
     private String mDisplayName;
     private String mDisplayImage;
     private String mDate;
+    private String mAnswer;
+    private String mAnsImage;
+    private String mAnsDisName;
+    private String mAnsDisImg;
 
 
     public Upload() {
     }
 
 
-    public Upload(String name, String imageUrl, String username, String image, String date) {
+    public Upload(String name, String imageUrl, String username, String image,
+                  String date, String answer, String ansImg, String ansDisName, String AnsDisIg) {
         if (name.trim().equals("")) {
             name = "No Text Description";
         }
@@ -22,8 +27,10 @@ public class Upload {
         mDisplayName = username;
         mDisplayImage = image;
         mDate = date;
-//        mAnswerText = answer;
-
+        mAnswer = answer;
+        mAnsImage = ansImg;
+        mAnsDisName = ansDisName;
+        mAnsDisImg = AnsDisIg;
 
     }
 
@@ -68,4 +75,35 @@ public class Upload {
         this.mDate = mDate;
     }
 
+    public String getmAnswer() {
+        return mAnswer;
+    }
+
+    public void setmAnswer(String mAnswer) {
+        this.mAnswer = mAnswer;
+    }
+
+    public String getmAnsImage() {
+        return mAnsImage;
+    }
+
+    public void setmAnsImage(String mAnsImage) {
+        this.mAnsImage = mAnsImage;
+    }
+
+    public String getmAnsDisName() {
+        return mAnsDisName;
+    }
+
+    public void setmAnsDisName(String mAnsDisName) {
+        this.mAnsDisName = mAnsDisName;
+    }
+
+    public String getmAnsDisImg() {
+        return mAnsDisImg;
+    }
+
+    public void setmAnsDisImg(String mAnsDisImg) {
+        this.mAnsDisImg = mAnsDisImg;
+    }
 }

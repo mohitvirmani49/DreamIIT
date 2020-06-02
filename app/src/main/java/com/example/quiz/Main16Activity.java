@@ -184,7 +184,8 @@ public class Main16Activity extends AppCompatActivity {
                                     String username = user.getDisplayName();
                                     Uri pic = user.getPhotoUrl();
                                     Upload upload = new Upload(mEditTextFileName.getText().toString().trim(),
-                                            downloadUri.toString(), username.trim(), pic.toString(), datetime.trim());
+                                            downloadUri.toString(), username.trim(),
+                                            pic.toString(), datetime.trim(), "", "", "", "");
 //                                    DispName dispName = new DispName(username.trim(), downloadUri.toString());
 //                                    mDatabaseRef.push().setValue(dispName);
 //                                    Upload upload = new Upload(mEditTextFileName.getText().toString().trim(), downloadUri.toString());
@@ -213,7 +214,7 @@ public class Main16Activity extends AppCompatActivity {
 
             Uri pic = user2.getPhotoUrl();
             Upload upload = new Upload(mEditTextFileName.getText().toString().trim(), "",
-                    username.trim(), pic.toString(), "");
+                    username.trim(), pic.toString(), "", "", "", "", "");
             mDatabaseRef.push().setValue(upload);
             Toast.makeText(Main16Activity.this, "Upload successful", Toast.LENGTH_LONG).show();
             openImagesActivity();

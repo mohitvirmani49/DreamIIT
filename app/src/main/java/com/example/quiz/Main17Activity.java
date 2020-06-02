@@ -2,12 +2,10 @@ package com.example.quiz;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.MenuInflater;
@@ -16,19 +14,19 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
 import android.widget.TextView;
-import android.widget.Toast;
+
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.mikhaellopez.circularimageview.CircularImageView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.prefs.PreferenceChangeEvent;
 
 public class Main17Activity extends AppCompatActivity {
     private ImageButton question_image;
@@ -36,12 +34,12 @@ public class Main17Activity extends AppCompatActivity {
     private CircularImageView question_user_pic;
     private TextView question_user_name;
     private Button answer_question;
-    private RecyclerView mRecyclerView;
-    private AnswerAdapter mAdapter;
-    //    private Button floatingActionButton;
     private DatabaseReference mDatabaseRef;
-    private List<Ans_Upload> mUploads;
-//    private AnswerAdapter mAdapter;
+    private List<Upload> mUploads;
+    private ImageButton answer_image;
+    private TextView answer_text;
+    private CircularImageView circularImageView;
+    private TextView userNameA;
 
 
     @Override
@@ -54,32 +52,15 @@ public class Main17Activity extends AppCompatActivity {
         question_user_pic = (CircularImageView) findViewById(R.id.answer_pg_image);
         question_user_name = (TextView) findViewById(R.id.answer_pg_name);
         answer_question = (Button) findViewById(R.id.answer_question);
-        mRecyclerView = (RecyclerView) findViewById(R.id.answer_recycler);
 
-        mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        answer_image = (ImageButton) findViewById(R.id.ans_image5);
+        answer_text = (TextView) findViewById(R.id.answer_text5);
+        userNameA = (TextView) findViewById(R.id.answer_user_name);
+        circularImageView = (CircularImageView) findViewById(R.id.answer_person_image);
 
-        mUploads = new ArrayList<>();
-        mDatabaseRef = FirebaseDatabase.getInstance().getReference("uploadsAns");
-        mDatabaseRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    Ans_Upload uploadsAns = postSnapshot.getValue(Ans_Upload.class);
-                    mUploads.add(uploadsAns);
-                }
-//                Ans_Upload upload = dataSnapshot.getValue(Ans_Upload.class);
-//                mUploads.add(upload);
-                mAdapter = new AnswerAdapter(Main17Activity.this, mUploads);
-                mRecyclerView.setAdapter(mAdapter);
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(Main17Activity.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
-
-            }
-        });
+        final View vw = (View) findViewById(R.id.l123);
+        final View ans_btn5 = (View) findViewById(R.id.answer_question);
 
         SharedPreferences result = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
@@ -100,6 +81,65 @@ public class Main17Activity extends AppCompatActivity {
 
         }
         String txt = result.getString("question", "1");
+
+        Query query = FirebaseDatabase.getInstance().getReference().child("uploads");
+        query.orderByChild("mName").equalTo(txt).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot foodSnapshot : dataSnapshot.getChildren()) {
+                    String key = foodSnapshot.getKey();
+                    DatabaseReference fbdatabase = FirebaseDatabase.getInstance().getReference().child("uploads").child(key);
+                    fbdatabase.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            String myAnswer = dataSnapshot.child("mAnswer").getValue().toString();
+                            String myName = dataSnapshot.child("mAnsDisName").getValue().toString();
+                            String myAnsImage = dataSnapshot.child("mAnsImage").getValue().toString();
+//                            String myImage = dataSnapshot.child("mAnsDisImg").getValue().toString();
+                            System.out.println("My Answer::::::::" + myAnswer);
+                            if (myAnswer.matches("")) {
+                                vw.setVisibility(View.INVISIBLE);
+                            } else {
+                                vw.setVisibility(View.VISIBLE);
+                                answer_text.setText(myAnswer);
+                                userNameA.setText(myName);
+                                ans_btn5.setVisibility(View.INVISIBLE);
+
+                                if (myAnsImage.matches("")) {
+                                    answer_image.requestLayout();
+                                    answer_image.getLayoutParams().width = 0;
+                                    answer_image.getLayoutParams().height = 0;
+                                    System.out.println("empty");
+
+                                } else {
+                                    answer_image.requestLayout();
+                                    answer_image.getLayoutParams().width = 200;
+                                    answer_image.getLayoutParams().height = 200;
+                                    Picasso.get().load(myAnsImage).into(answer_image);
+
+
+                                }
+
+                            }
+
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
         question_text.setText(txt);
         question_user_name.setText(result.getString("username", "2"));
         Picasso.get().load(result.getString("userpic", "3")).fit().centerCrop().into(question_user_pic);
@@ -113,7 +153,17 @@ public class Main17Activity extends AppCompatActivity {
             }
         });
 
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("txt", txt);
+        editor.apply();
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(Main17Activity.this, ImagesActivity.class);
+        startActivity(intent);
     }
 
     public void showPopup1(View v) {

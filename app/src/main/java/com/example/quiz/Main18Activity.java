@@ -5,9 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentResolver;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
+
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
@@ -23,10 +26,12 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -36,7 +41,6 @@ import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
 import java.util.Map;
-
 
 public class Main18Activity extends AppCompatActivity {
     private static final int PICK_IMAGE_REQUEST = 1;
@@ -54,7 +58,6 @@ public class Main18Activity extends AppCompatActivity {
 
     private StorageTask mUploadTask;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,8 +70,8 @@ public class Main18Activity extends AppCompatActivity {
         attach_ans_img = (Button) findViewById(R.id.attach_answer);
         imageView = (ImageView) findViewById(R.id.verify_image);
 
-        mStorageRef = FirebaseStorage.getInstance().getReference("uploadsAns");
-        mDatabaseRef = FirebaseDatabase.getInstance().getReference("uploadsAns");
+        mStorageRef = FirebaseStorage.getInstance().getReference("uploads");
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference("uploads");
 
         attach_ans_img.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,8 +89,6 @@ public class Main18Activity extends AppCompatActivity {
                 }
             }
         });
-
-
     }
 
     private void openFileChooser() {
@@ -128,10 +129,13 @@ public class Main18Activity extends AppCompatActivity {
                 public void run() {
 
                 }
-            }, 500);
+            }, 100);
 
 
             if (user.getDisplayName() != null) {
+
+                SharedPreferences result = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                final String txt = result.getString("txt", "1");
 
 
                 final StorageReference fileReference = mStorageRef.child(System.currentTimeMillis()
@@ -151,14 +155,30 @@ public class Main18Activity extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<Uri> task) {
                                 if (task.isSuccessful()) {
-                                    Uri downloadUri = task.getResult();
+                                    final Uri downloadUri = task.getResult();
                                     String username = user.getDisplayName();
                                     Uri pic = user.getPhotoUrl();
 
-                                    mDatabaseRef.addValueEventListener(new ValueEventListener() {
+                                    Query query = FirebaseDatabase.getInstance().getReference().child("uploads");
+                                    query.orderByChild("mName").equalTo(txt).addValueEventListener(new ValueEventListener() {
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                            mDatabaseRef.child(dataSnapshot.getKey().toString().trim()).child("answer_text").setValue(main_ans.getText().toString());
+                                            for (DataSnapshot foodSnapshot : dataSnapshot.getChildren()) {
+                                                FirebaseAuth firebaseAuth;
+                                                firebaseAuth = FirebaseAuth.getInstance();
+                                                FirebaseUser user2 = firebaseAuth.getCurrentUser();
+
+                                                String key = foodSnapshot.getKey();
+                                                System.out.println(":::::::::::::" + key);
+                                                DatabaseReference fbdatabase = FirebaseDatabase.getInstance().getReference().child("uploads").child(key);
+                                                Map<String, Object> updates = new HashMap<String, Object>();
+                                                updates.put("mAnswer", main_ans.getText().toString());
+                                                updates.put("mAnsImage", downloadUri.toString());
+                                                updates.put("mDisplayName", user2.getDisplayName());
+//                                                updates.put("mDisplayImage",user2.getPhotoUrl());
+                                                fbdatabase.updateChildren(updates);
+
+                                            }
 
                                         }
 
@@ -167,18 +187,17 @@ public class Main18Activity extends AppCompatActivity {
 
                                         }
                                     });
-//                                    Ans_Upload upload = new Ans_Upload(main_ans.getText().toString().trim(), downloadUri.toString(), username.trim(), pic.toString(), "");
 
-//                                    mDatabaseRef.push().setValue(upload);
+                                    Toast.makeText(Main18Activity.this, "Upload successful", Toast.LENGTH_LONG).
 
-                                    Toast.makeText(Main18Activity.this, "Upload successful", Toast.LENGTH_LONG).show();
+                                            show();
 
                                 } else {
                                     Toast.makeText(Main18Activity.this, "upload failed: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
                                 }
                             }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
+                        }).
+                        addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
                                 Toast.makeText(Main18Activity.this, e.getMessage(), Toast.LENGTH_LONG).show();
@@ -186,36 +205,42 @@ public class Main18Activity extends AppCompatActivity {
                         });
             }
         } else {
-            FirebaseAuth firebaseAuth;
-            firebaseAuth = FirebaseAuth.getInstance();
-            FirebaseUser user2 = firebaseAuth.getCurrentUser();
-            String username = user2.getDisplayName();
 
-            Uri pic = user2.getPhotoUrl();
-//            mDatabaseRef.addValueEventListener(new ValueEventListener() {
-//                @Override
-//                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                    for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-//                        System.out.println(postSnapshot.getKey());
-//                    }
-//
-//                    mDatabaseRef.child(dataSnapshot.getKey()).child("mAnswerText").push().setValue(main_ans.getText().toString());
-//
-//                }
+            SharedPreferences result = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+            final String txt = result.getString("txt", "1");
 
-//                HashMap<String, String> map1 = new HashMap<>();
-//                map1.put("rsvp","going");
 
-//                @Override
-//                public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//                }
-//            });
-            Ans_Upload upload = new Ans_Upload(main_ans.getText().toString().trim(), "", username.trim(), pic.toString(), "");
-            mDatabaseRef.push().setValue(upload);
+            Query query = FirebaseDatabase.getInstance().getReference().child("uploads");
+            query.orderByChild("mName").equalTo(txt).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    for (DataSnapshot foodSnapshot : dataSnapshot.getChildren()) {
+                        FirebaseAuth firebaseAuth;
+                        firebaseAuth = FirebaseAuth.getInstance();
+
+
+                        FirebaseUser user2 = firebaseAuth.getCurrentUser();
+
+                        String key = foodSnapshot.getKey();
+                        System.out.println(":::::::::::::" + key);
+                        DatabaseReference fbdatabase = FirebaseDatabase.getInstance().getReference().child("uploads").child(key);
+                        Map<String, Object> updates = new HashMap<String, Object>();
+                        updates.put("mAnswer", main_ans.getText().toString());
+                        updates.put("mAnsDisName", user2.getDisplayName());
+//                        updates.put("mAnsDisImg",user2.getPhotoUrl());
+
+                        fbdatabase.updateChildren(updates);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+
             Toast.makeText(Main18Activity.this, "Upload successful", Toast.LENGTH_LONG).show();
             openImagesActivity();
-
         }
     }
 
@@ -223,6 +248,4 @@ public class Main18Activity extends AppCompatActivity {
         Intent intent = new Intent(this, Main17Activity.class);
         startActivity(intent);
     }
-
-
 }
