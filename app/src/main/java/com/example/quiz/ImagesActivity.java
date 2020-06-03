@@ -42,7 +42,10 @@ public class ImagesActivity extends AppCompatActivity implements ImageAdapter.On
         progressBar = findViewById(R.id.pg);
         floatingActionButton = (Button) findViewById(R.id.floatwithme);
         mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setReverseLayout(true);
+        linearLayoutManager.setStackFromEnd(true);
+        mRecyclerView.setLayoutManager(linearLayoutManager);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -105,7 +108,7 @@ public class ImagesActivity extends AppCompatActivity implements ImageAdapter.On
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(ImagesActivity.this,Main14Activity.class);
+        Intent intent = new Intent(ImagesActivity.this, Main14Activity.class);
         startActivity(intent);
     }
 }
