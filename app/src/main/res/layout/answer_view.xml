@@ -37,10 +37,12 @@
         <TextView
             android:id="@+id/answer_text5"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="wrap_content"
+            android:minHeight="100dp"
             android:layout_below="@+id/ans_image5"
             android:text="answer"
-            android:textAlignment="center"
+            android:textAlignment="textStart"
+            android:textColor="#130008"
             android:textSize="20dp" />
 
 
@@ -58,14 +60,16 @@
         <com.like.LikeButton
             android:id="@+id/like"
             android:layout_width="wrap_content"
-            android:layout_height="15dp"
+            android:layout_height="20dp"
             android:layout_below="@+id/answer_user_name"
             app:circle_end_color="@color/colorAccent"
-            app:circle_start_color="#FFFFFF"
+            app:circle_start_color="#130008"
             app:icon_size="15dp"
             app:icon_type="heart"
             app:liked="false"
-            android:layout_marginStart="5dp"/>
+
+
+            />
 
         <TextView
             android:id="@+id/no_of_likes"
@@ -74,8 +78,10 @@
             android:layout_below="@+id/answer_user_name"
             android:layout_toRightOf="@+id/like"
             android:text="0"
-            android:textSize="10dp"
-            android:layout_marginBottom="2dp"/>
+            android:textSize="15dp"
+            android:layout_marginBottom="2dp"
+            android:gravity="center"
+            android:textColor="#130008"/>
 
         <TextView
             android:id="@+id/comments"
@@ -83,11 +89,12 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/answer_user_name"
             android:drawableLeft="@drawable/msg"
-            android:text=" Comments"
-            android:textSize="20dp"
+            android:text="  0"
+            android:textSize="15dp"
             android:layout_alignParentRight="true"
             android:layout_marginEnd="5dp"
-            android:layout_marginBottom="1dp"/>
+            android:layout_marginBottom="1dp"
+            android:textColor="#130008"/>
     </RelativeLayout>
 </androidx.cardview.widget.CardView>
 </ScrollView>

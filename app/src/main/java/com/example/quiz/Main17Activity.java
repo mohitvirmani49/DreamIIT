@@ -22,6 +22,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.like.LikeButton;
 import com.mikhaellopez.circularimageview.CircularImageView;
 import com.squareup.picasso.Picasso;
 
@@ -41,6 +42,10 @@ public class Main17Activity extends AppCompatActivity {
 
     private TextView userNameA;
 
+    private TextView comments;
+    private TextView like;
+    private LikeButton likeButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +61,10 @@ public class Main17Activity extends AppCompatActivity {
         answer_image = (ImageButton) findViewById(R.id.ans_image5);
         answer_text = (TextView) findViewById(R.id.answer_text5);
         userNameA = (TextView) findViewById(R.id.answer_user_name);
+
+        comments = (TextView) findViewById(R.id.comments);
+        like = (TextView) findViewById(R.id.no_of_likes);
+        likeButton = (LikeButton) findViewById(R.id.like);
 
 
         final View vw = (View) findViewById(R.id.l123);
@@ -104,6 +113,14 @@ public class Main17Activity extends AppCompatActivity {
                                 userNameA.setText(myName);
                                 ans_btn5.setVisibility(View.INVISIBLE);
 
+                                userNameA.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        Intent intent = new Intent(Main17Activity.this, Main19Activity.class);
+                                        startActivity(intent);
+                                    }
+                                });
+
                                 if (myAnsImage.matches("")) {
                                     answer_image.requestLayout();
                                     answer_image.getLayoutParams().width = 0;
@@ -143,6 +160,21 @@ public class Main17Activity extends AppCompatActivity {
         question_user_name.setText(result.getString("username", "2"));
         Picasso.get().load(result.getString("userpic", "3")).fit().centerCrop().into(question_user_pic);
 
+        question_user_name.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Main17Activity.this, Main19Activity.class);
+                startActivity(intent);
+            }
+        });
+        question_user_pic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Main17Activity.this, Main19Activity.class);
+                startActivity(intent);
+            }
+        });
+
 
         answer_question.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -156,6 +188,16 @@ public class Main17Activity extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("txt", txt);
         editor.apply();
+
+
+        comments.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Main17Activity.this, Main21Activity.class);
+                startActivity(intent);
+
+            }
+        });
 
     }
 

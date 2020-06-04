@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/doubt_background"
+    android:background="@drawable/gradient_color"
     tools:context=".Main17Activity">
 
 
@@ -36,7 +36,7 @@
         android:layout_below="@id/question_image"
         android:layout_marginStart="10dp"
         android:text="Question Text"
-
+        android:textColor="#FFFFFF"
         android:textSize="25dp" />
 
     <com.mikhaellopez.circularimageview.CircularImageView
@@ -45,7 +45,8 @@
         android:layout_height="30dp"
         android:layout_below="@+id/question_text"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="10dp" />
+        android:layout_marginStart="10dp"
+        app:civ_border_width="0dp"/>
 
     <TextView
         android:id="@+id/answer_pg_name"
@@ -56,7 +57,9 @@
         android:layout_toRightOf="@+id/answer_pg_image"
         android:text="User name"
         android:textAllCaps="false"
-        android:textSize="15dp" />
+        android:textSize="15dp"
+        android:textColor="#FFFFFF"
+        android:fontFamily="sans-serif-light"/>
 
     <Button
         android:id="@+id/answer_question"

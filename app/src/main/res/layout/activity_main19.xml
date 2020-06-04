@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_color"
+    tools:context=".Main19Activity">
+
+    <RelativeLayout
+        android:id="@+id/rl1_profile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <ImageButton
+            android:id="@+id/back_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="15dp"
+            android:background="#00000000"
+            android:src="@drawable/back" />
+
+        <TextView
+            android:id="@+id/profile_user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="15dp"
+            android:layout_toRightOf="@+id/back_button"
+            android:fontFamily="sans-serif-light"
+            android:text="Name"
+            android:textAlignment="center"
+            android:textSize="20dp"
+            android:textColor="#FFFFFF"/>
+
+        <ImageButton
+            android:id="@+id/menu_prof"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="5dp"
+            android:background="#00000000"
+            android:src="@drawable/popup" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/profile_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rl1_profile"
+        android:layout_marginTop="20dp">
+
+        <com.mikhaellopez.circularimageview.CircularImageView
+            android:id="@+id/profile_other_user_pic"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/image"
+            app:civ_border_width="0dp"
+
+            />
+
+        <TextView
+            android:id="@+id/posts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:layout_toRightOf="@+id/profile_other_user_pic"
+            android:fontFamily="sans-serif-light"
+            android:gravity="center_horizontal"
+            android:lines="2"
+            android:maxLines="2"
+            android:text="0\n Answers"
+            android:textColor="#FFFFFF"/>
+
+        <TextView
+            android:id="@+id/followers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@+id/posts"
+            android:fontFamily="sans-serif-light"
+            android:gravity="center_horizontal"
+            android:lines="2"
+            android:text="0\n Followers"
+            android:textColor="#FFFFFF"/>
+
+        <TextView
+            android:id="@+id/following"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@+id/followers"
+            android:fontFamily="sans-serif-light"
+            android:gravity="center_horizontal"
+            android:lines="2"
+            android:text="0\n Following"
+            android:textColor="#FFFFFF"/>
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/p_user_nm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/profile_ll"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="20dp"
+        android:text="Name"
+        android:textSize="20dp"
+        android:textColor="#FFFFFF"
+        android:fontFamily="sans-serif-light"/>
+
+    <TextView
+        android:id="@+id/user_rank"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/p_user_nm"
+        android:layout_marginStart="30dp"
+        android:text="Ranks"
+        android:textSize="20dp"
+        android:textColor="#FFFFFF"
+        android:fontFamily="sans-serif-light"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/user_rank"
+        android:layout_margin="20dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_follow_user"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="15dp"
+            android:layout_weight="1"
+            android:background="@drawable/other_user_profile"
+            android:drawableLeft="@drawable/follow"
+            android:text="Follow"
+            android:paddingLeft="10dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textColor="#FFFFFF"
+            />
+
+        <Button
+            android:id="@+id/message_user"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:background="@drawable/other_user_profile"
+            android:drawableLeft="@drawable/msg"
+            android:text="Message"
+            android:drawablePadding="5dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:paddingLeft="10dp"
+            android:textColor="#FFFFFF"/>
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>
