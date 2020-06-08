@@ -2,6 +2,8 @@ package com.example.quiz;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +18,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
+
+import static com.facebook.FacebookSdk.getApplicationContext;
 
 public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHolder> {
     private Context mContext;
@@ -51,7 +55,22 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
     public void onBindViewHolder(@NonNull ImageViewHolder holder, int position) {
 
         Upload uploadCurrent = mUploads.get(position);
-        if (uploadCurrent.getmImageUrl().trim().isEmpty()) {
+        System.out.println(":::::::::::" + uploadCurrent.getmImageUrl());
+
+        if (!uploadCurrent.getmImageUrl().equals(null) && !uploadCurrent.getmImageUrl().equals("")) {
+
+
+            holder.imageView.requestLayout();
+            holder.imageView.getLayoutParams().height = 460;
+            holder.imageView.getLayoutParams().width = 1050;
+
+
+            holder.textView.setText(uploadCurrent.getmName());
+            Picasso.get().load(uploadCurrent.getmImageUrl()).fit().centerCrop().into(holder.imageView);
+            holder.textView1.setText(uploadCurrent.getmDisplayName());
+            Picasso.get().load(uploadCurrent.getmDisplayImage()).fit().centerCrop().into(holder.im1);
+
+        } else {
             holder.imageView.requestLayout();
             holder.imageView.getLayoutParams().height = 0;
             holder.imageView.getLayoutParams().width = 0;
@@ -62,17 +81,6 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
             holder.textView1.setText(uploadCurrent.getmDisplayName());
             Picasso.get().load(uploadCurrent.getmDisplayImage()).fit().centerCrop().into(holder.im1);
 
-
-        } else {
-            holder.imageView.requestLayout();
-            holder.imageView.getLayoutParams().height = 460;
-            holder.imageView.getLayoutParams().width = 1050;
-
-
-            holder.textView.setText(uploadCurrent.getmName());
-            Picasso.get().load(uploadCurrent.getmImageUrl()).fit().centerCrop().into(holder.imageView);
-            holder.textView1.setText(uploadCurrent.getmDisplayName());
-            Picasso.get().load(uploadCurrent.getmDisplayImage()).fit().centerCrop().into(holder.im1);
 
         }
     }

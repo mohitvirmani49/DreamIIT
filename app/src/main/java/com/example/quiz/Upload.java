@@ -11,14 +11,17 @@ public class Upload {
     private String mAnsImage;
     private String mAnsDisName;
     private String mAnsDisImg;
-
+    private String mComment;
+    private String mCommentName;
+    private String mCommentImage;
+    private String mCommentRecieve;
 
     public Upload() {
     }
 
-
     public Upload(String name, String imageUrl, String username, String image,
-                  String date, String answer, String ansImg, String ansDisName, String AnsDisIg) {
+                  String date, String answer, String ansImg, String ansDisName,
+                  String AnsDisIg, String comment, String commName, String commImage, String commRec) {
         if (name.trim().equals("")) {
             name = "No Text Description";
         }
@@ -31,6 +34,10 @@ public class Upload {
         mAnsImage = ansImg;
         mAnsDisName = ansDisName;
         mAnsDisImg = AnsDisIg;
+        mComment = comment;
+        mCommentName = commName;
+        mCommentImage = commImage;
+        mCommentRecieve = commRec;
 
     }
 
@@ -105,5 +112,37 @@ public class Upload {
 
     public void setmAnsDisImg(String mAnsDisImg) {
         this.mAnsDisImg = mAnsDisImg;
+    }
+
+    public String getmComment() {
+        return mComment;
+    }
+
+    public void setmComment(String mComment) {
+        this.mComment = mComment;
+    }
+
+    public String getmCommentName() {
+        return mCommentName;
+    }
+
+    public void setmCommentName(String mCommentName) {
+        this.mCommentName = mCommentName;
+    }
+
+    public String getmCommentImage() {
+        return mCommentImage;
+    }
+
+    public void setmCommentImage(String mCommentImage) {
+        this.mCommentImage = mCommentImage;
+    }
+
+    public String getmCommentRecieve() {
+        return mCommentRecieve;
+    }
+
+    public void setmCommentRecieve(String mCommentRecieve) {
+        this.mCommentRecieve = mCommentRecieve;
     }
 }

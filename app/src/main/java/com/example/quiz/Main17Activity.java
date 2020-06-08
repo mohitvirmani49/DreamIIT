@@ -94,13 +94,21 @@ public class Main17Activity extends AppCompatActivity {
         query.orderByChild("mName").equalTo(txt).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
                 for (DataSnapshot foodSnapshot : dataSnapshot.getChildren()) {
                     String key = foodSnapshot.getKey();
                     DatabaseReference fbdatabase = FirebaseDatabase.getInstance().getReference().child("uploads").child(key);
                     fbdatabase.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+
                             String myAnswer = dataSnapshot.child("mAnswer").getValue().toString();
+
+                            editor.putString("myAns", myAnswer);
+                            editor.apply();
+
                             String myName = dataSnapshot.child("mAnsDisName").getValue().toString();
                             String myAnsImage = dataSnapshot.child("mAnsImage").getValue().toString();
 //                            String myImage = dataSnapshot.child("mAnsDisImg").getValue().toString();

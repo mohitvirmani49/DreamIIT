@@ -230,7 +230,9 @@ public class Main18Activity extends AppCompatActivity {
 
                         String key = foodSnapshot.getKey();
                         System.out.println(":::::::::::::" + key);
+
                         DatabaseReference fbdatabase = FirebaseDatabase.getInstance().getReference().child("uploads").child(key);
+
                         Map<String, Object> updates = new HashMap<String, Object>();
                         updates.put("mAnswer", main_ans.getText().toString());
                         updates.put("mAnsDisName", user2.getDisplayName());

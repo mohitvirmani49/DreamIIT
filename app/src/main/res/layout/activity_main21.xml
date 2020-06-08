@@ -60,7 +60,8 @@
             android:layout_marginEnd="40dp"
             android:background="@drawable/cylender_btn"
             android:hint="Type a comment...."
-            android:padding="10dp"/>
+            android:padding="10dp"
+            android:focusable="true"/>
 
         <RelativeLayout
             android:layout_width="wrap_content"
