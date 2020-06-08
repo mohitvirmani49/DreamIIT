@@ -7,22 +7,26 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content">
 
-        <com.mikhaellopez.circularimageview.CircularImageView
-            android:id="@+id/msg_sent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            />
 
         <TextView
-            android:id="@+id/show_msg"
+            android:id="@+id/msg_for"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
-            android:layout_toRightOf="@+id/msg_sent"
+            android:textColor="#fff"
             android:padding="8dp"
             android:text="hello"
-            android:textSize="20dp" />
+            android:textSize="18dp"
+            android:layout_below="@+id/myName"
+            android:background="@drawable/bg_left"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="My Name"
+            android:textSize="10dp"
+            android:textColor="#fff"
+            android:id="@+id/myName"/>
 
 
 

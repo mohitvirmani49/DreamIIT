@@ -14,7 +14,8 @@
             android:text="My Name"
             android:id="@+id/myName"
             android:textSize="10dp"
-            android:textColor="#FFF"/>
+            android:textColor="#FFF"
+            android:layout_alignParentEnd="true"/>
 
         <TextView
             android:id="@+id/msg_for"

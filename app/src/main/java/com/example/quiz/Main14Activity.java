@@ -48,4 +48,10 @@ public class Main14Activity extends AppCompatActivity {
         inflater.inflate(R.menu.menu_1, popup.getMenu());
         popup.show();
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
 }

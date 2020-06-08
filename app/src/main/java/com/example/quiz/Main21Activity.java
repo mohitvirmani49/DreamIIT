@@ -125,9 +125,11 @@ public class Main21Activity extends AppCompatActivity {
         SharedPreferences result = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         final String txt = result.getString("txt", "1");
         final String answer = result.getString("myAns", "0");
+        FirebaseAuth firebaseAuth;
+        firebaseAuth = FirebaseAuth.getInstance();
+        final FirebaseUser user = firebaseAuth.getCurrentUser();
 
-
-        final Comm comm = new Comm(comment.getText().toString(),"","");
+        final Comm comm = new Comm(comment.getText().toString(),user.getDisplayName(),"");
         DatabaseReference dr = FirebaseDatabase.getInstance().getReference("doubts");
         dr.child(answer).push().setValue(comm);
         comment.getText().clear();
