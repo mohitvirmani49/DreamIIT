@@ -2,7 +2,10 @@ package com.example.quiz;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
+import android.app.Notification;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -42,6 +45,8 @@ import com.squareup.picasso.Picasso;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.example.quiz.App.CHANNEL_1_ID;
+
 public class Main18Activity extends AppCompatActivity {
     private static final int PICK_IMAGE_REQUEST = 1;
     EditText main_ans;
@@ -50,6 +55,7 @@ public class Main18Activity extends AppCompatActivity {
     TextView prev_ans_txt;
     Button attach_ans_img;
     ImageView imageView;
+    private NotificationManagerCompat notificationManager;
 
     private Uri mImageUri;
 
@@ -70,6 +76,8 @@ public class Main18Activity extends AppCompatActivity {
         attach_ans_img = (Button) findViewById(R.id.attach_answer);
         imageView = (ImageView) findViewById(R.id.verify_image);
 
+        notificationManager = NotificationManagerCompat.from(this);
+
         mStorageRef = FirebaseStorage.getInstance().getReference("uploads");
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("uploads");
 
@@ -84,8 +92,10 @@ public class Main18Activity extends AppCompatActivity {
             public void onClick(View v) {
                 if (mUploadTask != null && mUploadTask.isInProgress()) {
                     Toast.makeText(Main18Activity.this, "Upload in progress", Toast.LENGTH_LONG).show();
+
                 } else {
                     uploadFile();
+                    notify_person();
                 }
             }
         });
@@ -256,5 +266,19 @@ public class Main18Activity extends AppCompatActivity {
     private void openImagesActivity() {
         Intent intent = new Intent(this, Main17Activity.class);
         startActivity(intent);
+    }
+    private void notify_person(){
+        Notification notification = new NotificationCompat.Builder(Main18Activity.this, CHANNEL_1_ID)
+                .setSmallIcon(R.drawable.mohitpic)
+                .setContentTitle("New Comment")
+                .setContentText("Your question has been answered")
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setCategory(NotificationCompat.CATEGORY_MESSAGE)
+                .setOnlyAlertOnce(true)
+                .setAutoCancel(true)
+                .build();
+//        System.out.println("Dekh Bhai " + result.getString("comm","0"));
+
+        notificationManager.notify(1, notification);
     }
 }

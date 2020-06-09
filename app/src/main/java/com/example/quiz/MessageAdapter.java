@@ -1,23 +1,28 @@
 package com.example.quiz;
 
+import android.app.Notification;
 import android.content.Context;
 
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
+
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
+
+import static com.example.quiz.App.CHANNEL_1_ID;
+import static com.facebook.FacebookSdk.getApplicationContext;
 
 public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ImageViewHolder> {
     public static final int MSG_TYPE_LEFT = 1;
@@ -25,8 +30,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ImageVie
 
     private Context mContext;
     private List<Comm> mUploads;
-
-
+    private NotificationManagerCompat notificationManager;
 
     public MessageAdapter(Context context, List<Comm> doubts) {
         mContext = context;
@@ -43,6 +47,21 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ImageVie
             return MSG_TYPE_RIGHT;
         }else {
             System.out.println("HAAHAHAHA");
+//            notificationManager = NotificationManagerCompat.from(getApplicationContext());
+//
+//            SharedPreferences result = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+//                Notification notification = new NotificationCompat.Builder(getApplicationContext(), CHANNEL_1_ID)
+//                        .setSmallIcon(R.drawable.mohitpic)
+//                        .setContentTitle("New Comment")
+//                        .setContentText(result.getString("comm", "0"))
+//                        .setPriority(NotificationCompat.PRIORITY_HIGH)
+//                        .setCategory(NotificationCompat.CATEGORY_MESSAGE)
+//                        .setAutoCancel(true)
+//                        .setOnlyAlertOnce(true)
+//                        .build();
+//
+//                notificationManager.notify(1, notification);
+
             return MSG_TYPE_LEFT;
 
         }
@@ -55,13 +74,14 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ImageVie
             System.out.println(":::::::::::::mnmn" + MSG_TYPE_RIGHT);
 
             View v = LayoutInflater.from(mContext).inflate(R.layout.message_send, parent, false);
+
             return new ImageViewHolder(v);
         }else {
             View v = LayoutInflater.from(mContext).inflate(R.layout.message_recieve, parent, false);
+
             return new ImageViewHolder(v);
 
         }
-
 
     }
 
@@ -71,11 +91,15 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ImageVie
         Comm uploadCurrent = mUploads.get(position);
 
 
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("comm", uploadCurrent.getmComment());
+        editor.putString("name789", uploadCurrent.getmCommentName());
+        editor.apply();
+
+
         holder.textView_msgsent.setText(uploadCurrent.getmComment());
         holder.textView1_rec.setText(uploadCurrent.getmCommentName());
-//
-//        holder.tv2.setText(uploadCurrent.getmComment());
-//        holder.tv3.setText(uploadCurrent.getmCommentName());
 
         System.out.println("Check Truth::::" + uploadCurrent.getmComment());
 
@@ -90,24 +114,13 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ImageVie
 
     public class ImageViewHolder extends RecyclerView.ViewHolder {
         public TextView textView_msgsent;
-//        public ImageView imageView_sent;
-//        public ImageView im1_rec;
+
         public TextView textView1_rec;
-//        public TextView tv2;
-//        public TextView tv3;
-
-
 
         public ImageViewHolder(@NonNull View itemView) {
             super(itemView);
             textView_msgsent = itemView.findViewById(R.id.msg_for);
             textView1_rec = itemView.findViewById(R.id.myName);
-//            tv2 = itemView.findViewById(R.id.msg_for5);
-//            tv3 = itemView.findViewById(R.id.myName5);
-//            im1_rec = itemView.findViewById(R.id.msg_sent);
-//            textView1_rec = itemView.findViewById(R.id.show_msg);
-//            itemView.setOnClickListener(this);
-
         }
 
     }

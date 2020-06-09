@@ -1,21 +1,29 @@
 package com.example.quiz;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.AttributeSet;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+import android.widget.ViewFlipper;
 
+import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -32,12 +40,16 @@ public class ImagesActivity extends AppCompatActivity implements ImageAdapter.On
     private DatabaseReference mDatabaseRef;
     private List<Upload> mUploads;
     private ProgressBar progressBar;
+    private TabLayout tabLayout;
+    private androidx.appcompat.widget.Toolbar toolbar;
+    private ViewPager viewPager;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_images);
+
         mRecyclerView = findViewById(R.id.recycler_view);
         progressBar = findViewById(R.id.pg);
         floatingActionButton = (Button) findViewById(R.id.floatwithme);
@@ -54,8 +66,14 @@ public class ImagesActivity extends AppCompatActivity implements ImageAdapter.On
             }
         });
 
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        viewPager = (ViewPager) findViewById(R.id.viewpager);
+        tabLayout = (TabLayout)findViewById(R.id.tablayout);
+        setSupportActionBar(toolbar);
+        setUpViewPager(viewPager);
+        tabLayout.setupWithViewPager(viewPager);
+
         mUploads = new ArrayList<>();
-//        mdispNames = new ArrayList<>();
 
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("uploads");
         mDatabaseRef.addValueEventListener(new ValueEventListener() {
@@ -111,4 +129,14 @@ public class ImagesActivity extends AppCompatActivity implements ImageAdapter.On
         Intent intent = new Intent(ImagesActivity.this, Main14Activity.class);
         startActivity(intent);
     }
+    private void setUpViewPager(ViewPager viewPager){
+        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+        viewPagerAdapter.addFragment(new Physics(),"Physics");
+        viewPagerAdapter.addFragment(new Chem(),"Chemistry");
+        viewPagerAdapter.addFragment(new Mathematics(),"Maths");
+        viewPager.setAdapter(viewPagerAdapter);
+
+
+    }
+
 }

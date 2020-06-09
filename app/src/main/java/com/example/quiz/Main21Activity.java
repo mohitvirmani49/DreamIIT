@@ -2,9 +2,12 @@ package com.example.quiz;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Notification;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -31,6 +34,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.example.quiz.App.CHANNEL_1_ID;
+
 public class Main21Activity extends AppCompatActivity {
     private ImageButton back_button;
     private RecyclerView recyclerView;
@@ -40,6 +45,7 @@ public class Main21Activity extends AppCompatActivity {
     private List<Comm> mUploads;
     private StorageTask mUploadTask;
     private MessageAdapter mAdapter;
+    private NotificationManagerCompat notificationManager;
 
 
     @Override
@@ -51,6 +57,9 @@ public class Main21Activity extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.comment_recycler);
         comment = (EditText) findViewById(R.id.main_comment);
         send = (ImageButton) findViewById(R.id.comment_send);
+
+        notificationManager = NotificationManagerCompat.from(this);
+
 
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
@@ -67,6 +76,7 @@ public class Main21Activity extends AppCompatActivity {
                     Toast.makeText(Main21Activity.this, "Hold On !!! Uploading", Toast.LENGTH_LONG).show();
                 } else {
                     uploadFile();
+                    notify_me();
                     comment.getText();
                 }
             }
@@ -77,36 +87,30 @@ public class Main21Activity extends AppCompatActivity {
         final String answer = result.getString("myAns", "0");
 
         databaseReference = FirebaseDatabase.getInstance().getReference("doubts").child(answer);
-//        Query query = FirebaseDatabase.getInstance().getReference().child("doubts");
-//        query.equalTo(answer).addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                for (DataSnapshot foodSnapshot : dataSnapshot.getChildren()){
-//                    String key = foodSnapshot.getKey();
-//                    System.out.println("::::::Ulalaleleo" + key);
-//                    DatabaseReference fbdatabase = FirebaseDatabase.getInstance().getReference().child("uploads").child(key);
-//
-//                }
-
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//            }
-//        });
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 mUploads.clear();
-                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()){
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     Comm upload = postSnapshot.getValue(Comm.class);
                     mUploads.add(upload);
+
                 }
                 mAdapter = new MessageAdapter(Main21Activity.this, mUploads);
                 recyclerView.setAdapter(mAdapter);
 
+//                SharedPreferences result = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+//                Notification notification = new NotificationCompat.Builder(Main21Activity.this, CHANNEL_1_ID)
+//                        .setSmallIcon(R.drawable.mohitpic)
+//                        .setContentTitle("New Comment")
+//                        .setContentText(result.getString("comm", "0"))
+//                        .setPriority(NotificationCompat.PRIORITY_HIGH)
+//                        .setCategory(NotificationCompat.CATEGORY_MESSAGE)
+//                        .build();
+//
+//                notificationManager.notify(1, notification);
+//
 
 
             }
@@ -116,7 +120,6 @@ public class Main21Activity extends AppCompatActivity {
 
             }
         });
-
 
 
     }
@@ -129,17 +132,43 @@ public class Main21Activity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         final FirebaseUser user = firebaseAuth.getCurrentUser();
 
-        final Comm comm = new Comm(comment.getText().toString(),user.getDisplayName(),"");
+        final Comm comm = new Comm(comment.getText().toString(), user.getDisplayName(), "");
         DatabaseReference dr = FirebaseDatabase.getInstance().getReference("doubts");
         dr.child(answer).push().setValue(comm);
         comment.getText().clear();
 
     }
 
+    private void notify_me() {
+
+        SharedPreferences result = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (!result.getString("name789", "0").equals(user.getDisplayName())) {
+            System.out.println("hi789");
+            Notification notification = new NotificationCompat.Builder(Main21Activity.this, CHANNEL_1_ID)
+                    .setSmallIcon(R.drawable.mohitpic)
+                    .setContentTitle("New Comment")
+                    .setContentText(result.getString("comm", "0"))
+                    .setPriority(NotificationCompat.PRIORITY_HIGH)
+                    .setCategory(NotificationCompat.CATEGORY_MESSAGE)
+                    .setOnlyAlertOnce(true)
+                    .setAutoCancel(true)
+                    .build();
+            System.out.println("Dekh Bhai " + result.getString("comm","0"));
+
+            notificationManager.notify(1, notification);
+        }
+        else {
+            System.out.println("Logic OK");
+        }
+
+
+    }
+
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(Main21Activity.this,Main17Activity.class);
+        Intent intent = new Intent(Main21Activity.this, Main17Activity.class);
         startActivity(intent);
     }
 }
