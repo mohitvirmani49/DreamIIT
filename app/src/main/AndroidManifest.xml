@@ -17,9 +17,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Main22Activity"></activity>
+        <activity android:name=".Main23Activity"></activity>
+        <activity android:name=".Main22Activity" />
         <activity android:name=".Main21Activity" />
-        <activity android:name=".Main20Activity" />
         <activity android:name=".Main19Activity" />
         <activity android:name=".Main18Activity" />
         <activity android:name=".Main17Activity" />
@@ -53,7 +53,8 @@
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
-        <receiver android:name=".NotificationReciever"/>
+
+        <receiver android:name=".NotificationReciever" />
     </application>
 
 </manifest>

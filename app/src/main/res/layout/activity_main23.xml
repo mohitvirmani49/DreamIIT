@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_color"
+    tools:context=".Main23Activity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:background="@color/transparent"
+            android:src="@drawable/back_24" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Choose a Subject"
+            android:textAllCaps="true"
+            android:textColor="#fff"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="8dp">
+
+        <Button
+            android:id="@+id/phy_filter"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_above="@+id/chem_filter"
+            android:layout_margin="8dp"
+            android:background="@drawable/cylender_btn"
+            android:drawableLeft="@drawable/phy_try"
+            android:paddingLeft="8dp"
+            android:text="Physics"
+            android:textAlignment="center"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/chem_filter"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_centerInParent="true"
+            android:layout_margin="8dp"
+            android:background="@drawable/cylender_btn"
+            android:drawableLeft="@drawable/try_chem"
+            android:paddingLeft="8dp"
+            android:text="Chemistry"
+            android:textAlignment="center"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/maths_filter"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_below="@+id/chem_filter"
+            android:layout_margin="8dp"
+            android:background="@drawable/cylender_btn"
+            android:drawableLeft="@drawable/maths_try"
+            android:paddingLeft="8dp"
+            android:text="Maths"
+            android:textAlignment="center"
+            android:textAllCaps="false" />
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

@@ -15,13 +15,14 @@ public class Upload {
     private String mCommentName;
     private String mCommentImage;
     private String mCommentRecieve;
+    private String mSubject;
 
     public Upload() {
     }
 
     public Upload(String name, String imageUrl, String username, String image,
                   String date, String answer, String ansImg, String ansDisName,
-                  String AnsDisIg, String comment, String commName, String commImage, String commRec) {
+                  String AnsDisIg, String comment, String commName, String commImage, String commRec, String sub) {
         if (name.trim().equals("")) {
             name = "No Text Description";
         }
@@ -38,6 +39,7 @@ public class Upload {
         mCommentName = commName;
         mCommentImage = commImage;
         mCommentRecieve = commRec;
+        mSubject = sub;
 
     }
 
@@ -144,5 +146,13 @@ public class Upload {
 
     public void setmCommentRecieve(String mCommentRecieve) {
         this.mCommentRecieve = mCommentRecieve;
+    }
+
+    public String getmSubject() {
+        return mSubject;
+    }
+
+    public void setmSubject(String mSubject) {
+        this.mSubject = mSubject;
     }
 }

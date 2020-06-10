@@ -9,4 +9,6 @@
     <color name="Button">#003366</color>
     <color name="Backgrnd">#21467A</color>
 
+    <color name="transparent">#00000000</color>
+
 </resources>

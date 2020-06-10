@@ -1,62 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Main16Activity"
-    android:layout_margin="20dp" >
+    android:background="@drawable/gradient_color"
+    tools:context=".Main16Activity">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/attach"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/chooseimg"/>
-
-    <EditText
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:hint="Ask your Doubt here"
-        android:layout_centerHorizontal="true"
-        android:textAlignment="center"
-        android:id="@+id/main_doubt"/>
+        android:layout_margin="20dp">
 
-    <ImageView
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:src="@drawable/image"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/imv1"/>
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/back_24"
+            android:background="@color/transparent"/>
 
-    <ProgressBar
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:id="@+id/pbar"
-        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-        android:layout_below="@id/imv1"
-        android:layout_marginTop="250dp"
-        />
+        <EditText
+            android:id="@+id/main_doubt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Ask your Doubt here......"
+            android:textAlignment="textStart"
+            android:textColor="#FFFDDC"
+            android:textColorHint="#FFFDC0"
+            android:layout_centerInParent="true"
+            android:background="@color/transparent"/>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Upload"
-        android:id="@+id/upload"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"/>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Show Uploads"
-        android:textAllCaps="false"
-        android:layout_alignParentBottom="true"
-        android:id="@+id/show_uploads"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_below="@+id/main_doubt"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="1dp"
+            android:background="@drawable/tv_bottomline" />
 
-    
+
+        <ImageView
+            android:id="@+id/imv1"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_centerHorizontal="true" />
+
+
+        <!--        <ProgressBar-->
+        <!--            android:id="@+id/pbar"-->
+        <!--            style="@style/Widget.AppCompat.ProgressBar.Horizontal"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_below="@id/imv1"-->
+        <!--            android:layout_centerInParent="true"-->
+        <!--            android:layout_marginTop="250dp" />-->
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true">
+
+            <Button
+                android:id="@+id/upload"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:text="Ask"
+                android:background="@drawable/ask_doubt"/>
+
+
+            <Button
+                android:id="@+id/chooseimg"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/attach"
+                android:rotation="150" />
+
+            <ImageButton
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentBottom="true"
+                android:background="#00000000"
+                android:src="@drawable/camera" />
+        </RelativeLayout>
+
+
+    </RelativeLayout>
 
 </RelativeLayout>

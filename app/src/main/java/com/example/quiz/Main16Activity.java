@@ -5,10 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentResolver;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.text.format.DateUtils;
 import android.view.View;
 import android.webkit.MimeTypeMap;
@@ -67,7 +69,7 @@ public class Main16Activity extends AppCompatActivity {
 
         mButtonChooseImage = findViewById(R.id.chooseimg);
         mButtonUpload = findViewById(R.id.upload);
-        mTextViewShowUploads = findViewById(R.id.show_uploads);
+
         mEditTextFileName = findViewById(R.id.main_doubt);
         mImageView = findViewById(R.id.imv1);
         mProgressBar = findViewById(R.id.progress_bar);
@@ -85,20 +87,18 @@ public class Main16Activity extends AppCompatActivity {
         mButtonUpload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mUploadTask != null && mUploadTask.isInProgress()) {
-                    Toast.makeText(Main16Activity.this, "Upload in progress", Toast.LENGTH_LONG).show();
-                } else {
-                    uploadFile();
-                }
+                uploadFile();
+                Intent intent = new Intent(Main16Activity.this, Main23Activity.class);
+                startActivity(intent);
+
+//                if (mUploadTask != null && mUploadTask.isInProgress()) {
+//                    Toast.makeText(Main16Activity.this, "Upload in progress", Toast.LENGTH_LONG).show();
+//                } else {
+//                    uploadFile();
+//                }
             }
         });
 
-        mTextViewShowUploads.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openImagesActivity();
-            }
-        });
     }
 
     private void openFileChooser() {
@@ -132,35 +132,9 @@ public class Main16Activity extends AppCompatActivity {
             firebaseAuth = FirebaseAuth.getInstance();
             final FirebaseUser user = firebaseAuth.getCurrentUser();
 
-            // Date
-
-            Handler handler = new Handler();
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-
-                }
-            }, 500);
-
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd kk:mm:ss");
-            String dateString = dateFormat.format(Calendar.getInstance().getTime());
-
-
-            Date convertedDate = new Date();
-
-            try {
-                convertedDate = dateFormat.parse(dateString);
-            } catch (ParseException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-
-            PrettyTime p = new PrettyTime();
-
-            final String datetime = p.format(convertedDate);
-
 
             if (user.getDisplayName() != null) {
+
 
 
                 final StorageReference fileReference = mStorageRef.child(System.currentTimeMillis()
@@ -183,14 +157,30 @@ public class Main16Activity extends AppCompatActivity {
                                     Uri downloadUri = task.getResult();
                                     String username = user.getDisplayName();
                                     Uri pic = user.getPhotoUrl();
-                                    Upload upload = new Upload(mEditTextFileName.getText().toString().trim(),
-                                            downloadUri.toString(), username.trim(),
-                                            pic.toString(), datetime.trim(), "", "", "",
-                                            "", "", "", "","");
+//                                    Upload upload = new Upload(mEditTextFileName.getText().toString().trim(),
+//                                            downloadUri.toString(), username.trim(),
+//                                            pic.toString(), "", "", "", "",
+//                                            "", "", "", "", "","");
 
-                                    mDatabaseRef.push().setValue(upload);
+
+                                    SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                                    SharedPreferences.Editor editor = sharedPreferences.edit();
+
+                                    String doubt = mEditTextFileName.getText().toString().trim();
+                                    System.out.println("::::::::::::::::::::::::"+doubt);
+                                    System.out.println("::::::::789" + "na" + username);
+
+                                    editor.putString("d", doubt);
+                                    editor.putString("down",downloadUri.toString());
+                                    editor.putString("user",username.trim());
+                                    editor.putString("pic",pic.toString());
+                                    editor.apply();
+
+
+//                                    mDatabaseRef.push().setValue(upload);
 //                                    mDatabaseRef.push().setValue(upload1);
                                     Toast.makeText(Main16Activity.this, "Upload successful", Toast.LENGTH_LONG).show();
+//                                    openImagesActivity();
 
                                 } else {
                                     Toast.makeText(Main16Activity.this, "upload failed: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
@@ -211,15 +201,27 @@ public class Main16Activity extends AppCompatActivity {
             String username = user2.getDisplayName();
 
             Uri pic = user2.getPhotoUrl();
-            Upload upload = new Upload(mEditTextFileName.getText().toString().trim(), "",
-                    username.trim(), pic.toString(), "", "", "",
-                    "", "", "", "", "","");
-            mDatabaseRef.push().setValue(upload);
+
+            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+
+            String doubt = mEditTextFileName.getText().toString().trim();
+            System.out.println("::::::::::::::::::::::::"+doubt);
+            System.out.println("::::::::789" + "na" + username);
+
+            editor.putString("d", doubt);
+            editor.putString("user",username.trim());
+            editor.putString("pic",pic.toString());
+            editor.apply();
+
+//            Upload upload = new Upload(mEditTextFileName.getText().toString().trim(), "",
+//                    username.trim(), pic.toString(), "", "", "",
+//                    "", "", "", "", "", "","");
+//            mDatabaseRef.push().setValue(upload);
             Toast.makeText(Main16Activity.this, "Upload successful", Toast.LENGTH_LONG).show();
-            openImagesActivity();
+//            openImagesActivity();
 
 
-//            Toast.makeText(this, "No file selected", Toast.LENGTH_LONG).show();
         }
     }
 
