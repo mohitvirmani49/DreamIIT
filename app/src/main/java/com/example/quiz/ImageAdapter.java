@@ -68,6 +68,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
             holder.textView.setText(uploadCurrent.getmName());
             Picasso.get().load(uploadCurrent.getmImageUrl()).fit().centerCrop().into(holder.imageView);
             holder.textView1.setText(uploadCurrent.getmDisplayName());
+            holder.tv2.setText(uploadCurrent.getmSubject());
             Picasso.get().load(uploadCurrent.getmDisplayImage()).fit().centerCrop().into(holder.im1);
 
         } else {
@@ -79,6 +80,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
 
             holder.textView.setText(uploadCurrent.getmName());
             holder.textView1.setText(uploadCurrent.getmDisplayName());
+            holder.tv2.setText(uploadCurrent.getmSubject());
             Picasso.get().load(uploadCurrent.getmDisplayImage()).fit().centerCrop().into(holder.im1);
 
 
@@ -95,6 +97,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
         public ImageView imageView;
         public ImageView im1;
         public TextView textView1;
+        public TextView tv2;
 
 
         public ImageViewHolder(@NonNull View itemView) {
@@ -103,6 +106,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
             imageView = itemView.findViewById(R.id.image_view_upload);
             im1 = itemView.findViewById(R.id.display_image5);
             textView1 = itemView.findViewById(R.id.display_name5);
+            tv2 = itemView.findViewById(R.id.mention_sub);
 //            itemView.setOnClickListener(this);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

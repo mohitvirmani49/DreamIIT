@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Main24Activity"
+    android:background="@drawable/filter_color">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="8dp">
+
+        <Button
+            android:id="@+id/phy_dialog"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_above="@+id/chem_dialog"
+            android:layout_margin="8dp"
+            android:background="@drawable/cylender_btn"
+            android:drawableLeft="@drawable/phy_try"
+            android:paddingLeft="8dp"
+            android:text="Physics"
+            android:textAlignment="center"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/chem_dialog"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_centerInParent="true"
+            android:layout_margin="8dp"
+            android:background="@drawable/cylender_btn"
+            android:drawableLeft="@drawable/try_chem"
+            android:paddingLeft="8dp"
+            android:text="Chemistry"
+            android:textAlignment="center"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/maths_dialog"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_below="@+id/chem_dialog"
+            android:layout_margin="8dp"
+            android:background="@drawable/cylender_btn"
+            android:drawableLeft="@drawable/maths_try"
+            android:paddingLeft="8dp"
+            android:text="Maths"
+            android:textAlignment="center"
+            android:textAllCaps="false" />
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

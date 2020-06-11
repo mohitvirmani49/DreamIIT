@@ -59,15 +59,117 @@ public class Main23Activity extends AppCompatActivity {
                 if (mUploadTask != null && mUploadTask.isInProgress()) {
                     Toast.makeText(Main23Activity.this, "Upload in progress", Toast.LENGTH_LONG).show();
                 } else {
-                    uploadFile();
+                    uploadPhyFile();
+                }
+            }
+        });
+        chemistry.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mUploadTask != null && mUploadTask.isInProgress()) {
+                    Toast.makeText(Main23Activity.this, "Upload in progress", Toast.LENGTH_LONG).show();
+                } else {
+                    uploadChemFile();
+                }
+
+            }
+        });
+        maths.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mUploadTask != null && mUploadTask.isInProgress()) {
+                    Toast.makeText(Main23Activity.this, "Upload in progress", Toast.LENGTH_LONG).show();
+                } else {
+                    uploadMathsFile();
                 }
             }
         });
 
     }
 
-    private void uploadFile() {
+    private void uploadPhyFile() {
 
+        SharedPreferences result = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        String doubt = result.getString("d", "0");
+        String img = result.getString("down", "1");
+        String usrname = result.getString("user", "2");
+        String pic7 = result.getString("pic", "3");
+
+        SharedPreferences.Editor editor = result.edit();
+
+
+        if (img.matches("1")) {
+
+            Upload upload = new Upload(doubt, "",
+                    usrname, pic7, "", "", "",
+                    "", "", "", "", "", "", "Physics");
+            mDatabaseRef.push().setValue(upload);
+
+            openImagesActivity();
+            editor.clear();
+            editor.apply();
+        } else {
+
+            Upload upload = new Upload(doubt,
+                    img, usrname, pic7, "", "", "", "",
+                    "", "", "", "", "", "Physics");
+
+            mDatabaseRef.push().setValue(upload);
+
+            System.out.println("myImage" + img);
+
+            openImagesActivity();
+            editor.clear();
+            editor.apply();
+
+        }
+
+    }
+
+    private void uploadChemFile() {
+
+        SharedPreferences result = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+
+        String doubt = result.getString("d", "0");
+        String img = result.getString("down", "1");
+        String usrname = result.getString("user", "2");
+        String pic7 = result.getString("pic", "3");
+
+        SharedPreferences.Editor editor = result.edit();
+
+
+        if (img.matches("1")) {
+            System.out.println("Celebrations, I reached here yayayyyyyyyyyy");
+
+
+            Upload upload = new Upload(doubt, "",
+                    usrname, pic7, "", "", "",
+                    "", "", "", "", "", "", "Chemistry");
+            mDatabaseRef.push().setValue(upload);
+
+            openImagesActivity();
+            editor.clear();
+            editor.apply();
+        } else {
+            System.out.println("I cant reach there, oops");
+
+            Upload upload = new Upload(doubt,
+                    img, usrname, pic7, "", "", "", "",
+                    "", "", "", "", "", "Chemistry");
+
+            mDatabaseRef.push().setValue(upload);
+
+            System.out.println("myImage" + img);
+
+            openImagesActivity();
+            editor.clear();
+            editor.apply();
+
+        }
+
+    }
+
+    private void uploadMathsFile() {
         SharedPreferences result = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         String doubt = result.getString("d", "0");
         System.out.println("My doubt" + doubt);
@@ -77,34 +179,37 @@ public class Main23Activity extends AppCompatActivity {
         System.out.println("My name" + usrname);
         String pic7 = result.getString("pic", "3");
         System.out.println("My pic" + pic7);
+
+        SharedPreferences.Editor editor = result.edit();
+
+
         if (img.matches("1")) {
             System.out.println("Celebrations, I reached here yayayyyyyyyyyy");
 
+
             Upload upload = new Upload(doubt, "",
                     usrname, pic7, "", "", "",
-                    "", "", "", "", "", "", "");
+                    "", "", "", "", "", "", "Maths");
             mDatabaseRef.push().setValue(upload);
+
             openImagesActivity();
+            editor.clear();
+            editor.apply();
         } else {
             System.out.println("I cant reach there, oops");
 
             Upload upload = new Upload(doubt,
                     img, usrname, pic7, "", "", "", "",
-                    "", "", "", "", "", "");
+                    "", "", "", "", "", "Maths");
 
             mDatabaseRef.push().setValue(upload);
+
             openImagesActivity();
+            editor.clear();
+            editor.apply();
 
         }
-        System.out.println("Some blunderrrr");
-
-
-//                final StorageReference fileReference = mStorageRef.child(System.currentTimeMillis()
-//                        + "." + getFileExtension(mImageUri));
-
-
     }
-
 
     private void openImagesActivity() {
         Intent intent = new Intent(this, ImagesActivity.class);

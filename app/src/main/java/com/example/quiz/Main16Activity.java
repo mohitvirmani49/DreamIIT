@@ -91,11 +91,6 @@ public class Main16Activity extends AppCompatActivity {
                 Intent intent = new Intent(Main16Activity.this, Main23Activity.class);
                 startActivity(intent);
 
-//                if (mUploadTask != null && mUploadTask.isInProgress()) {
-//                    Toast.makeText(Main16Activity.this, "Upload in progress", Toast.LENGTH_LONG).show();
-//                } else {
-//                    uploadFile();
-//                }
             }
         });
 
@@ -180,6 +175,7 @@ public class Main16Activity extends AppCompatActivity {
 //                                    mDatabaseRef.push().setValue(upload);
 //                                    mDatabaseRef.push().setValue(upload1);
                                     Toast.makeText(Main16Activity.this, "Upload successful", Toast.LENGTH_LONG).show();
+
 //                                    openImagesActivity();
 
                                 } else {

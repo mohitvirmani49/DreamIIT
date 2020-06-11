@@ -4,52 +4,59 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ImagesActivity"
-    android:background="@drawable/gradient_color">
+    android:background="@drawable/gradient_color"
+    tools:context=".ImagesActivity">
 
 
     <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/my_progress"
         android:layout_width="125dp"
         android:layout_height="125dp"
-        app:lottie_fileName="book.json"
-        app:lottie_loop="true"
-        app:lottie_autoPlay="true"
-        android:scaleType="fitCenter"
         android:layout_centerInParent="true"
-        android:id="@+id/my_progress"/>
+        android:scaleType="fitCenter"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="book.json"
+        app:lottie_loop="true" />
 
 
     <RelativeLayout
         android:id="@+id/mohit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="#034f84">
+        android:background="#034f84"
+        android:orientation="horizontal">
 
-        <ImageButton
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/search"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_alignParentRight="true"
             android:layout_marginTop="30dp"
             android:layout_marginEnd="70dp"
+            app:goIcon="@drawable/ic_baseline_search_24"
             android:background="@drawable/search_bar"
-            android:src="@drawable/ic_baseline_search_24" />
+
+
+             />
+
 
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Filter"
-                android:textColor="#fff"
-                android:textSize="10dp"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="25dp"
-                android:layout_marginEnd="30dp"/>
+                android:layout_marginEnd="30dp"
+                android:text="Filter"
+                android:textColor="#fff"
+                android:textSize="10dp" />
         </RelativeLayout>
 
         <ImageButton
+            android:id="@+id/back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -59,6 +66,7 @@
 
 
         <ImageButton
+            android:id="@+id/filter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -67,66 +75,72 @@
             android:background="#00000000"
             android:src="@drawable/filter" />
 
-        <TextView
+        <RelativeLayout
+            android:id="@+id/textV"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:gravity="center"
-            android:layout_marginStart="115dp"
-            android:text="Doubts"
-            android:textColor="#fff"
-            android:textSize="20dp" />
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="115dp"
+                android:layout_marginTop="30dp"
+                android:gravity="center"
+                android:text="Doubts"
+                android:textColor="#fff"
+                android:textSize="20dp" />
+        </RelativeLayout>
 
 
     </RelativeLayout>
+
     <RelativeLayout
+        android:id="@+id/virmani"
         android:layout_width="match_parent"
         android:layout_height="20dp"
         android:layout_below="@+id/mohit"
-        android:id="@+id/virmani"
         android:background="#034f84">
 
     </RelativeLayout>
 
     <LinearLayout
+        android:id="@+id/rec"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/rec"
         android:layout_below="@+id/virmani"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
+
         <TextView
+            android:id="@+id/bl"
             android:layout_width="match_parent"
             android:layout_height="2dp"
-            android:background="@drawable/tv_bottomline"
-            android:id="@+id/bl"/>
+            android:background="@drawable/tv_bottomline" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
             android:layout_marginTop="6dp"
-            android:layout_marginBottom="6dp"
-            />
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="6dp" />
     </LinearLayout>
 
     <Button
+        android:id="@+id/floatwithme"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="40dp"
         android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
         android:layout_marginEnd="15dp"
-        android:text="+"
-        android:textSize="30dp"
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/color_add"
         android:elevation="20dp"
+        android:text="+"
+
         android:textAlignment="center"
 
-        android:id="@+id/floatwithme"
-
-        android:background="@drawable/color_add"/>
+        android:textSize="30dp" />
 
 
 </RelativeLayout>
