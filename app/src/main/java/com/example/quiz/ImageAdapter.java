@@ -115,6 +115,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
                         int position = getAdapterPosition();
                         if (position != RecyclerView.NO_POSITION) {
                             itemClickListener.itemClicked(position);
+                            System.out.println("My Game, My Rule::::::" + position);
                         }
                     }
                 }

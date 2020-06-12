@@ -172,6 +172,8 @@ public class ImagesActivity extends AppCompatActivity implements ImageAdapter.On
 
         for(Upload object : mUploads){
             if(object.getmName().toLowerCase().contains(str.toLowerCase())){
+                int pos = object.getmName().indexOf(str);
+                System.out.println("My position is" + pos);
                 myList.add(object);
             }
 

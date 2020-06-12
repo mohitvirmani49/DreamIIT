@@ -27,8 +27,29 @@ public class Main14Activity extends AppCompatActivity {
         cardView_phy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Main14Activity.this, Main22Activity.class);
+                Intent intent = new Intent(Main14Activity.this, Main26Activity.class);
                 startActivity(intent);
+
+            }
+        });
+
+
+        cardView_chem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Main14Activity.this, Main27Activity.class);
+                startActivity(intent);
+
+
+            }
+        });
+
+        cardView_maths.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Main14Activity.this, Main28Activity.class);
+                startActivity(intent);
+
 
             }
         });

@@ -17,7 +17,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Main24Activity"></activity>
+        <activity android:name=".Main28Activity"></activity>
+        <activity android:name=".Main27Activity" />
+        <activity android:name=".Main26Activity" />
+        <activity android:name=".Main25Activity" />
+        <activity android:name=".Main24Activity" />
         <activity android:name=".Main23Activity" />
         <activity android:name=".Main22Activity" />
         <activity android:name=".Main21Activity" />
