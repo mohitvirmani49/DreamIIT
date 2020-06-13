@@ -16,6 +16,7 @@
         android:layout_weight="2">
 
         <ImageButton
+            android:id="@+id/back1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
@@ -31,6 +32,7 @@
             android:fontFamily="sans-serif"
             android:gravity="center"
             android:text="Physics"
+            android:textStyle="bold"
             android:textAlignment="center"
             android:textColor="#130008"
             android:textSize="20dp" />
@@ -38,11 +40,11 @@
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/my_progress"
-            android:layout_width="185dp"
-            android:layout_height="185dp"
+            android:layout_width="195dp"
+            android:layout_height="195dp"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="5dp"
+            android:layout_marginBottom="2dp"
             android:scaleType="fitCenter"
             app:lottie_autoPlay="true"
             app:lottie_fileName="phy_newton.json"
@@ -73,7 +75,7 @@
         android:rowCount="2">
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/phy"
+            android:id="@+id/phy_phy"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_rowWeight="1"
@@ -118,7 +120,7 @@
 
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/pp"
+            android:id="@+id/challenge_phy"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_rowWeight="1"
@@ -161,7 +163,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/mathematics"
+            android:id="@+id/formulae_phy"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_rowWeight="1"
@@ -201,7 +203,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/full_test_papers"
+            android:id="@+id/doubt_phy"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_rowWeight="1"
