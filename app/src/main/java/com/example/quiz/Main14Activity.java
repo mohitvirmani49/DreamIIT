@@ -9,10 +9,11 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.PopupMenu;
+import android.widget.RelativeLayout;
 
 public class Main14Activity extends AppCompatActivity {
     CardView cardView_phy, cardView_chem, cardView_maths, cardView_fulltest;
-    Button doubt;
+    RelativeLayout doubt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +23,7 @@ public class Main14Activity extends AppCompatActivity {
         cardView_chem = (CardView) findViewById(R.id.chem);
         cardView_maths = (CardView) findViewById(R.id.mathematics);
         cardView_fulltest = (CardView) findViewById(R.id.full_test_papers);
-        doubt = (Button) findViewById(R.id.doubts);
+        doubt = (RelativeLayout) findViewById(R.id.doubts);
 
         cardView_phy.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/main_bg"
     android:orientation="vertical"
-    android:weightSum="9"
-    tools:context=".Main14Activity">
+    android:weightSum="8">
 
 
     <RelativeLayout
@@ -15,27 +13,18 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="40dp"
-        android:layout_weight="2"
-        android:layout_margin="10dp"
-        >
+        android:layout_weight="2">
 
     </RelativeLayout>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="5dp"
-        android:id="@+id/myName"/>
-
     <GridLayout
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="15dp"
         android:id="@+id/grid_phy"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="5"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_weight="4"
         android:alignmentMode="alignMargins"
         android:background="@color/transparent"
         android:columnCount="2"
@@ -43,13 +32,13 @@
         android:rowCount="2">
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/phy"
+            android:id="@+id/phy_phy"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
             android:layout_marginLeft="25dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="5dp"
             android:layout_marginRight="5dp"
             android:layout_marginBottom="10dp"
             android:background="@drawable/cardview_color"
@@ -89,13 +78,13 @@
 
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/chem"
+            android:id="@+id/challenge_phy"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
             android:layout_marginLeft="5dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="5dp"
             android:layout_marginRight="25dp"
             android:layout_marginBottom="10dp"
             android:background="@drawable/cardview_color"
@@ -133,7 +122,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/mathematics"
+            android:id="@+id/formulae_phy"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_rowWeight="1"
@@ -175,7 +164,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/full_test_papers"
+            android:id="@+id/doubt_phy"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_rowWeight="1"
@@ -249,7 +238,6 @@
                     android:layout_height="match_parent">
 
                     <RelativeLayout
-                        android:id="@+id/doubts"
                         android:layout_width="50sp"
                         android:layout_height="50sp"
                         android:layout_centerHorizontal="true"

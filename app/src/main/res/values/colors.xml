@@ -8,6 +8,9 @@
 
     <color name="Button">#003366</color>
     <color name="Backgrnd">#21467A</color>
+    <color name="white">#FFFFFF</color>
+    <color name="main_page">#00B0EA</color>
+
 
     <color name="transparent">#00000000</color>
 

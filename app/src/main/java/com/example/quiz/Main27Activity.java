@@ -52,6 +52,13 @@ public class Main27Activity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        formulae.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Main27Activity.this, Main5Activity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 }

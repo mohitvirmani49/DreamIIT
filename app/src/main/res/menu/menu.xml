@@ -4,13 +4,13 @@
     <item
         android:id="@+id/home"
         android:enabled="true"
-        android:icon="@drawable/homw"
-        android:title="Home"/>
+        android:icon="@drawable/my_home"
+        android:title="Home"
+        />
     <item
         android:id="@+id/notification"
         android:enabled="true"
-        android:icon="@drawable/notify"
-        android:title="Updates"/>
+        android:title=""/>
     <item
         android:id="@+id/profile"
         android:enabled="true"
