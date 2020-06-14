@@ -4,17 +4,22 @@
         <shape android:shape="rectangle">
 
             <gradient
-                android:startColor="@color/Backgrnd"
+                android:angle="45"
                 android:endColor="#3168b4"
-                android:angle="45" />
-<!--#00B0EA-->
+                android:startColor="@color/Backgrnd" />
+            <!--#00B0EA-->
         </shape>
     </item>
     <item
-        android:bottom="475sp"
+        android:bottom="450sp"
         android:left="-100sp"
         android:right="-100sp"
         android:top="-200sp">
+
+<!--        android:bottom="450sp"
+        android:left="-100sp"
+        android:right="-100sp"
+        android:top="-200sp"-->
         <shape android:shape="oval">
             <gradient
                 android:angle="90"
@@ -23,7 +28,7 @@
         </shape>
     </item>
     <item
-        android:bottom="477sp"
+        android:bottom="452sp"
         android:left="-100sp"
 
         android:right="-100sp"
