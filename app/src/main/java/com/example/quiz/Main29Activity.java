@@ -31,7 +31,7 @@ public class Main29Activity extends AppCompatActivity implements Phy_Adapter.OnI
         back = (ImageButton) findViewById(R.id.back);
 //        List<Phy> list = new ArrayList<>();
         list = new ArrayList<>();
-        list.add(new Phy("\n1 Units and Measurement"));
+        list.add(new Phy("1 Units and Measurement"));
         list.add(new Phy("\n2. Kinematics"));
         list.add(new Phy("\n3. Laws Of Motion"));
         list.add(new Phy("\n4. Work, Energy and Power"));

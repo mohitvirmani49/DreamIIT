@@ -5,7 +5,38 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Main3Activity"
+    android:id="@+id/my"
     >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/pass"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="2dp"
+        android:scaleType="fitCenter"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="pass.json"
+        app:lottie_loop="true" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/fail"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="2dp"
+        android:scaleType="fitCenter"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="fail.json"
+        app:lottie_loop="true" />
+
+    </RelativeLayout>
 
 
 
@@ -14,10 +45,36 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:fontFamily="sans-serif-medium"
+        android:textAlignment="center"
         android:textSize="50dp"
         android:text="Hi"
         android:textColor="#ff0000"
         android:textStyle="italic"
         android:id="@+id/result"/>
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/my_progress"
+        android:layout_width="150sp"
+        android:layout_height="150sp"
+        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="2dp"
+        android:scaleType="fitCenter"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="p.json"
+        app:lottie_loop="true" />
+
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/my_progress2"
+        android:layout_width="150sp"
+        android:layout_height="150sp"
+        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="2dp"
+        android:scaleType="fitCenter"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="f.json"
+        app:lottie_loop="true" />
 
 </RelativeLayout>

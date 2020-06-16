@@ -36,7 +36,7 @@ public class Main34Activity extends AppCompatActivity {
     private ImageButton back;
     private Button submit, prev, nxt;
     private ImageView question_img;
-    private TextView chapterName, marks;
+    private TextView chapterName, marks, number;
     private RadioGroup radioGroup;
     private RadioButton optionA, optionB, optionC, optionD;
     private int alpha = 0;
@@ -44,6 +44,7 @@ public class Main34Activity extends AppCompatActivity {
 
     private DatabaseReference reference;
     private int total = 1;
+    private int no = 1;
     private int correct = 0;
 
 
@@ -64,6 +65,7 @@ public class Main34Activity extends AppCompatActivity {
         optionB = (RadioButton) findViewById(R.id.b);
         optionC = (RadioButton) findViewById(R.id.c);
         optionD = (RadioButton) findViewById(R.id.d);
+        number = (TextView) findViewById(R.id.number);
 
         random();
         updateQuestion();
@@ -104,7 +106,6 @@ public class Main34Activity extends AppCompatActivity {
     public int random() {
         for (int i = 0; i < array.length; i++) {
             array[i] = i + 1;
-            System.out.println("Simple array print: " + array[i]);
         }
         Collections.shuffle(Arrays.asList(array));
         return array[alpha];
@@ -117,14 +118,13 @@ public class Main34Activity extends AppCompatActivity {
 
         } else {
 
-            SharedPreferences result = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-//            String chapter = .getString("chapter", "0");
-//            System.out.println("My name5 " + result.getString("chapter","0"));
             Intent intent = getIntent();
-            String chapter = intent.getStringExtra("chapter");
-            System.out.println("My name:::::" + chapter);
-            reference = FirebaseDatabase.getInstance().getReference("Physics").child("1 Units and Measurement").child(String.valueOf(array[alpha]));
+            final String value = intent.getStringExtra("val");
+
+            reference = FirebaseDatabase.getInstance().getReference("Physics").child(intent.getStringExtra("val")).child(String.valueOf(array[alpha]));
             alpha++;
+            number.setText("Q" + no + " :");
+            no++;
             reference.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
