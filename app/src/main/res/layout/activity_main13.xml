@@ -7,85 +7,138 @@
     android:background="@drawable/gradient_color"
     tools:context=".Main13Activity">
 
-    <RelativeLayout
-        android:id="@+id/rl1_profile"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:scrollbars="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/rl1_profile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
 
-        <ImageButton
-            android:id="@+id/back_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="15dp"
-            android:background="#00000000"
-            android:src="@drawable/back_24" />
+                <ImageButton
+                    android:id="@+id/back_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="15dp"
+                    android:background="#00000000"
+                    android:src="@drawable/back_24" />
 
-        <TextView
-            android:id="@+id/profile_user_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="15dp"
-            android:layout_toRightOf="@+id/back_button"
-            android:fontFamily="sans-serif-light"
-            android:text="Name"
-            android:textAlignment="center"
-            android:textColor="#FFFFFF"
-            android:textSize="20dp" />
+                <TextView
+                    android:id="@+id/profile_user_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_toRightOf="@+id/back_button"
+                    android:fontFamily="sans-serif-light"
+                    android:text="Name"
+                    android:textAlignment="center"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20dp" />
 
 
-    </RelativeLayout>
+            </RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/profile_ll"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/rl1_profile"
-        android:layout_marginTop="20dp">
+            <RelativeLayout
+                android:id="@+id/profile_ll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rl1_profile"
+                android:layout_marginTop="20dp">
 
-        <com.mikhaellopez.circularimageview.CircularImageView
-            android:id="@+id/profile_other_user_pic"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="20dp"
-            android:src="@drawable/image"
-            app:civ_border_width="0dp"
+                <com.mikhaellopez.circularimageview.CircularImageView
+                    android:id="@+id/profile_other_user_pic"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="20dp"
+                    android:src="@drawable/image"
+                    app:civ_border_color_end="#1FD1F9"
+                    app:civ_border_color_start="#B621FE"
+                    app:civ_border_width="3dp" />
 
-            />
+            </RelativeLayout>
 
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/p_user_nm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/profile_ll"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="sans-serif"
+                android:text="Name"
+                android:textColor="#FFFFFF"
+                android:textSize="25dp" />
 
-    <TextView
-        android:id="@+id/p_user_nm"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/profile_ll"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="20dp"
-        android:fontFamily="sans-serif"
-        android:text="Name"
-        android:textColor="#FFFFFF"
-        android:textSize="25dp" />
+            <TextView
+                android:id="@+id/user_rank"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/p_user_nm"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="30dp"
+                android:drawableLeft="@drawable/star"
+                android:fontFamily="sans-serif-light"
+                android:padding="10dp"
+                android:text="  Beginner"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:textSize="20dp" />
 
-    <TextView
-        android:id="@+id/user_rank"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/p_user_nm"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="30dp"
-        android:fontFamily="sans-serif-light"
-        android:text="Beginner"
-        android:textAlignment="center"
-        android:textColor="#FFFFFF"
+            <Button
+                android:id="@+id/notify"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_below="@+id/user_rank"
+                android:layout_marginTop="50dp"
+                android:background="@color/transparent"
+                android:drawableLeft="@drawable/notify"
+                android:fontFamily="sans-serif"
+                android:paddingLeft="20dp"
+                android:paddingEnd="20dp"
+                android:text="Notifications"
+                android:textColor="#fff" />
 
-        android:textSize="20dp" />
 
+            <Button
+                android:id="@+id/msg"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_below="@+id/notify"
+                android:background="@color/transparent"
+                android:drawableLeft="@drawable/msg"
+                android:paddingLeft="20dp"
+                android:paddingEnd="20dp"
+                android:text="Messages"
+                android:textColor="#fff" />
+
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_below="@+id/msg"
+                android:background="@color/transparent"
+                android:drawableLeft="@drawable/invite"
+                android:fontFamily="sans-serif"
+                android:paddingLeft="20dp"
+                android:paddingEnd="20dp"
+                android:text="Invite Friends"
+                android:textColor="#fff" />
+
+
+        </RelativeLayout>
+    </ScrollView>
 
 </RelativeLayout>

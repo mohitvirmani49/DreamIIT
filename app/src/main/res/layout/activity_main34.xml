@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Main34Activity"
+    android:background="#fff">
+
+    <RelativeLayout
+        android:id="@+id/inst"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/gradient_color">
+
+        <ImageButton
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="15dp"
+            android:layout_marginBottom="15dp"
+            android:background="@color/transparent"
+            android:src="@drawable/back_24" />
+
+        <Button
+            android:id="@+id/submit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/border_white"
+            android:fontFamily="sans-serif"
+            android:text="Submit"
+            android:textColor="#fff"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/chapterName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="sans-serif"
+            android:text="Kinematics"
+            android:textAlignment="center"
+            android:textColor="#fff"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/marks"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/inst"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:fontFamily="sans-serif"
+        android:text="+4 / 0"
+        android:textColor="#130008"
+        android:textSize="15dp" />
+
+    <TextView
+        android:id="@+id/my_marks"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/inst"
+        android:layout_centerHorizontal="true"
+        android:text="My Marks: "
+        android:layout_marginTop="15dp"
+        android:textStyle="bold"
+        android:textColor="#130008"
+        android:textSize="15dp"/>
+
+    <ImageView
+        android:id="@+id/main_qs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:src="@drawable/image"
+        android:minHeight="175dp"
+        android:layout_below="@+id/marks"/>
+
+    <LinearLayout
+        android:id="@+id/my_linear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/main_qs"
+        android:layout_marginTop="35dp"
+        android:orientation="horizontal">
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/radio">
+
+            <RadioButton
+                android:id="@+id/a"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="Option A"
+                android:paddingEnd="10dp"/>
+
+            <RadioButton
+                android:id="@+id/b"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:text="Option B"
+                android:paddingEnd="10dp"/>
+
+            <RadioButton
+                android:id="@+id/c"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:text="Option C"
+                android:paddingEnd="10dp"/>
+
+            <RadioButton
+                android:id="@+id/d"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:text="Option D"
+                android:paddingEnd="10dp"/>
+        </RadioGroup>
+
+
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+            <Button
+                android:id="@+id/prev"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/gradient_color"
+                android:drawableLeft="@drawable/prev"
+                android:fontFamily="sans-serif"
+                android:paddingLeft="25dp"
+                android:text="Previous"
+                android:textAlignment="textStart"
+                android:textColor="#fff"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/next"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/gradient_color"
+                android:drawableEnd="@drawable/nxt"
+                android:fontFamily="sans-serif"
+                android:paddingEnd="25dp"
+                android:text="Next"
+                android:textAlignment="textEnd"
+                android:textColor="#fff"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+    </RelativeLayout>
+
+
+
+
+</RelativeLayout>

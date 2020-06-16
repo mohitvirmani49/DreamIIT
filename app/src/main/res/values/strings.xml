@@ -15,4 +15,12 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="practice_instructions">
+        1. No Time Limit.\n
+        2. Test consists of 10 questions.\n
+        3. Each question carries 4 Marks.\n
+        4. There is no negative marking.\n
+        5. Correct answer will be displayed after choosing the option.
+    </string>
 </resources>

@@ -1,6 +1,7 @@
 package com.example.quiz;
 
 import android.content.ClipData;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,15 +15,29 @@ import java.util.List;
 
 public class Phy_Adapter extends RecyclerView.Adapter<Phy_Adapter.ItemViewHolder> {
     private List<Phy> myList;
+    private Phy_Adapter.OnItemClickListener itemClickListener;
+    private Context mContext;
 
-    Phy_Adapter(List<Phy> list){
+    public interface OnItemClickListener {
+        void itemClicked(int position);
+
+    }
+
+    public void setOnItemClickListener(Phy_Adapter.OnItemClickListener listener) {
+        itemClickListener = listener;
+
+    }
+
+    Phy_Adapter(Context context, List<Phy> list) {
+        mContext = context;
         myList = list;
     }
 
     @NonNull
     @Override
     public ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.phy_recycler,parent,false);
+        System.out.println(myList.size() + " Hii Let me check you");
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.phy_recycler, parent, false);
         return new ItemViewHolder(view);
     }
 
@@ -30,11 +45,11 @@ public class Phy_Adapter extends RecyclerView.Adapter<Phy_Adapter.ItemViewHolder
     public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
         Phy upload = myList.get(position);
         holder.textView.setText(upload.getChapters());
-        if(position == 0){
+        if (position == 0) {
             holder.container.setBackgroundResource(R.drawable.round_corner);
             holder.setIsRecyclable(false);
         }
-        if(position == myList.size() - 1){
+        if (position == myList.size() - 1) {
             holder.container.setBackgroundResource(R.drawable.round_corner_btm);
             holder.divider.setVisibility(View.GONE);
             holder.setIsRecyclable(false);
@@ -47,7 +62,7 @@ public class Phy_Adapter extends RecyclerView.Adapter<Phy_Adapter.ItemViewHolder
         return myList.size();
     }
 
-    class ItemViewHolder extends RecyclerView.ViewHolder{
+    class ItemViewHolder extends RecyclerView.ViewHolder {
         RelativeLayout container;
         View divider;
         TextView textView;
@@ -58,6 +73,19 @@ public class Phy_Adapter extends RecyclerView.Adapter<Phy_Adapter.ItemViewHolder
             container = itemView.findViewById(R.id.container);
             divider = itemView.findViewById(R.id.divider);
             textView = itemView.findViewById(R.id.tv3);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (itemClickListener != null) {
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+                            itemClickListener.itemClicked(position);
+                            System.out.println("My Game, My Rule::::::" + position);
+                        }
+                    }
+                }
+            });
 
         }
     }
