@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Main34Activity"
+    tools:context=".Main37Activity"
     android:background="#fff">
 
     <RelativeLayout
@@ -31,9 +31,9 @@
             android:layout_marginTop="15dp"
             android:layout_marginEnd="15dp"
             android:layout_marginBottom="15dp"
-            android:background="@drawable/border_white"
+            android:background="@color/transparent"
             android:fontFamily="sans-serif"
-            android:text="Submit"
+            android:text=""
             android:textColor="#fff"
             android:textStyle="bold" />
 
@@ -154,25 +154,23 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true">
 
-            <Button
-                android:id="@+id/next"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:layout_marginEnd="10dp"
-                android:layout_centerHorizontal="true"
-                android:background="@drawable/start_btn"
-                android:drawableEnd="@drawable/nxt"
-                android:fontFamily="sans-serif"
-                android:text="Next"
-                android:textAlignment="center"
-                android:textColor="#fff"
-                android:textStyle="bold"
-                android:padding="10dp"
-                android:layout_marginBottom="10dp"/>
+        <Button
+            android:id="@+id/next"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginEnd="10dp"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/start_btn"
+            android:drawableEnd="@drawable/nxt"
+            android:fontFamily="sans-serif"
+            android:text="Next"
+            android:textAlignment="center"
+            android:textColor="#fff"
+            android:textStyle="bold"
+            android:padding="10dp"
+            android:layout_marginBottom="10dp"/>
 
     </RelativeLayout>
-
-
 
 
 </RelativeLayout>

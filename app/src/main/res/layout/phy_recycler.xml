@@ -6,11 +6,6 @@
     android:background="#fff">
 
 
-    <!--    <ImageView-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="10dp"-->
-    <!--        android:id="@+id/space"/>-->
-
     <TextView
         android:id="@+id/tv3"
         android:layout_width="match_parent"
@@ -20,7 +15,8 @@
         android:paddingLeft="20dp"
         android:text=""
         android:textColor="#130008"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        android:layout_marginTop="14dp"/>
 
     <View
         android:id="@+id/divider"

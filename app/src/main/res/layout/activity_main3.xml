@@ -7,6 +7,15 @@
     tools:context=".Main3Activity"
     android:id="@+id/my"
     >
+    
+    <ImageButton
+        android:id="@+id/back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/back_24"
+        android:layout_margin="10dp"
+        android:background="@color/transparent"
+        />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -76,5 +85,12 @@
         app:lottie_autoPlay="true"
         app:lottie_fileName="f.json"
         app:lottie_loop="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="Next"
+        android:id="@+id/check"/>
 
 </RelativeLayout>

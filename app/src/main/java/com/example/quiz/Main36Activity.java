@@ -1,18 +1,15 @@
 package com.example.quiz;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Vibrator;
-import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -20,7 +17,6 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -31,20 +27,27 @@ import com.squareup.picasso.Picasso;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 import Model.Question;
+import Model.Test;
 
-public class Main34Activity extends AppCompatActivity {
+public class Main36Activity extends AppCompatActivity {
+    private TextView timer;
+    private int time = 1800;
+
     private ImageButton back;
     private Button submit, nxt;
     private ImageView question_img;
-    private TextView chapterName, marks, number;
+    private TextView chapterName, number;
     private RadioGroup radioGroup;
     private RadioButton optionA, optionB, optionC, optionD;
     private int alpha = 0;
     private Integer[] array = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 
     private DatabaseReference reference;
+    private DatabaseReference mDatabaseRef;
     private int total = 1;
     private int no = 1;
     private int correct = 0;
@@ -53,13 +56,12 @@ public class Main34Activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main34);
+        setContentView(R.layout.activity_main36);
 
         back = (ImageButton) findViewById(R.id.back);
         submit = (Button) findViewById(R.id.submit);
         chapterName = (TextView) findViewById(R.id.chapterName);
         nxt = (Button) findViewById(R.id.next);
-        marks = (TextView) findViewById(R.id.my_marks);
         question_img = (ImageView) findViewById(R.id.main_qs);
         radioGroup = (RadioGroup) findViewById(R.id.radio);
         optionA = (RadioButton) findViewById(R.id.a);
@@ -68,28 +70,19 @@ public class Main34Activity extends AppCompatActivity {
         optionD = (RadioButton) findViewById(R.id.d);
         number = (TextView) findViewById(R.id.number);
 
+        timer = (TextView) findViewById(R.id.my_marks);
+        startTimer();
+
         random();
         updateQuestion();
 
-        submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                submitTest();
-            }
-        });
-
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                backpresss();
-
-            }
-        });
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference("test");
 
         nxt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (alpha <= 9) {
+
                     radioGroup.clearCheck();
 
                     optionA.setBackgroundColor(getResources().getColor(R.color.white));
@@ -100,7 +93,6 @@ public class Main34Activity extends AppCompatActivity {
                         radioGroup.getChildAt(i).setEnabled(true);
 
                     }
-
                     updateQuestion();
                 } else {
                     radioGroup.clearCheck();
@@ -113,12 +105,14 @@ public class Main34Activity extends AppCompatActivity {
                         radioGroup.getChildAt(i).setEnabled(true);
                         submitTest();
 
+
                     }
 
                 }
 
             }
         });
+
 
     }
 
@@ -128,13 +122,13 @@ public class Main34Activity extends AppCompatActivity {
         }
         Collections.shuffle(Arrays.asList(array));
         return array[alpha];
-
     }
 
-
     private void updateQuestion() {
+
         if (alpha > 10) {
             submitTest();
+
 
         } else {
 
@@ -157,35 +151,34 @@ public class Main34Activity extends AppCompatActivity {
                         public void onCheckedChanged(RadioGroup group, int checkedId) {
                             System.out.println(question.getAnswer() + "Name:::::::::");
                             if (optionA.isChecked()) {
-                                for (int i = 0; i < radioGroup.getChildCount(); i++) {
-                                    radioGroup.getChildAt(i).setEnabled(false);
-                                }
+
+                                Test test = new Test(optionA.getText().toString(), question.getAnswer());
+
+                                Map<String, Object> updates = new HashMap<String, Object>();
+                                updates.put("optionMarked", optionA.getText().toString());
+                                updates.put("correctAns", question.getAnswer());
+
+
+                                mDatabaseRef.child(String.valueOf(alpha)).updateChildren(updates);
+
+
+                                System.out.println("Hurray uploaded");
+
                                 if (optionA.getText().toString().equals(question.getAnswer())) {
                                     Handler handler = new Handler();
                                     handler.postDelayed(new Runnable() {
                                         @Override
                                         public void run() {
                                             correct = correct + 4;
-                                            marks.setText("My Marks: " + correct);
+
 
                                         }
                                     }, 1000);
 
-                                    optionA.setBackgroundColor(Color.GREEN);
 
                                 } else {
-                                    optionA.setBackgroundColor(Color.RED);
-                                    Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-                                    v.vibrate(400);
+                                    correct = correct - 1;
 
-                                    if (optionB.getText().toString().equals(question.getAnswer())) {
-
-                                        optionB.setBackgroundColor(Color.GREEN);
-                                    } else if (optionC.getText().toString().equals(question.getAnswer())) {
-                                        optionC.setBackgroundColor(Color.GREEN);
-                                    } else {
-                                        optionD.setBackgroundColor(Color.GREEN);
-                                    }
                                     Handler handler = new Handler();
                                     handler.postDelayed(new Runnable() {
                                         @Override
@@ -197,9 +190,18 @@ public class Main34Activity extends AppCompatActivity {
 
                                 }
                             } else if (optionB.isChecked()) {
-                                for (int i = 0; i < radioGroup.getChildCount(); i++) {
-                                    radioGroup.getChildAt(i).setEnabled(false);
-                                }
+
+
+                                Test test = new Test(optionA.getText().toString(), question.getAnswer());
+
+                                Map<String, Object> updates = new HashMap<String, Object>();
+                                updates.put("optionMarked", optionB.getText().toString());
+                                updates.put("correctAns", question.getAnswer());
+
+
+                                mDatabaseRef.child(String.valueOf(alpha)).updateChildren(updates);
+
+
                                 if (optionB.getText().toString().equals(question.getAnswer())) {
 
                                     Handler handler = new Handler();
@@ -207,26 +209,15 @@ public class Main34Activity extends AppCompatActivity {
                                         @Override
                                         public void run() {
                                             correct = correct + 4;
-                                            marks.setText("My Marks: " + correct);
+
 
                                         }
                                     }, 1000);
 
-                                    optionB.setBackgroundColor(Color.GREEN);
 
                                 } else {
-                                    optionB.setBackgroundColor(Color.RED);
-                                    Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-                                    v.vibrate(400);
+                                    correct = correct - 1;
 
-                                    if (optionA.getText().toString().equals(question.getAnswer())) {
-
-                                        optionA.setBackgroundColor(Color.GREEN);
-                                    } else if (optionC.getText().toString().equals(question.getAnswer())) {
-                                        optionC.setBackgroundColor(Color.GREEN);
-                                    } else {
-                                        optionD.setBackgroundColor(Color.GREEN);
-                                    }
                                     Handler handler = new Handler();
                                     handler.postDelayed(new Runnable() {
                                         @Override
@@ -238,9 +229,18 @@ public class Main34Activity extends AppCompatActivity {
 
                                 }
                             } else if (optionC.isChecked()) {
-                                for (int i = 0; i < radioGroup.getChildCount(); i++) {
-                                    radioGroup.getChildAt(i).setEnabled(false);
-                                }
+
+
+                                Test test = new Test(optionA.getText().toString(), question.getAnswer());
+
+                                Map<String, Object> updates = new HashMap<String, Object>();
+                                updates.put("optionMarked", optionC.getText().toString());
+                                updates.put("correctAns", question.getAnswer());
+
+
+                                mDatabaseRef.child(String.valueOf(alpha)).updateChildren(updates);
+
+
                                 if (optionC.getText().toString().equals(question.getAnswer())) {
 
                                     Handler handler = new Handler();
@@ -248,26 +248,15 @@ public class Main34Activity extends AppCompatActivity {
                                         @Override
                                         public void run() {
                                             correct = correct + 4;
-                                            marks.setText("My Marks: " + correct);
+
 
                                         }
                                     }, 1000);
 
-                                    optionC.setBackgroundColor(Color.GREEN);
-
                                 } else {
-                                    optionC.setBackgroundColor(Color.RED);
-                                    Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-                                    v.vibrate(400);
+                                    correct = correct - 1;
 
-                                    if (optionB.getText().toString().equals(question.getAnswer())) {
 
-                                        optionB.setBackgroundColor(Color.GREEN);
-                                    } else if (optionA.getText().toString().equals(question.getAnswer())) {
-                                        optionA.setBackgroundColor(Color.GREEN);
-                                    } else {
-                                        optionD.setBackgroundColor(Color.GREEN);
-                                    }
                                     Handler handler = new Handler();
                                     handler.postDelayed(new Runnable() {
                                         @Override
@@ -278,9 +267,18 @@ public class Main34Activity extends AppCompatActivity {
 
                                 }
                             } else if (optionD.isChecked()) {
-                                for (int i = 0; i < radioGroup.getChildCount(); i++) {
-                                    radioGroup.getChildAt(i).setEnabled(false);
-                                }
+
+
+                                Test test = new Test(optionA.getText().toString(), question.getAnswer());
+
+                                Map<String, Object> updates = new HashMap<String, Object>();
+                                updates.put("optionMarked", optionD.getText().toString());
+                                updates.put("correctAns", question.getAnswer());
+
+
+                                mDatabaseRef.child(String.valueOf(alpha)).updateChildren(updates);
+
+
                                 if (optionD.getText().toString().equals(question.getAnswer())) {
 
                                     Handler handler = new Handler();
@@ -288,26 +286,15 @@ public class Main34Activity extends AppCompatActivity {
                                         @Override
                                         public void run() {
                                             correct = correct + 4;
-                                            marks.setText("My Marks: " + correct);
+
 
                                         }
                                     }, 1000);
 
-                                    optionD.setBackgroundColor(Color.GREEN);
 
                                 } else {
-                                    optionD.setBackgroundColor(Color.RED);
-                                    Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-                                    v.vibrate(400);
+                                    correct = correct - 1;
 
-                                    if (optionB.getText().toString().equals(question.getAnswer())) {
-
-                                        optionB.setBackgroundColor(Color.GREEN);
-                                    } else if (optionC.getText().toString().equals(question.getAnswer())) {
-                                        optionC.setBackgroundColor(Color.GREEN);
-                                    } else {
-                                        optionA.setBackgroundColor(Color.GREEN);
-                                    }
                                     Handler handler = new Handler();
                                     handler.postDelayed(new Runnable() {
                                         @Override
@@ -331,45 +318,36 @@ public class Main34Activity extends AppCompatActivity {
             });
 
         }
+
     }
 
-    private void submitTest() {
-        Intent myIntent = new Intent(Main34Activity.this, Main3Activity.class);
+    private void startTimer() {
+
+        new CountDownTimer(1800000, 1000) {
+
+            @Override
+            public void onTick(long millisUntilFinished) {
+                int min = time / 60;
+                int sec = time % 60;
+                timer.setText(checkDigit(min) + ":" + checkDigit(sec));
+                time--;
+
+            }
+
+            @Override
+            public void onFinish() {
+                timer.setText("Times Up!");
+
+            }
+        }.start();
+    }
+
+    public String checkDigit(int number) {
+        return number <= 9 ? "0" + number : String.valueOf(number);
+    }
+    private void submitTest(){
+        Intent myIntent = new Intent(Main36Activity.this, Main3Activity.class);
         myIntent.putExtra("intVariableName", correct);
         startActivity(myIntent);
-
-    }
-
-
-    private void backpresss() {
-        Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        v.vibrate(700);
-
-        new AlertDialog.Builder(Main34Activity.this)
-                .setMessage("Are you sure you want to exit the Test")
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        startActivity(new Intent(Main34Activity.this, Main26Activity.class));
-                    }
-                }).setNegativeButton("No", null)
-                .show();
-    }
-
-    @Override
-    public void onBackPressed() {
-//        super.onBackPressed();
-        Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        v.vibrate(700);
-
-        new AlertDialog.Builder(this)
-                .setMessage("Are you sure you want to exit the Test")
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        startActivity(new Intent(Main34Activity.this, Main26Activity.class));
-                    }
-                }).setNegativeButton("No", null)
-                .show();
     }
 }

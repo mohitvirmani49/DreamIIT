@@ -23,4 +23,12 @@
         4. There is no negative marking.\n
         5. Correct answer will be displayed after choosing the option.
     </string>
+
+
+    <string name="challenge_instructions">
+        1. Test consists of 10 questions.\n
+        2. 30 Minutes will be provided. After which test will be submitted automatically.\n
+        3. Each question carries 4 Marks.\n
+        4. +4 for every correct answer and -1 for incorrect.\n
+    </string>
 </resources>
