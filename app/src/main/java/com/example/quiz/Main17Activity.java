@@ -101,6 +101,28 @@ public class Main17Activity extends AppCompatActivity {
                     fbdatabase.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+
+                            DatabaseReference databaseReference1 = FirebaseDatabase.getInstance().getReference("doubts").child(dataSnapshot.child("mAnswer").getValue().toString());
+                            Query query = FirebaseDatabase.getInstance().getReference("doubts").child(dataSnapshot.child("mAnswer").getValue().toString());
+                            query.addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                    int total = (int) dataSnapshot.getChildrenCount();
+                                    System.out.println("My val, plz tell" + total);
+                                    comments.setText(String.valueOf(total));
+
+//                commentNumber.setText(total);
+
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                }
+                            });
+
+
                             SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                             SharedPreferences.Editor editor = sharedPreferences.edit();
 
@@ -206,6 +228,10 @@ public class Main17Activity extends AppCompatActivity {
 
             }
         });
+
+
+
+
 
     }
 

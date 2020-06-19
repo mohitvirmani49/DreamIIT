@@ -75,18 +75,16 @@
         android:text="Answer" />
 
 
-        <include
-            android:id="@+id/l123"
-            layout="@layout/answer_view"
-            android:layout_below="@+id/answer_pg_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:visibility="gone"
+    <include
+        android:id="@+id/l123"
+        layout="@layout/answer_view"
+        android:layout_below="@+id/answer_pg_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:visibility="gone"
 
-            />
+        />
 
-    </RelativeLayout>
-
-
+</RelativeLayout>
 

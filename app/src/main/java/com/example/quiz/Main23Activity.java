@@ -102,7 +102,7 @@ public class Main23Activity extends AppCompatActivity {
 
             Upload upload = new Upload(doubt, "",
                     usrname, pic7, "", "", "",
-                    "", "", "", "", "", "", "Physics");
+                    "", "", "", "", "", "", "Physics", "", "", "", "");
             mDatabaseRef.push().setValue(upload);
 
             openImagesActivity();
@@ -112,7 +112,7 @@ public class Main23Activity extends AppCompatActivity {
 
             Upload upload = new Upload(doubt,
                     img, usrname, pic7, "", "", "", "",
-                    "", "", "", "", "", "Physics");
+                    "", "", "", "", "", "Physics", "", "", "", "");
 
             mDatabaseRef.push().setValue(upload);
 
@@ -144,7 +144,7 @@ public class Main23Activity extends AppCompatActivity {
 
             Upload upload = new Upload(doubt, "",
                     usrname, pic7, "", "", "",
-                    "", "", "", "", "", "", "Chemistry");
+                    "", "", "", "", "", "", "Chemistry", "", "", "", "");
             mDatabaseRef.push().setValue(upload);
 
             openImagesActivity();
@@ -155,7 +155,7 @@ public class Main23Activity extends AppCompatActivity {
 
             Upload upload = new Upload(doubt,
                     img, usrname, pic7, "", "", "", "",
-                    "", "", "", "", "", "Chemistry");
+                    "", "", "", "", "", "Chemistry", "", "", "", "");
 
             mDatabaseRef.push().setValue(upload);
 
@@ -189,7 +189,7 @@ public class Main23Activity extends AppCompatActivity {
 
             Upload upload = new Upload(doubt, "",
                     usrname, pic7, "", "", "",
-                    "", "", "", "", "", "", "Maths");
+                    "", "", "", "", "", "", "Maths", "", "", "", "");
             mDatabaseRef.push().setValue(upload);
 
             openImagesActivity();
@@ -200,7 +200,7 @@ public class Main23Activity extends AppCompatActivity {
 
             Upload upload = new Upload(doubt,
                     img, usrname, pic7, "", "", "", "",
-                    "", "", "", "", "", "Maths");
+                    "", "", "", "", "", "Maths", "", "", "", "");
 
             mDatabaseRef.push().setValue(upload);
 

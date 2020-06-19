@@ -45,6 +45,7 @@ public class ImagesActivity extends AppCompatActivity implements ImageAdapter.On
     private RelativeLayout myTextView;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -120,7 +121,6 @@ public class ImagesActivity extends AppCompatActivity implements ImageAdapter.On
             }
         });
 
-
     }
 
     @Override
@@ -151,7 +151,7 @@ public class ImagesActivity extends AppCompatActivity implements ImageAdapter.On
     @Override
     protected void onStart() {
         super.onStart();
-        if(search != null){
+        if (search != null) {
             search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                 @Override
                 public boolean onQueryTextSubmit(String query) {
@@ -167,18 +167,19 @@ public class ImagesActivity extends AppCompatActivity implements ImageAdapter.On
             });
         }
     }
-    private void searchMe(String str){
+
+    private void searchMe(String str) {
         ArrayList<Upload> myList = new ArrayList<>();
 
-        for(Upload object : mUploads){
-            if(object.getmName().toLowerCase().contains(str.toLowerCase())){
+        for (Upload object : mUploads) {
+            if (object.getmName().toLowerCase().contains(str.toLowerCase())) {
                 int pos = object.getmName().indexOf(str);
                 System.out.println("My position is" + pos);
                 myList.add(object);
             }
 
         }
-        ImageAdapter mAdapter2 = new ImageAdapter(getApplicationContext(),myList);
+        ImageAdapter mAdapter2 = new ImageAdapter(getApplicationContext(), myList);
         mRecyclerView.setAdapter(mAdapter2);
         mAdapter2.setOnItemClickListener(ImagesActivity.this);
 

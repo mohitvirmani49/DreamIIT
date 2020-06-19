@@ -100,7 +100,7 @@
             <Button
                 android:id="@+id/notify"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="wrap_content"
                 android:layout_below="@+id/user_rank"
                 android:layout_marginTop="50dp"
                 android:background="@color/transparent"
@@ -109,33 +109,125 @@
                 android:paddingLeft="20dp"
                 android:paddingEnd="20dp"
                 android:text="Notifications"
-                android:textColor="#fff" />
+                android:textColor="#fff"
+                android:paddingTop="10dp"/>
+
+            <TextView
+                android:id="@+id/notifyline"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/notify"
+                android:layout_marginTop="0dp"
+                android:background="@drawable/btn_bottom_line"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"/>
 
 
             <Button
                 android:id="@+id/msg"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_below="@+id/notify"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/notifyline"
                 android:background="@color/transparent"
                 android:drawableLeft="@drawable/msg"
                 android:paddingLeft="20dp"
                 android:paddingEnd="20dp"
                 android:text="Messages"
-                android:textColor="#fff" />
+                android:textColor="#fff"
+                android:paddingTop="10dp"
+                android:fontFamily="sans-serif"/>
+
+
+            <TextView
+                android:id="@+id/notifyline2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/msg"
+                android:layout_marginTop="0dp"
+                android:background="@drawable/btn_bottom_line"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"/>
 
 
             <Button
+                android:id="@+id/invite_frnds"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_below="@+id/msg"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/notifyline2"
                 android:background="@color/transparent"
                 android:drawableLeft="@drawable/invite"
                 android:fontFamily="sans-serif"
                 android:paddingLeft="20dp"
                 android:paddingEnd="20dp"
                 android:text="Invite Friends"
-                android:textColor="#fff" />
+                android:textColor="#fff"
+                android:paddingTop="10dp"/>
+
+
+            <TextView
+                android:id="@+id/notifyline3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/invite_frnds"
+                android:layout_marginTop="0dp"
+                android:background="@drawable/btn_bottom_line"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"/>
+
+
+            <Button
+                android:id="@+id/settings"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/notifyline3"
+                android:background="@color/transparent"
+                android:drawableLeft="@drawable/logout"
+                android:fontFamily="sans-serif"
+                android:paddingLeft="20dp"
+                android:paddingEnd="20dp"
+                android:text="Log Out"
+                android:textColor="#fff"
+                android:paddingTop="10dp"/>
+
+
+            <TextView
+                android:id="@+id/notifyline4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/settings"
+                android:layout_marginTop="0dp"
+                android:background="@drawable/btn_bottom_line"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"/>
+
+            <TextView
+                android:id="@+id/nxtGoal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Next Goal"
+                android:layout_below="@+id/notifyline4"
+                android:layout_marginTop="20dp"
+                android:textColor="#fff"
+                android:fontFamily="sans-serif"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:layout_marginStart="10dp"/>
+
+            <TextView
+                android:id="@+id/rank"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ambitious"
+                android:layout_below="@+id/nxtGoal"
+                android:layout_marginTop="10dp"
+                android:textColor="#fff"
+                android:fontFamily="sans-serif"
+                android:textSize="15dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginBottom="20dp"/>
+
+
+
 
 
         </RelativeLayout>

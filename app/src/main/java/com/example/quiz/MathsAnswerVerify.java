@@ -1,15 +1,11 @@
 package com.example.quiz;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Vibrator;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -25,10 +21,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.Arrays;
-import java.util.Collections;
-
-public class Main37Activity extends AppCompatActivity {
+public class MathsAnswerVerify extends AppCompatActivity {
 
     private ImageButton back;
     private Button submit, nxt;
@@ -38,7 +31,7 @@ public class Main37Activity extends AppCompatActivity {
     private RadioButton optionA, optionB, optionC, optionD;
     private int alpha = 1;
     private int letter = 1;
-    private Integer[] array = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    private Integer[] array = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20};
 
     private DatabaseReference reference;
     private int total = 1;
@@ -49,7 +42,7 @@ public class Main37Activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main37);
+        setContentView(R.layout.activity_maths_answer_verify);
 
         back = (ImageButton) findViewById(R.id.back);
         submit = (Button) findViewById(R.id.submit);
@@ -100,9 +93,10 @@ public class Main37Activity extends AppCompatActivity {
         });
 
     }
-
     private void updateQuestion() {
         if (letter > 10) {
+            submitTest();
+
 
         } else {
             number.setText("Q" + no);
@@ -113,7 +107,7 @@ public class Main37Activity extends AppCompatActivity {
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                     DatabaseReference fbdatabase = reference;
-                    fbdatabase.addValueEventListener(new ValueEventListener() {
+                    reference.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
@@ -191,7 +185,7 @@ public class Main37Activity extends AppCompatActivity {
                                     optionD.setBackgroundColor(Color.RED);
                                     optionA.setBackgroundColor(Color.GREEN);
                                 }
-                            } else {
+                            } else if(mark.equals("")){
                                 if (correctResponse.equals(optionA.getText().toString())) {
                                     optionA.setBackgroundColor(Color.GREEN);
                                 } else if (correctResponse.equals(optionB.getText().toString())) {
@@ -209,6 +203,7 @@ public class Main37Activity extends AppCompatActivity {
 
                         @Override
                         public void onCancelled(@NonNull DatabaseError databaseError) {
+                            System.out.println("sorry error");
 
                         }
                     });
@@ -217,6 +212,7 @@ public class Main37Activity extends AppCompatActivity {
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
+                    System.out.println("sorry error2");
 
                 }
             });
@@ -234,7 +230,8 @@ public class Main37Activity extends AppCompatActivity {
     }
 
     private void submitTest() {
-        startActivity(new Intent(this, Main3Activity.class));
+        startActivity(new Intent(this, ImagesActivity.class));
+
     }
 
 }

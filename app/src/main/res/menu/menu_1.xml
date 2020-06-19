@@ -18,11 +18,13 @@
         app:showAsAction="never"
         android:orderInCategory="100">
 
+
     </item>
+
 
     <item
         android:id="@+id/share"
-        android:title="Share App"
+        android:title="Invite Friends"
         android:icon="@drawable/share"
         app:showAsAction="never"
         android:orderInCategory="100">
@@ -37,7 +39,6 @@
         android:orderInCategory="100">
 
     </item>
-
 
 
 </menu>

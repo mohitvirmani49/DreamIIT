@@ -53,4 +53,10 @@ public class Main26Activity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(this, Main14Activity.class));
+    }
 }

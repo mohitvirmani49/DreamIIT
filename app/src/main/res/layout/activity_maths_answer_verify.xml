@@ -5,8 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Main36Activity"
-    android:background="#fff">
+    tools:context=".MathsAnswerVerify"
+    android:background="@color/white">
 
     <RelativeLayout
         android:id="@+id/inst"
@@ -32,9 +32,9 @@
             android:layout_marginTop="15dp"
             android:layout_marginEnd="15dp"
             android:layout_marginBottom="15dp"
-            android:background="@drawable/border_white"
+            android:background="@color/transparent"
             android:fontFamily="sans-serif"
-            android:text="Submit"
+            android:text=""
             android:textColor="#fff"
             android:textStyle="bold" />
 
@@ -60,7 +60,7 @@
         android:layout_marginStart="15dp"
         android:layout_marginTop="15dp"
         android:fontFamily="sans-serif"
-        android:text="+4 / -1"
+        android:text="+4 / 0"
         android:textColor="#130008"
         android:textSize="15dp" />
 
@@ -70,7 +70,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/inst"
         android:layout_centerHorizontal="true"
-        android:text="Timer"
+        android:text="My Marks: 0"
         android:layout_marginTop="15dp"
         android:textStyle="bold"
         android:textColor="#130008"
@@ -94,7 +94,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
         android:src="@drawable/image"
-        android:minHeight="50dp"
+        android:minHeight="175dp"
         android:layout_below="@+id/number"/>
 
     <LinearLayout
@@ -172,5 +172,6 @@
             android:layout_marginBottom="10dp"/>
 
     </RelativeLayout>
+
 
 </RelativeLayout>

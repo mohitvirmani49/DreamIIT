@@ -246,7 +246,7 @@ public class Main18Activity extends AppCompatActivity {
                         Map<String, Object> updates = new HashMap<String, Object>();
                         updates.put("mAnswer", main_ans.getText().toString());
                         updates.put("mAnsDisName", user2.getDisplayName());
-//                        updates.put("mAnsDisImg",user2.getPhotoUrl());
+
 
                         fbdatabase.updateChildren(updates);
                     }
@@ -267,7 +267,8 @@ public class Main18Activity extends AppCompatActivity {
         Intent intent = new Intent(this, Main17Activity.class);
         startActivity(intent);
     }
-    private void notify_person(){
+
+    private void notify_person() {
         Notification notification = new NotificationCompat.Builder(Main18Activity.this, CHANNEL_1_ID)
                 .setSmallIcon(R.drawable.mohitpic)
                 .setContentTitle("New Comment")

@@ -3,13 +3,10 @@ package com.example.quiz;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
-import android.os.Vibrator;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -17,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -33,7 +31,8 @@ import java.util.Map;
 import Model.Question;
 import Model.Test;
 
-public class Main36Activity extends AppCompatActivity {
+public class MathsChallengeTest extends AppCompatActivity {
+
     private TextView timer;
     private int time = 1800;
 
@@ -44,7 +43,7 @@ public class Main36Activity extends AppCompatActivity {
     private RadioGroup radioGroup;
     private RadioButton optionA, optionB, optionC, optionD;
     private int alpha = 0;
-    private Integer[] array = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    private Integer[] array = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20};
 
     private DatabaseReference reference;
     private DatabaseReference mDatabaseRef;
@@ -56,7 +55,7 @@ public class Main36Activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main36);
+        setContentView(R.layout.activity_maths_challenge_test);
 
         back = (ImageButton) findViewById(R.id.back);
         submit = (Button) findViewById(R.id.submit);
@@ -73,6 +72,7 @@ public class Main36Activity extends AppCompatActivity {
         timer = (TextView) findViewById(R.id.my_marks);
         startTimer();
 
+
         random();
         updateQuestion();
 
@@ -82,7 +82,20 @@ public class Main36Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (alpha <= 9) {
+                    if(optionA.isChecked()|| optionB.isChecked()||optionC.isChecked() ||optionD.isChecked()){
 
+                    }else {
+
+//                        Test test = new Test(optionA.getText().toString(), question.getAnswer());
+
+                        Map<String, Object> updates = new HashMap<String, Object>();
+                        updates.clear();
+                        updates.put("optionMarked", "");
+                        updates.put("correctAns", "");
+                        mDatabaseRef.child(String.valueOf(alpha)).updateChildren(updates);
+
+
+                    }
                     radioGroup.clearCheck();
 
                     optionA.setBackgroundColor(getResources().getColor(R.color.white));
@@ -113,9 +126,7 @@ public class Main36Activity extends AppCompatActivity {
             }
         });
 
-
     }
-
     public int random() {
         for (int i = 0; i < array.length; i++) {
             array[i] = i + 1;
@@ -136,7 +147,7 @@ public class Main36Activity extends AppCompatActivity {
             final String value = intent.getStringExtra("val");
             chapterName.setText(value);
 
-            reference = FirebaseDatabase.getInstance().getReference("Physics").child(intent.getStringExtra("val")).child(String.valueOf(array[alpha]));
+            reference = FirebaseDatabase.getInstance().getReference("Maths").child(intent.getStringExtra("val")).child(String.valueOf(array[alpha]));
             alpha++;
             number.setText("Q" + no + " :");
             no++;
@@ -306,6 +317,7 @@ public class Main36Activity extends AppCompatActivity {
 
                                 }
                             }
+
                         }
                     });
 
@@ -338,6 +350,8 @@ public class Main36Activity extends AppCompatActivity {
             @Override
             public void onFinish() {
                 timer.setText("Times Up!");
+                Toast.makeText(MathsChallengeTest.this,"Time is up! Your test has been submitted automatically",Toast.LENGTH_LONG).show();
+                submitTest();
 
             }
         }.start();
@@ -347,7 +361,7 @@ public class Main36Activity extends AppCompatActivity {
         return number <= 9 ? "0" + number : String.valueOf(number);
     }
     private void submitTest(){
-        Intent myIntent = new Intent(Main36Activity.this, Main3Activity.class);
+        Intent myIntent = new Intent(MathsChallengeTest.this, MathsChallengeResult.class);
         myIntent.putExtra("intVariableName", correct);
         startActivity(myIntent);
     }

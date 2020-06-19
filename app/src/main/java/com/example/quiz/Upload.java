@@ -11,6 +11,12 @@ public class Upload {
     private String mAnsImage;
     private String mAnsDisName;
     private String mAnsDisImg;
+
+    private String mAnswer2;
+    private String mAnsImage2;
+    private String mAnsDisName2;
+    private String mAnsDisImg2;
+
     private String mComment;
     private String mCommentName;
     private String mCommentImage;
@@ -22,7 +28,8 @@ public class Upload {
 
     public Upload(String name, String imageUrl, String username, String image,
                   String date, String answer, String ansImg, String ansDisName,
-                  String AnsDisIg, String comment, String commName, String commImage, String commRec, String sub) {
+                  String AnsDisIg, String comment, String commName, String commImage, String commRec, String sub
+            , String answer2, String answerimage2, String answerDisp2, String answerimg2) {
         if (name.trim().equals("")) {
             name = "No Text Description";
         }
@@ -40,6 +47,11 @@ public class Upload {
         mCommentImage = commImage;
         mCommentRecieve = commRec;
         mSubject = sub;
+        mAnswer2 = answer2;
+        mAnsImage2 = answerimage2;
+        mAnsDisName2 = answerDisp2;
+        mAnsDisImg2 = answerimg2;
+
 
     }
 
@@ -154,5 +166,37 @@ public class Upload {
 
     public void setmSubject(String mSubject) {
         this.mSubject = mSubject;
+    }
+
+    public String getmAnswer2() {
+        return mAnswer2;
+    }
+
+    public void setmAnswer2(String mAnswer2) {
+        this.mAnswer2 = mAnswer2;
+    }
+
+    public String getmAnsImage2() {
+        return mAnsImage2;
+    }
+
+    public void setmAnsImage2(String mAnsImage2) {
+        this.mAnsImage2 = mAnsImage2;
+    }
+
+    public String getmAnsDisName2() {
+        return mAnsDisName2;
+    }
+
+    public void setmAnsDisName2(String mAnsDisName2) {
+        this.mAnsDisName2 = mAnsDisName2;
+    }
+
+    public String getmAnsDisImg2() {
+        return mAnsDisImg2;
+    }
+
+    public void setmAnsDisImg2(String mAnsDisImg2) {
+        this.mAnsDisImg2 = mAnsDisImg2;
     }
 }

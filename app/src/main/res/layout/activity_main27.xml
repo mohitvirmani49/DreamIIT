@@ -81,17 +81,18 @@
             android:layout_height="0dp"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="25dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginBottom="25dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="16dp"
             android:background="@drawable/cardview_color"
             app:cardCornerRadius="8dp"
-            app:cardElevation="8dp">
+            app:cardElevation="16dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:background="@drawable/main_pg_phy">
 
                 <ImageView
                     android:id="@+id/prac"
@@ -126,24 +127,25 @@
             android:layout_height="0dp"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="25dp"
-            android:layout_marginRight="25dp"
-            android:layout_marginBottom="25dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginBottom="16dp"
             android:background="@drawable/cardview_color"
             app:cardCornerRadius="8dp"
-            app:cardElevation="8dp">
+            app:cardElevation="16dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:background="@drawable/filter_color">
 
                 <ImageView
                     android:id="@+id/challenge"
                     android:layout_width="wrap_content"
                     android:layout_height="60dp"
                     android:layout_marginTop="6dp"
-                    android:src="@drawable/challenge" />
+                    android:src="@drawable/tar" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -169,21 +171,22 @@
             android:layout_height="0dp"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginBottom="25dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="30dp"
             app:cardCornerRadius="8dp"
             app:cardElevation="8dp">
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:background="@drawable/main_pg_chem">
 
                 <ImageView
                     android:id="@+id/formulae"
                     android:layout_width="wrap_content"
                     android:layout_height="60dp"
                     android:layout_marginTop="6dp"
-                    android:src="@drawable/formulae" />
+                    android:src="@drawable/albert" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -209,22 +212,23 @@
             android:layout_height="0dp"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="25dp"
-            android:layout_marginBottom="25dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginBottom="30dp"
             app:cardCornerRadius="8dp"
-            app:cardElevation="8dp">
+            app:cardElevation="16dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:background="@drawable/main_pg_maths">
 
                 <ImageView
                     android:id="@+id/doubts_image"
                     android:layout_width="wrap_content"
                     android:layout_height="60dp"
                     android:layout_marginTop="6dp"
-                    android:src="@drawable/doubts" />
+                    android:src="@drawable/quest" />
 
                 <TextView
                     android:layout_width="wrap_content"

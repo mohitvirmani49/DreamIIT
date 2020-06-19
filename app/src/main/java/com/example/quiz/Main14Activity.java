@@ -3,25 +3,32 @@ package com.example.quiz;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
-import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
-import com.google.android.material.bottomnavigation.BottomNavigationMenu;
+import com.codemybrainsout.ratingdialog.RatingDialog;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class Main14Activity extends AppCompatActivity {
     CardView cardView_phy, cardView_chem, cardView_maths, cardView_fulltest;
     RelativeLayout doubt;
     BottomNavigationView menu;
     private int menuId;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,6 +103,11 @@ public class Main14Activity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
+
+
+
     }
 
     public void showPopup(View v) {
@@ -103,12 +115,91 @@ public class Main14Activity extends AppCompatActivity {
         MenuInflater inflater = popup.getMenuInflater();
         inflater.inflate(R.menu.menu_1, popup.getMenu());
         popup.show();
+
+        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+
+                switch (item.getItemId()) {
+                    case R.id.share:
+                        Intent intent = new Intent(Intent.ACTION_SEND);
+                        intent.setType("text/plain");
+                        intent.putExtra(Intent.EXTRA_SUBJECT, "DreamIIT");
+                        intent.putExtra(Intent.EXTRA_TEXT, "Check out this app! Best Student JEE Prep companion\n link of playstore");
+                        startActivity(Intent.createChooser(intent, "Invite Friends"));
+                        return true;
+
+
+                    case R.id.rate_us:
+                        System.out.println("Hello");
+
+                        final RatingDialog ratingDialog = new RatingDialog.Builder(Main14Activity.this)
+                                .threshold(3)
+                                .onRatingBarFormSumbit(new RatingDialog.Builder.RatingDialogFormListener() {
+                                    @Override
+                                    public void onFormSubmitted(String feedback) {
+                                        Toast.makeText(Main14Activity.this, "Thanks for your feedback", Toast.LENGTH_SHORT).show();
+
+                                    }
+                                }).build();
+
+                        ratingDialog.show();
+
+                        return true;
+
+
+                    case R.id.contact_dev:
+
+                        Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
+                        emailIntent.setData(Uri.parse("mailto:"));
+                        emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"contact.dreamiit@gmail.com"});
+                        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "");
+                        Intent chooser = Intent.createChooser(emailIntent, "Contact Developer");
+                        if (emailIntent.resolveActivity(getPackageManager()) != null) {
+                            startActivity(chooser);
+
+                        } else {
+                            Toast.makeText(Main14Activity.this, "Something went Goofy", Toast.LENGTH_SHORT).show();
+
+                        }
+
+
+                    default:
+                        return false;
+
+                }
+
+            }
+        });
     }
 
+
+    private Boolean exit = false;
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        finish();
+        if (exit) {
+
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_HOME);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+
+        } else {
+            Toast.makeText(this, "Press Back again to Exit.",
+                    Toast.LENGTH_SHORT).show();
+
+            exit = true;
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    exit = false;
+                }
+            }, 3 * 1000);
+
+        }
+
     }
+
+
 }
