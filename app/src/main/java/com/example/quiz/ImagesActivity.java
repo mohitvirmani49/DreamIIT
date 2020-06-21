@@ -22,6 +22,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -58,6 +60,7 @@ public class ImagesActivity extends AppCompatActivity implements ImageAdapter.On
         mRecyclerView = findViewById(R.id.recycler_view);
         animationView = (LottieAnimationView) findViewById(R.id.my_progress);
         floatingActionButton = (Button) findViewById(R.id.floatwithme);
+
 
         mRecyclerView.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);

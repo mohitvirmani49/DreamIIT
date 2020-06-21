@@ -20,8 +20,12 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
@@ -90,39 +94,59 @@ public class Main23Activity extends AppCompatActivity {
     private void uploadPhyFile() {
 
         SharedPreferences result = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        String doubt = result.getString("d", "0");
-        String img = result.getString("down", "1");
-        String usrname = result.getString("user", "2");
-        String pic7 = result.getString("pic", "3");
+        final String doubt = result.getString("d", "0");
+        final String img = result.getString("down", "1");
+        final String usrname = result.getString("user", "2");
+        final String pic7 = result.getString("pic", "3");
 
-        SharedPreferences.Editor editor = result.edit();
+        final SharedPreferences.Editor editor = result.edit();
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        FirebaseUser user = auth.getCurrentUser();
+        Query query2 = FirebaseDatabase.getInstance().getReference("answercount").child(user.getUid());
+        query2.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                int number = (int) dataSnapshot.getChildrenCount();
+                System.out.println("My total answers upto now is" + number);
 
 
-        if (img.matches("1")) {
+                if (img.matches("1")) {
 
-            Upload upload = new Upload(doubt, "",
-                    usrname, pic7, "", "", "",
-                    "", "", "", "", "", "", "Physics", "", "", "", "");
-            mDatabaseRef.push().setValue(upload);
+                    Upload upload = new Upload(doubt, "",
+                            usrname, pic7, "", "", "",
+                            "", "", String.valueOf(number), "", "", "", "Physics", "", "", "", "");
+                    mDatabaseRef.push().setValue(upload);
 
-            openImagesActivity();
-            editor.clear();
-            editor.apply();
-        } else {
+                    openImagesActivity();
+                    editor.clear();
+                    editor.apply();
+                } else {
 
-            Upload upload = new Upload(doubt,
-                    img, usrname, pic7, "", "", "", "",
-                    "", "", "", "", "", "Physics", "", "", "", "");
+                    Upload upload = new Upload(doubt,
+                            img, usrname, pic7, "", "", "", "",
+                            "", String.valueOf(number), "", "", "", "Physics", "", "", "", "");
 
-            mDatabaseRef.push().setValue(upload);
+                    mDatabaseRef.push().setValue(upload);
 
-            System.out.println("myImage" + img);
+                    System.out.println("myImage" + img);
 
-            openImagesActivity();
-            editor.clear();
-            editor.apply();
+                    openImagesActivity();
+                    editor.clear();
+                    editor.apply();
 
-        }
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+//        query2.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//
 
     }
 
@@ -130,85 +154,113 @@ public class Main23Activity extends AppCompatActivity {
 
         SharedPreferences result = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
-        String doubt = result.getString("d", "0");
-        String img = result.getString("down", "1");
-        String usrname = result.getString("user", "2");
-        String pic7 = result.getString("pic", "3");
+        final String doubt = result.getString("d", "0");
+        final String img = result.getString("down", "1");
+        final String usrname = result.getString("user", "2");
+        final String pic7 = result.getString("pic", "3");
 
-        SharedPreferences.Editor editor = result.edit();
+        final SharedPreferences.Editor editor = result.edit();
+
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        FirebaseUser user = auth.getCurrentUser();
+        Query query2 = FirebaseDatabase.getInstance().getReference("answercount").child(user.getUid());
+        query2.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                int number = (int) dataSnapshot.getChildrenCount();
+                System.out.println("My total answers upto now is" + number);
 
 
-        if (img.matches("1")) {
-            System.out.println("Celebrations, I reached here yayayyyyyyyyyy");
+                if (img.matches("1")) {
 
+                    Upload upload = new Upload(doubt, "",
+                            usrname, pic7, "", "", "",
+                            "", "", String.valueOf(number), "", "", "", "Chemistry", "", "", "", "");
+                    mDatabaseRef.push().setValue(upload);
 
-            Upload upload = new Upload(doubt, "",
-                    usrname, pic7, "", "", "",
-                    "", "", "", "", "", "", "Chemistry", "", "", "", "");
-            mDatabaseRef.push().setValue(upload);
+                    openImagesActivity();
+                    editor.clear();
+                    editor.apply();
+                } else {
 
-            openImagesActivity();
-            editor.clear();
-            editor.apply();
-        } else {
-            System.out.println("I cant reach there, oops");
+                    Upload upload = new Upload(doubt,
+                            img, usrname, pic7, "", "", "", "",
+                            "", String.valueOf(number), "", "", "", "Chemistry", "", "", "", "");
 
-            Upload upload = new Upload(doubt,
-                    img, usrname, pic7, "", "", "", "",
-                    "", "", "", "", "", "Chemistry", "", "", "", "");
+                    mDatabaseRef.push().setValue(upload);
 
-            mDatabaseRef.push().setValue(upload);
+                    System.out.println("myImage" + img);
 
-            System.out.println("myImage" + img);
+                    openImagesActivity();
+                    editor.clear();
+                    editor.apply();
 
-            openImagesActivity();
-            editor.clear();
-            editor.apply();
+                }
 
-        }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
     }
 
     private void uploadMathsFile() {
+
         SharedPreferences result = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        String doubt = result.getString("d", "0");
-        System.out.println("My doubt" + doubt);
-        String img = result.getString("down", "1");
-        System.out.println("My Image" + img);
-        String usrname = result.getString("user", "2");
-        System.out.println("My name" + usrname);
-        String pic7 = result.getString("pic", "3");
-        System.out.println("My pic" + pic7);
 
-        SharedPreferences.Editor editor = result.edit();
+        final String doubt = result.getString("d", "0");
+        final String img = result.getString("down", "1");
+        final String usrname = result.getString("user", "2");
+        final String pic7 = result.getString("pic", "3");
+
+        final SharedPreferences.Editor editor = result.edit();
+
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        FirebaseUser user = auth.getCurrentUser();
+        Query query2 = FirebaseDatabase.getInstance().getReference("answercount").child(user.getUid());
+        query2.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                int number = (int) dataSnapshot.getChildrenCount();
+                System.out.println("My total answers upto now is" + number);
 
 
-        if (img.matches("1")) {
-            System.out.println("Celebrations, I reached here yayayyyyyyyyyy");
+                if (img.matches("1")) {
 
+                    Upload upload = new Upload(doubt, "",
+                            usrname, pic7, "", "", "",
+                            "", "", String.valueOf(number), "", "", "", "Maths", "", "", "", "");
+                    mDatabaseRef.push().setValue(upload);
 
-            Upload upload = new Upload(doubt, "",
-                    usrname, pic7, "", "", "",
-                    "", "", "", "", "", "", "Maths", "", "", "", "");
-            mDatabaseRef.push().setValue(upload);
+                    openImagesActivity();
+                    editor.clear();
+                    editor.apply();
+                } else {
 
-            openImagesActivity();
-            editor.clear();
-            editor.apply();
-        } else {
-            System.out.println("I cant reach there, oops");
+                    Upload upload = new Upload(doubt,
+                            img, usrname, pic7, "", "", "", "",
+                            "", String.valueOf(number), "", "", "", "Maths", "", "", "", "");
 
-            Upload upload = new Upload(doubt,
-                    img, usrname, pic7, "", "", "", "",
-                    "", "", "", "", "", "Maths", "", "", "", "");
+                    mDatabaseRef.push().setValue(upload);
 
-            mDatabaseRef.push().setValue(upload);
+                    System.out.println("myImage" + img);
 
-            openImagesActivity();
-            editor.clear();
-            editor.apply();
+                    openImagesActivity();
+                    editor.clear();
+                    editor.apply();
 
-        }
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     private void openImagesActivity() {

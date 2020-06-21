@@ -3,12 +3,17 @@ package com.example.quiz;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.provider.MediaStore;
 import android.view.MenuInflater;
 import android.view.View;
 import android.widget.Button;
@@ -16,11 +21,12 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
-import com.bogdwellers.pinchtozoom.ImageMatrixTouchHandler;
+//import com.bogdwellers.pinchtozoom.ImageMatrixTouchHandler;
 //import com.github.chrisbanes.photoview.PhotoView;
-import com.bogdwellers.pinchtozoom.MultiTouchListener;
+//import com.bogdwellers.pinchtozoom.MultiTouchListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -37,15 +43,17 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
+import ozaydin.serkan.com.image_zoom_view.ImageViewZoom;
+
 public class Main17Activity extends AppCompatActivity {
-    private ImageView question_image;
+    private ImageViewZoom question_image;
     private TextView question_text;
     private CircularImageView question_user_pic;
     private TextView question_user_name;
     private Button answer_question;
     private DatabaseReference mDatabaseRef;
     private List<Upload> mUploads;
-    private ImageButton answer_image;
+    private ImageViewZoom answer_image;
     private TextView answer_text;
     private TextView userNameA;
 
@@ -61,22 +69,21 @@ public class Main17Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main17);
 
-        question_image = (ImageView) findViewById(R.id.question_image);
+        question_image = (ImageViewZoom) findViewById(R.id.question_image);
         question_text = (TextView) findViewById(R.id.question_text);
         question_user_pic = (CircularImageView) findViewById(R.id.answer_pg_image);
         question_user_name = (TextView) findViewById(R.id.answer_pg_name);
         answer_question = (Button) findViewById(R.id.answer_question);
 
-        answer_image = (ImageButton) findViewById(R.id.ans_image5);
+        answer_image = (ImageViewZoom) findViewById(R.id.ans_image5);
         answer_text = (TextView) findViewById(R.id.answer_text5);
         userNameA = (TextView) findViewById(R.id.answer_user_name);
-
         comments = (TextView) findViewById(R.id.comments);
         like1 = (TextView) findViewById(R.id.no_of_likes);
         likeButton = (LikeButton) findViewById(R.id.like);
 //        photoView = (PhotoView) findViewById(R.id.photo_view);
 
-        final View vw = (View) findViewById(R.id.l123);
+//        final View vw = (View) findViewById(R.id.l123);
         final View ans_btn5 = (View) findViewById(R.id.answer_question);
 
         SharedPreferences result = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
@@ -98,6 +105,7 @@ public class Main17Activity extends AppCompatActivity {
 
         }
         String txt = result.getString("question", "1");
+
 
         Query query = FirebaseDatabase.getInstance().getReference().child("uploads");
         query.orderByChild("mName").equalTo(txt).addValueEventListener(new ValueEventListener() {
@@ -236,9 +244,9 @@ public class Main17Activity extends AppCompatActivity {
 //                            String myImage = dataSnapshot.child("mAnsDisImg").getValue().toString();
                             System.out.println("My Answer::::::::" + myAnswer);
                             if (myAnswer.matches("") && myAnsImage.matches("")) {
-                                vw.setVisibility(View.INVISIBLE);
+//                                vw.setVisibility(View.INVISIBLE);
                             } else {
-                                vw.setVisibility(View.VISIBLE);
+//                                vw.setVisibility(View.VISIBLE);
                                 answer_text.setText(myAnswer);
                                 userNameA.setText(myName);
                                 ans_btn5.setVisibility(View.INVISIBLE);
@@ -344,4 +352,5 @@ public class Main17Activity extends AppCompatActivity {
         inflater.inflate(R.menu.menu_2, popup.getMenu());
         popup.show();
     }
+
 }

@@ -30,6 +30,7 @@ import java.util.Map;
 
 import Model.Question;
 import Model.Test;
+import ozaydin.serkan.com.image_zoom_view.ImageViewZoom;
 
 public class MathsChallengeTest extends AppCompatActivity {
 
@@ -38,7 +39,7 @@ public class MathsChallengeTest extends AppCompatActivity {
 
     private ImageButton back;
     private Button submit, nxt;
-    private ImageView question_img;
+    private ImageViewZoom question_img;
     private TextView chapterName, number;
     private RadioGroup radioGroup;
     private RadioButton optionA, optionB, optionC, optionD;
@@ -61,7 +62,7 @@ public class MathsChallengeTest extends AppCompatActivity {
         submit = (Button) findViewById(R.id.submit);
         chapterName = (TextView) findViewById(R.id.chapterName);
         nxt = (Button) findViewById(R.id.next);
-        question_img = (ImageView) findViewById(R.id.main_qs);
+        question_img = (ImageViewZoom) findViewById(R.id.main_qs);
         radioGroup = (RadioGroup) findViewById(R.id.radio);
         optionA = (RadioButton) findViewById(R.id.a);
         optionB = (RadioButton) findViewById(R.id.b);

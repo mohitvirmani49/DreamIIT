@@ -15,6 +15,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -52,7 +59,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ImageViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final ImageViewHolder holder, int position) {
 
         Upload uploadCurrent = mUploads.get(position);
         System.out.println(":::::::::::" + uploadCurrent.getmImageUrl());
@@ -66,6 +73,25 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
 
 
             holder.textView.setText(uploadCurrent.getmName());
+            String value = uploadCurrent.getmComment().toString();
+            int val = Integer.parseInt(value);
+            if (val >= 0 && val <= 5) {
+                holder.rank.setText("Toddler");
+
+            } else if (val > 5 && val <= 15) {
+                holder.rank.setText("Rookie");
+            } else if (val > 15 && val < 30) {
+                holder.rank.setText("Rising Star");
+
+            } else if (val >= 30 && val < 50) {
+                holder.rank.setText("Achiever");
+            } else if (val >= 50 && val < 80) {
+                holder.rank.setText("Expert");
+            } else if (val >= 80 && val < 120) {
+                holder.rank.setText("Genius");
+            } else if (val >= 120) {
+                holder.rank.setText("Legend");
+            }
             Picasso.get().load(uploadCurrent.getmImageUrl()).fit().centerCrop().into(holder.imageView);
             holder.textView1.setText(uploadCurrent.getmDisplayName());
             holder.tv2.setText(uploadCurrent.getmSubject());
@@ -83,8 +109,30 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
             holder.tv2.setText(uploadCurrent.getmSubject());
             Picasso.get().load(uploadCurrent.getmDisplayImage()).fit().centerCrop().into(holder.im1);
 
+            String value = uploadCurrent.getmComment().toString();
+            int val = Integer.parseInt(value);
+            if (val >= 0 && val <= 5) {
+                holder.rank.setText("Toddler");
+
+            } else if (val > 5 && val <= 15) {
+                holder.rank.setText("Rookie");
+            } else if (val > 15 && val < 30) {
+                holder.rank.setText("Rising Star");
+
+            } else if (val >= 30 && val < 50) {
+                holder.rank.setText("Achiever");
+            } else if (val >= 50 && val < 80) {
+                holder.rank.setText("Expert");
+            } else if (val >= 80 && val < 120) {
+                holder.rank.setText("Genius");
+            } else if (val >= 120) {
+                holder.rank.setText("Legend");
+            }
+
 
         }
+
+
     }
 
     @Override
@@ -98,6 +146,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
         public ImageView im1;
         public TextView textView1;
         public TextView tv2;
+        public TextView rank;
 
 
         public ImageViewHolder(@NonNull View itemView) {
@@ -107,6 +156,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
             im1 = itemView.findViewById(R.id.display_image5);
             textView1 = itemView.findViewById(R.id.display_name5);
             tv2 = itemView.findViewById(R.id.mention_sub);
+            rank = itemView.findViewById(R.id.myvalue);
 //            itemView.setOnClickListener(this);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

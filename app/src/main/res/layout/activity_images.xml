@@ -15,7 +15,7 @@
         android:layout_centerInParent="true"
         android:scaleType="fitCenter"
         app:lottie_autoPlay="true"
-        app:lottie_fileName="load.json"
+        app:lottie_fileName="book.json"
         app:lottie_loop="true" />
 
 
