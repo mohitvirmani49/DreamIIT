@@ -26,6 +26,12 @@
                 android:startColor="@color/Backgrnd" />
 
 
+<!--            <gradient-->
+<!--                android:startColor="#09C6F9"-->
+<!--                android:endColor="#045DE9"-->
+<!--                android:angle="315" />-->
+
+
         </shape>
     </item>
 

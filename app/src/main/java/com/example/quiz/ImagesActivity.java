@@ -79,6 +79,7 @@ public class ImagesActivity extends AppCompatActivity implements ImageAdapter.On
         mDatabaseRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                mUploads.clear();
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     Upload upload = postSnapshot.getValue(Upload.class);
 //                    DispName dispName = postSnapshot.getValue(DispName.class);

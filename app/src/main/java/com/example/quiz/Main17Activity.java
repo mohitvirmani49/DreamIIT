@@ -3,6 +3,7 @@ package com.example.quiz;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -12,10 +13,16 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
 
+import com.bogdwellers.pinchtozoom.ImageMatrixTouchHandler;
+//import com.github.chrisbanes.photoview.PhotoView;
+import com.bogdwellers.pinchtozoom.MultiTouchListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -23,6 +30,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.like.LikeButton;
+import com.like.OnLikeListener;
 import com.mikhaellopez.circularimageview.CircularImageView;
 import com.squareup.picasso.Picasso;
 
@@ -30,7 +38,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Main17Activity extends AppCompatActivity {
-    private ImageButton question_image;
+    private ImageView question_image;
     private TextView question_text;
     private CircularImageView question_user_pic;
     private TextView question_user_name;
@@ -39,20 +47,21 @@ public class Main17Activity extends AppCompatActivity {
     private List<Upload> mUploads;
     private ImageButton answer_image;
     private TextView answer_text;
-
     private TextView userNameA;
 
     private TextView comments;
-    private TextView like;
+    private TextView like1;
     private LikeButton likeButton;
+    private int love = 0;
 
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main17);
 
-        question_image = (ImageButton) findViewById(R.id.question_image);
+        question_image = (ImageView) findViewById(R.id.question_image);
         question_text = (TextView) findViewById(R.id.question_text);
         question_user_pic = (CircularImageView) findViewById(R.id.answer_pg_image);
         question_user_name = (TextView) findViewById(R.id.answer_pg_name);
@@ -63,9 +72,9 @@ public class Main17Activity extends AppCompatActivity {
         userNameA = (TextView) findViewById(R.id.answer_user_name);
 
         comments = (TextView) findViewById(R.id.comments);
-        like = (TextView) findViewById(R.id.no_of_likes);
+        like1 = (TextView) findViewById(R.id.no_of_likes);
         likeButton = (LikeButton) findViewById(R.id.like);
-
+//        photoView = (PhotoView) findViewById(R.id.photo_view);
 
         final View vw = (View) findViewById(R.id.l123);
         final View ans_btn5 = (View) findViewById(R.id.answer_question);
@@ -100,8 +109,100 @@ public class Main17Activity extends AppCompatActivity {
                     DatabaseReference fbdatabase = FirebaseDatabase.getInstance().getReference().child("uploads").child(key);
                     fbdatabase.addValueEventListener(new ValueEventListener() {
                         @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        public void onDataChange(@NonNull final DataSnapshot dataSnapshot) {
 
+
+                            Query query1 = FirebaseDatabase.getInstance().getReference("likes").child((dataSnapshot.child("mAnswer").getValue().toString()));
+                            query1.addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                    int total = (int) dataSnapshot.getChildrenCount();
+                                    System.out.println("My val, plz tell" + total);
+                                    like1.setText(String.valueOf(total));
+
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                }
+                            });
+
+
+                            likeButton.setOnLikeListener(new OnLikeListener() {
+                                @Override
+                                public void liked(LikeButton likeButton) {
+                                    FirebaseAuth firebaseAuth;
+                                    firebaseAuth = FirebaseAuth.getInstance();
+                                    final FirebaseUser user = firebaseAuth.getCurrentUser();
+                                    love = love + 1;
+                                    final Like like = new Like(String.valueOf(love));
+                                    DatabaseReference dbr = FirebaseDatabase.getInstance().getReference("likes");
+                                    dbr.child((dataSnapshot.child("mAnswer").getValue().toString())).child(user.getUid()).setValue(like);
+
+
+                                    Query query1 = FirebaseDatabase.getInstance().getReference("likes").child((dataSnapshot.child("mAnswer").getValue().toString()));
+                                    query1.addValueEventListener(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                            int total = (int) dataSnapshot.getChildrenCount();
+                                            System.out.println("My val, plz tell" + total);
+                                            like1.setText(String.valueOf(total));
+
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                        }
+                                    });
+
+
+                                }
+
+                                @Override
+                                public void unLiked(LikeButton likeButton) {
+                                    FirebaseAuth firebaseAuth;
+                                    firebaseAuth = FirebaseAuth.getInstance();
+                                    final FirebaseUser user = firebaseAuth.getCurrentUser();
+//                                    love = love + 1;
+//                                    final Like like = new Like(String.valueOf(love));
+                                    DatabaseReference dbr = FirebaseDatabase.getInstance().getReference("likes").child((dataSnapshot.child("mAnswer").getValue().toString())).child(user.getUid());
+//                                    dbr.child((dataSnapshot.child("mAnswer").getValue().toString())).child(user.getUid());
+                                    dbr.removeValue();
+
+                                    Query query1 = FirebaseDatabase.getInstance().getReference("likes").child((dataSnapshot.child("mAnswer").getValue().toString()));
+                                    query1.addValueEventListener(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                                            int total = (int) dataSnapshot.getChildrenCount();
+                                            System.out.println("My val, plz tell" + total);
+                                            like1.setText(String.valueOf(total));
+
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                        }
+                                    });
+
+
+                                }
+                            });
+
+//
+//                            if(likeButton.isLiked()) {
+//
+//
+//                                love = love + 1;
+//                            }if(!likeButton.isLiked()){
+//                                love= love+0;
+//                            }
+//
+//
+//
 
                             DatabaseReference databaseReference1 = FirebaseDatabase.getInstance().getReference("doubts").child(dataSnapshot.child("mAnswer").getValue().toString());
                             Query query = FirebaseDatabase.getInstance().getReference("doubts").child(dataSnapshot.child("mAnswer").getValue().toString());
@@ -112,7 +213,6 @@ public class Main17Activity extends AppCompatActivity {
                                     System.out.println("My val, plz tell" + total);
                                     comments.setText(String.valueOf(total));
 
-//                commentNumber.setText(total);
 
                                 }
 
@@ -228,10 +328,7 @@ public class Main17Activity extends AppCompatActivity {
 
             }
         });
-
-
-
-
+//        question_image.setOnTouchListener(new ImageMatrixTouchHandler(onCreateView().getContext());
 
     }
 

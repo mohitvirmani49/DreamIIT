@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login"
+    android:orientation="vertical"
+    android:weightSum="5"
+    tools:context=".SliderPage">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true">
+
+            <include layout="@layout/page14"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_centerInParent="true"/>
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:background="@drawable/main_slider">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="35dp"
+            android:fontFamily="cursive"
+            android:text="Start your learning journey, Now !"
+            android:textAlignment="center"
+            android:textColor="#130008"
+            android:textSize="20dp" />
+
+        <com.google.android.gms.common.SignInButton
+            android:id="@+id/google_sign_in"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_below="@+id/cont"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/gradient_color" />
+
+
+        <com.facebook.login.widget.LoginButton
+            android:id="@+id/facebook_login"
+            android:layout_width="150dp"
+            android:layout_height="100dp"
+            android:layout_below="@+id/google_sign_in"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"/>
+
+
+    </RelativeLayout>
+
+
+</LinearLayout>

@@ -7,6 +7,11 @@
                 android:angle="45"
                 android:endColor="#3168b4"
                 android:startColor="@color/Backgrnd" />
+
+<!--            <gradient-->
+<!--                android:startColor="#09C6F9"-->
+<!--                android:endColor="#045DE9"-->
+<!--                android:angle="315" />-->
             <!--#00B0EA-->
         </shape>
     </item>

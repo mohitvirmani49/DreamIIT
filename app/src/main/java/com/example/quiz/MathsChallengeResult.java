@@ -85,8 +85,8 @@ public class MathsChallengeResult extends AppCompatActivity {
 
         SharedPreferences result = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         final String chapter = result.getString("chapter", "0");
-        DatabaseReference dr = FirebaseDatabase.getInstance().getReference(user1.getUid()).child("Maths").child("level1");
-        if (intValue >= 16) {
+        DatabaseReference dr = FirebaseDatabase.getInstance().getReference(user1.getUid()).child("level1");
+        if (intValue >= 5) {
             User user = new User(intValue);
             dr.child(chapter).setValue(user);
         }
@@ -116,5 +116,11 @@ public class MathsChallengeResult extends AppCompatActivity {
 //        resultRef.addListenerForSingleValueEvent(valueEventListener);
 
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(this, Main28Activity.class));
     }
 }

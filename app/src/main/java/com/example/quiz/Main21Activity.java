@@ -41,7 +41,6 @@ public class Main21Activity extends AppCompatActivity {
     private StorageTask mUploadTask;
     private MessageAdapter mAdapter;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -100,13 +99,12 @@ public class Main21Activity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 mUploads.clear();
-                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()){
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     Comm upload = postSnapshot.getValue(Comm.class);
                     mUploads.add(upload);
                 }
                 mAdapter = new MessageAdapter(Main21Activity.this, mUploads);
                 recyclerView.setAdapter(mAdapter);
-
 
 
             }
@@ -116,7 +114,6 @@ public class Main21Activity extends AppCompatActivity {
 
             }
         });
-
 
 
     }
@@ -129,7 +126,7 @@ public class Main21Activity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         final FirebaseUser user = firebaseAuth.getCurrentUser();
 
-        final Comm comm = new Comm(comment.getText().toString(),user.getDisplayName(),"");
+        final Comm comm = new Comm(comment.getText().toString(), user.getDisplayName(), "");
         DatabaseReference dr = FirebaseDatabase.getInstance().getReference("doubts");
         dr.child(answer).push().setValue(comm);
         comment.getText().clear();
@@ -139,7 +136,7 @@ public class Main21Activity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(Main21Activity.this,Main17Activity.class);
+        Intent intent = new Intent(Main21Activity.this, Main17Activity.class);
         startActivity(intent);
     }
 }

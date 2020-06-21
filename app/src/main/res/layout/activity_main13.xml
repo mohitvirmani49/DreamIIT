@@ -82,13 +82,19 @@
                 android:textColor="#FFFFFF"
                 android:textSize="25dp" />
 
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/p_user_nm"
+                android:id="@+id/myvalue"
+                android:layout_centerHorizontal="true"
+                android:layout_centerInParent="true"
+                >
+
             <TextView
                 android:id="@+id/user_rank"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/p_user_nm"
-                android:layout_centerHorizontal="true"
-                android:layout_marginStart="30dp"
                 android:drawableLeft="@drawable/star"
                 android:fontFamily="sans-serif-light"
                 android:padding="10dp"
@@ -97,11 +103,39 @@
                 android:textColor="#FFFFFF"
                 android:textSize="20dp" />
 
+            <TextView
+                android:id="@+id/arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/user_rank"
+                android:text="|"
+                android:textSize="20dp"
+                android:fontFamily="sans-serif"
+                android:textColor="@color/white"
+                android:textAlignment="center"
+                android:padding="10dp"/>
+
+                <TextView
+                    android:id="@+id/answerrank"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Beginner"
+                    android:textSize="20dp"
+                    android:fontFamily="sans-serif-light"
+                    android:textColor="@color/white"
+                    android:textAlignment="center"
+                    android:padding="10dp"
+                    android:layout_toRightOf="@+id/arrow"/>
+
+
+            </RelativeLayout>
+
+
             <Button
                 android:id="@+id/notify"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/user_rank"
+                android:layout_below="@+id/myvalue"
                 android:layout_marginTop="50dp"
                 android:background="@color/transparent"
                 android:drawableLeft="@drawable/notify"
@@ -220,6 +254,19 @@
                 android:text="Ambitious"
                 android:layout_below="@+id/nxtGoal"
                 android:layout_marginTop="10dp"
+                android:textColor="#fff"
+                android:fontFamily="sans-serif"
+                android:textSize="15dp"
+                android:layout_marginStart="10dp"/>
+
+
+            <TextView
+                android:id="@+id/rank_ans"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:layout_below="@+id/rank"
+                android:layout_marginTop="8dp"
                 android:textColor="#fff"
                 android:fontFamily="sans-serif"
                 android:textSize="15dp"

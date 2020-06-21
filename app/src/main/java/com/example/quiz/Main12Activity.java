@@ -3,10 +3,12 @@ package com.example.quiz;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -37,6 +39,9 @@ import com.google.firebase.auth.GoogleAuthProvider;
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class Main12Activity extends AppCompatActivity {
 
     // google
@@ -46,6 +51,7 @@ public class Main12Activity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private int RC_SIGN_IN = 1;
 
+
     // facebook
     private CallbackManager callbackManager;
     private LoginButton loginButton;
@@ -53,15 +59,52 @@ public class Main12Activity extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener authStateListener;
     private AccessTokenTracker accessTokenTracker;
 
+
+    private int[] layouts = {R.layout.try_3, R.layout.try_l2, R.layout.try_liquid1};
+    private MPagerAdapter mPagerAdapter;
+    private ViewPager viewPager;
+
+    int currentPage = 0;
+    Timer timer;
+    final long DELAY_MS = 500;//delay in milliseconds before task is to be executed
+    final long PERIOD_MS = 3000;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main12);
+        setContentView(R.layout.slider);
         loginButton = (LoginButton) findViewById(R.id.facebook_login);  // facebook
         loginButton.setReadPermissions("email", "public_profile");
         signInButton = (SignInButton) findViewById(R.id.google_sign_in);  // Google
         firebaseAuth = FirebaseAuth.getInstance();
 
+
+        viewPager = (ViewPager) findViewById(R.id.viewpager);
+
+
+        mPagerAdapter = new MPagerAdapter(layouts, this);
+        viewPager.setAdapter(mPagerAdapter);
+
+        final Handler handler = new Handler();
+        final Runnable Update = new Runnable() {
+            @Override
+            public void run() {
+                if (currentPage == 3) {
+                    currentPage = 0;
+
+                }
+                viewPager.setCurrentItem(currentPage++, true);
+
+            }
+        };
+
+        timer = new Timer(); // This will create a new Thread
+        timer.schedule(new TimerTask() { // task to be scheduled
+            @Override
+            public void run() {
+                handler.post(Update);
+            }
+        }, DELAY_MS, PERIOD_MS);
         GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail().build();
@@ -147,7 +190,7 @@ public class Main12Activity extends AppCompatActivity {
     private void updateUI(FirebaseUser firebaseUser) {
         if (firebaseUser != null) {
             Toast.makeText(this, firebaseUser.getDisplayName(), Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(this,Main14Activity.class);
+            Intent intent = new Intent(this, Main14Activity.class);
             startActivity(intent);
 
         }
@@ -198,7 +241,7 @@ public class Main12Activity extends AppCompatActivity {
             //email
             firebaseAuth.sendPasswordResetEmail(acc.getEmail());
 
-            Intent intent = new Intent(Main12Activity.this,Main14Activity.class);
+            Intent intent = new Intent(Main12Activity.this, Main14Activity.class);
             intent.putExtra("message", acc.getDisplayName());
             startActivity(intent);
 
@@ -240,6 +283,33 @@ public class Main12Activity extends AppCompatActivity {
 
             }
         });
+
+    }
+
+    private Boolean exit = false;
+
+    @Override
+    public void onBackPressed() {
+        if (exit) {
+
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_HOME);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+
+        } else {
+            Toast.makeText(this, "Press Back again to Exit.",
+                    Toast.LENGTH_SHORT).show();
+
+            exit = true;
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    exit = false;
+                }
+            }, 3 * 1000);
+
+        }
 
     }
 

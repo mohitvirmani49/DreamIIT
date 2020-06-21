@@ -55,6 +55,7 @@ public class Main18Activity extends AppCompatActivity {
     TextView prev_ans_txt;
     Button attach_ans_img;
     ImageView imageView;
+    private int answersum = 0;
     private NotificationManagerCompat notificationManager;
 
     private Uri mImageUri;
@@ -187,8 +188,57 @@ public class Main18Activity extends AppCompatActivity {
                                                     updates.put("mAnsImage", downloadUri.toString());
                                                     updates.put("mAnsDisName", user2.getDisplayName());
 
+                                                    String ans = main_ans.getText().toString();
+
                                                 } else {
-                                                    updates.put("mAnswer", main_ans.getText().toString());
+                                                    if (main_ans.getText().toString().contains(".")) {
+
+                                                        String ans = main_ans.getText().toString().replace(".", ",");
+
+                                                        updates.put("mAnswer", ans);
+                                                        updates.put("mAnsImage", downloadUri.toString());
+                                                        updates.put("mAnsDisName", user2.getDisplayName());
+                                                        fbdatabase.updateChildren(updates);
+                                                    }
+                                                    if (main_ans.getText().toString().contains("#")) {
+                                                        String ans = main_ans.getText().toString().replace("#", "hash");
+
+                                                        updates.put("mAnswer", ans);
+                                                        updates.put("mAnsImage", downloadUri.toString());
+                                                        updates.put("mAnsDisName", user2.getDisplayName());
+                                                        fbdatabase.updateChildren(updates);
+                                                    }
+                                                    if (main_ans.getText().toString().contains("$")) {
+                                                        String ans = main_ans.getText().toString().replace("$", "dollar");
+
+                                                        updates.put("mAnswer", ans);
+                                                        updates.put("mAnsImage", downloadUri.toString());
+                                                        updates.put("mAnsDisName", user2.getDisplayName());
+                                                        fbdatabase.updateChildren(updates);
+
+                                                    }
+                                                    if (main_ans.getText().toString().contains("[")) {
+                                                        String ans = main_ans.getText().toString().replace("[", "");
+
+
+                                                        updates.put("mAnswer", ans);
+                                                        updates.put("mAnsImage", downloadUri.toString());
+                                                        updates.put("mAnsDisName", user2.getDisplayName());
+                                                        fbdatabase.updateChildren(updates);
+                                                    }
+                                                    if (main_ans.getText().toString().contains("]")) {
+                                                        String ans = main_ans.getText().toString().replace("]", "");
+
+                                                        updates.put("mAnswer", ans);
+                                                        updates.put("mAnsImage", downloadUri.toString());
+                                                        updates.put("mAnsDisName", user2.getDisplayName());
+                                                        fbdatabase.updateChildren(updates);
+
+                                                    }
+                                                    String ans = main_ans.getText().toString();
+
+
+                                                    updates.put("mAnswer", ans);
                                                     updates.put("mAnsImage", downloadUri.toString());
                                                     updates.put("mAnsDisName", user2.getDisplayName());
                                                 }
@@ -243,12 +293,79 @@ public class Main18Activity extends AppCompatActivity {
 
                         DatabaseReference fbdatabase = FirebaseDatabase.getInstance().getReference().child("uploads").child(key);
 
-                        Map<String, Object> updates = new HashMap<String, Object>();
-                        updates.put("mAnswer", main_ans.getText().toString());
-                        updates.put("mAnsDisName", user2.getDisplayName());
+                        if (main_ans.getText().toString().contains(".")) {
+
+                            String ans = main_ans.getText().toString().replace(".", ",");
+                            Map<String, Object> updates = new HashMap<String, Object>();
+                            updates.put("mAnswer", ans);
+                            updates.put("mAnsDisName", user2.getDisplayName());
 
 
-                        fbdatabase.updateChildren(updates);
+                            fbdatabase.updateChildren(updates);
+
+
+                        } else if (main_ans.getText().toString().contains("#")) {
+                            String ans = main_ans.getText().toString().replace("#", "hash");
+
+                            Map<String, Object> updates = new HashMap<String, Object>();
+                            updates.put("mAnswer", ans);
+                            updates.put("mAnsDisName", user2.getDisplayName());
+
+
+                            fbdatabase.updateChildren(updates);
+
+
+                        } else if (main_ans.getText().toString().contains("$")) {
+                            String ans = main_ans.getText().toString().replace("$", "dollar");
+
+                            Map<String, Object> updates = new HashMap<String, Object>();
+                            updates.put("mAnswer", ans);
+                            updates.put("mAnsDisName", user2.getDisplayName());
+
+
+                            fbdatabase.updateChildren(updates);
+
+
+                        } else if (main_ans.getText().toString().contains("[")) {
+                            String ans = main_ans.getText().toString().replace("[", "");
+
+                            Map<String, Object> updates = new HashMap<String, Object>();
+                            updates.put("mAnswer", ans);
+                            updates.put("mAnsDisName", user2.getDisplayName());
+
+
+                            fbdatabase.updateChildren(updates);
+
+
+                        } else if (main_ans.getText().toString().contains("]")) {
+                            String ans = main_ans.getText().toString().replace("]", "");
+
+                            Map<String, Object> updates = new HashMap<String, Object>();
+                            updates.put("mAnswer", ans);
+                            updates.put("mAnsDisName", user2.getDisplayName());
+
+
+                            fbdatabase.updateChildren(updates);
+
+
+                        } else {
+
+                            Map<String, Object> updates = new HashMap<String, Object>();
+                            updates.put("mAnswer", main_ans.getText().toString());
+                            updates.put("mAnsDisName", user2.getDisplayName());
+
+
+                            fbdatabase.updateChildren(updates);
+                        }
+
+                        FirebaseAuth firebaseAuth1;
+                        firebaseAuth1 = FirebaseAuth.getInstance();
+                        final FirebaseUser user = firebaseAuth1.getCurrentUser();
+                        answersum = answersum + 1;
+                        final AnswerNumber answerNumber = new AnswerNumber(String.valueOf(answersum));
+                        DatabaseReference dbr = FirebaseDatabase.getInstance().getReference("answercount").child(user.getUid());
+                        dbr.child(main_ans.getText().toString()).push().setValue(answerNumber);
+
                     }
                 }
 
