@@ -124,7 +124,7 @@ public class AnsAdapter extends RecyclerView.Adapter<AnsAdapter.ImageViewHolder>
             imageView = itemView.findViewById(R.id.ans_image5);
             comment = itemView.findViewById(R.id.comments);
             tv2 = itemView.findViewById(R.id.answer_user_name);
-            
+
 //            rank = itemView.findViewById(R.id.myvalue);
 //            itemView.setOnClickListener(this);
             itemView.setOnClickListener(new View.OnClickListener() {
