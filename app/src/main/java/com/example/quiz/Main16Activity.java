@@ -131,7 +131,6 @@ public class Main16Activity extends AppCompatActivity {
             if (user.getDisplayName() != null) {
 
 
-
                 final StorageReference fileReference = mStorageRef.child(System.currentTimeMillis()
                         + "." + getFileExtension(mImageUri));
 
@@ -162,13 +161,13 @@ public class Main16Activity extends AppCompatActivity {
                                     SharedPreferences.Editor editor = sharedPreferences.edit();
 
                                     String doubt = mEditTextFileName.getText().toString().trim();
-                                    System.out.println("::::::::::::::::::::::::"+doubt);
+                                    System.out.println("::::::::::::::::::::::::" + doubt);
                                     System.out.println("::::::::789" + "na" + username);
 
                                     editor.putString("d", doubt);
-                                    editor.putString("down",downloadUri.toString());
-                                    editor.putString("user",username.trim());
-                                    editor.putString("pic",pic.toString());
+                                    editor.putString("down", downloadUri.toString());
+                                    editor.putString("user", username.trim());
+                                    editor.putString("pic", pic.toString());
                                     editor.apply();
 
 
@@ -202,12 +201,12 @@ public class Main16Activity extends AppCompatActivity {
             SharedPreferences.Editor editor = sharedPreferences.edit();
 
             String doubt = mEditTextFileName.getText().toString().trim();
-            System.out.println("::::::::::::::::::::::::"+doubt);
+            System.out.println("::::::::::::::::::::::::" + doubt);
             System.out.println("::::::::789" + "na" + username);
 
             editor.putString("d", doubt);
-            editor.putString("user",username.trim());
-            editor.putString("pic",pic.toString());
+            editor.putString("user", username.trim());
+            editor.putString("pic", pic.toString());
             editor.apply();
 
 //            Upload upload = new Upload(mEditTextFileName.getText().toString().trim(), "",

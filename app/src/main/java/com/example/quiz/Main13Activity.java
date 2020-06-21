@@ -118,6 +118,12 @@ public class Main13Activity extends AppCompatActivity {
 
             }
         });
+        if (user1.getUid().equals(R.string.mohit) || user1.getUid().equals(R.string.smriti)) {
+            answerRank.setText("Moderator");
+            ranks.setText("Congratulations you are an esteemed member of DreamIIT");
+            rankLeft.setText("");
+
+        }
         Query query2 = FirebaseDatabase.getInstance().getReference("answercount").child(user.getUid());
         query2.addValueEventListener(new ValueEventListener() {
             @Override

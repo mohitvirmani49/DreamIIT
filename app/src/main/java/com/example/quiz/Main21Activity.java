@@ -31,6 +31,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.example.quiz.Main17Activity.CORRECT;
+
 public class Main21Activity extends AppCompatActivity {
     private ImageButton back_button;
     private RecyclerView recyclerView;
@@ -75,7 +77,14 @@ public class Main21Activity extends AppCompatActivity {
         final String txt = result.getString("txt", "1");
         final String answer = result.getString("myAns", "0");
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("doubts").child(answer);
+        SharedPreferences result4 = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        String work = result4.getString("myAns", "0");
+        System.out.println(":::::::Hello There::::::::::" + work);
+        Intent intent = getIntent();
+        System.out.println("Hi Hello How" + intent.getStringExtra("correct"));
+        String comm = intent.getStringExtra("correct");
+
+        databaseReference = FirebaseDatabase.getInstance().getReference("doubts").child(comm);
 //        Query query = FirebaseDatabase.getInstance().getReference().child("doubts");
 //        query.equalTo(answer).addValueEventListener(new ValueEventListener() {
 //            @Override
@@ -122,13 +131,16 @@ public class Main21Activity extends AppCompatActivity {
         SharedPreferences result = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         final String txt = result.getString("txt", "1");
         final String answer = result.getString("myAns", "0");
+        Intent intent = getIntent();
+        final String comm1 = intent.getStringExtra("correct");
+
         FirebaseAuth firebaseAuth;
         firebaseAuth = FirebaseAuth.getInstance();
         final FirebaseUser user = firebaseAuth.getCurrentUser();
 
         final Comm comm = new Comm(comment.getText().toString(), user.getDisplayName(), "");
         DatabaseReference dr = FirebaseDatabase.getInstance().getReference("doubts");
-        dr.child(answer).push().setValue(comm);
+        dr.child(comm1).push().setValue(comm);
         comment.getText().clear();
 
     }

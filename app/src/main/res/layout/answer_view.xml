@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    xmlns:android="http://schemas.android.com/apk/res/android" >
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -19,11 +18,10 @@
                 android:id="@+id/solv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/sol"
                 android:text="Solution:"
                 android:textSize="20dp"
-                android:textStyle="bold"
-                android:background="@drawable/sol"
-                />
+                android:textStyle="bold" />
 
             <ozaydin.serkan.com.image_zoom_view.ImageViewZoom
                 android:id="@+id/ans_image5"
@@ -38,8 +36,8 @@
                 android:id="@+id/answer_text5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:minHeight="100dp"
                 android:layout_below="@+id/ans_image5"
+                android:minHeight="100dp"
                 android:text="answer"
                 android:textAlignment="textStart"
                 android:textColor="#130008"
@@ -52,9 +50,8 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/answer_text5"
                 android:layout_margin="5dp"
-                android:text="My nmae"
                 android:background="@drawable/name_bottom_line"
-                />
+                android:text="My nmae" />
 
 
             <com.like.LikeButton
@@ -76,25 +73,25 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/answer_user_name"
-                android:layout_toRightOf="@+id/like"
-                android:text="0"
-                android:textSize="15dp"
                 android:layout_marginBottom="2dp"
+                android:layout_toRightOf="@+id/like"
                 android:gravity="center"
-                android:textColor="#130008"/>
+                android:text="0"
+                android:textColor="#130008"
+                android:textSize="15dp" />
 
             <TextView
                 android:id="@+id/comments"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/answer_user_name"
-                android:drawableLeft="@drawable/msg"
-                android:text="  0"
-                android:textSize="15dp"
                 android:layout_alignParentRight="true"
                 android:layout_marginEnd="5dp"
                 android:layout_marginBottom="1dp"
-                android:textColor="#130008"/>
+                android:drawableLeft="@drawable/msg"
+                android:text="  0"
+                android:textColor="#130008"
+                android:textSize="15dp" />
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
-</ScrollView>
+</RelativeLayout>

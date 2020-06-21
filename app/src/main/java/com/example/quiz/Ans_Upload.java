@@ -11,7 +11,6 @@ public class Ans_Upload {
     public Ans_Upload() {
     }
 
-
     public Ans_Upload(String name, String imageUrl, String username, String image, String date) {
         if (name.trim().equals("")) {
             name = "No Text Description";

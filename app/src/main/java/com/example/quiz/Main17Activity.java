@@ -2,6 +2,8 @@ package com.example.quiz;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -45,22 +47,25 @@ import java.util.List;
 
 import ozaydin.serkan.com.image_zoom_view.ImageViewZoom;
 
-public class Main17Activity extends AppCompatActivity {
+public class Main17Activity extends AppCompatActivity implements AnsAdapter.OnItemClickListener {
     private ImageViewZoom question_image;
     private TextView question_text;
     private CircularImageView question_user_pic;
     private TextView question_user_name;
     private Button answer_question;
     private DatabaseReference mDatabaseRef;
-    private List<Upload> mUploads;
+    //    private List<Upload> mUploads;
     private ImageViewZoom answer_image;
     private TextView answer_text;
     private TextView userNameA;
-
+    private RecyclerView mRecyclerView;
     private TextView comments;
     private TextView like1;
     private LikeButton likeButton;
     private int love = 0;
+    private List<Ans_Upload> uploadsm;
+    private AnsAdapter mAdapter;
+    public static final String CORRECT = "correct";
 
 
     @SuppressLint("ClickableViewAccessibility")
@@ -68,7 +73,7 @@ public class Main17Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main17);
-
+        mRecyclerView = (RecyclerView) findViewById(R.id.recycler);
         question_image = (ImageViewZoom) findViewById(R.id.question_image);
         question_text = (TextView) findViewById(R.id.question_text);
         question_user_pic = (CircularImageView) findViewById(R.id.answer_pg_image);
@@ -83,7 +88,18 @@ public class Main17Activity extends AppCompatActivity {
         likeButton = (LikeButton) findViewById(R.id.like);
 //        photoView = (PhotoView) findViewById(R.id.photo_view);
 
-//        final View vw = (View) findViewById(R.id.l123);
+
+        mRecyclerView.setHasFixedSize(true);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setReverseLayout(true);
+        linearLayoutManager.setStackFromEnd(true);
+        mRecyclerView.setLayoutManager(linearLayoutManager);
+
+
+        uploadsm = new ArrayList<>();
+
+
+        final View vw = (View) findViewById(R.id.l123);
         final View ans_btn5 = (View) findViewById(R.id.answer_question);
 
         SharedPreferences result = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
@@ -106,6 +122,26 @@ public class Main17Activity extends AppCompatActivity {
         }
         String txt = result.getString("question", "1");
 
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("solv").child(txt);
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                uploadsm.clear();
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                    Ans_Upload upload = postSnapshot.getValue(Ans_Upload.class);
+                    uploadsm.add(upload);
+                }
+                mAdapter = new AnsAdapter(Main17Activity.this, uploadsm);
+                mAdapter.setOnItemClickListener(Main17Activity.this);
+                mRecyclerView.setAdapter(mAdapter);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
         Query query = FirebaseDatabase.getInstance().getReference().child("uploads");
         query.orderByChild("mName").equalTo(txt).addValueEventListener(new ValueEventListener() {
@@ -244,12 +280,12 @@ public class Main17Activity extends AppCompatActivity {
 //                            String myImage = dataSnapshot.child("mAnsDisImg").getValue().toString();
                             System.out.println("My Answer::::::::" + myAnswer);
                             if (myAnswer.matches("") && myAnsImage.matches("")) {
-//                                vw.setVisibility(View.INVISIBLE);
+                                vw.setVisibility(View.INVISIBLE);
                             } else {
 //                                vw.setVisibility(View.VISIBLE);
                                 answer_text.setText(myAnswer);
                                 userNameA.setText(myName);
-                                ans_btn5.setVisibility(View.INVISIBLE);
+//                                ans_btn5.setVisibility(View.INVISIBLE);
 
                                 userNameA.setOnClickListener(new View.OnClickListener() {
                                     @Override
@@ -353,4 +389,25 @@ public class Main17Activity extends AppCompatActivity {
         popup.show();
     }
 
+    @Override
+    public void itemClicked(int position) {
+
+//        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+//        SharedPreferences.Editor editor = sharedPreferences.edit();
+//
+//        String myAnswer = clickedItem.getmName();
+//
+//        editor.putString("myAns", myAnswer);
+//        editor.apply();
+
+
+        Intent intent = new Intent(this, Main21Activity.class);
+        Ans_Upload clickedItem = uploadsm.get(position);
+
+        intent.putExtra(CORRECT, clickedItem.getmName());
+
+        startActivity(intent);
+
+
+    }
 }
