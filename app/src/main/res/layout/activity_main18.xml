@@ -43,7 +43,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/answer_are_text"
-        android:digits="0123456789qwertzuiopasdfghjklyxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM\n,/?;:{}()+-*/=^% "
+        android:digits="0123456789qwertzuiopasdfghjklyxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM\n,!@/?;:{}()+-*/=^% "
         android:hint="Write your solution here"
         android:textAlignment="center" />
 

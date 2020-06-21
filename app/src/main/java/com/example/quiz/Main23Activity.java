@@ -163,7 +163,7 @@ public class Main23Activity extends AppCompatActivity {
 
         FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseUser user = auth.getCurrentUser();
-        Query query2 = FirebaseDatabase.getInstance().getReference("answercount").child(user.getUid());
+        Query query2 = FirebaseDatabase.getInstance().getReference("rankans").child(user.getUid());
         query2.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

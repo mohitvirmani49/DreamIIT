@@ -124,11 +124,12 @@ public class Main13Activity extends AppCompatActivity {
             rankLeft.setText("");
 
         }
-        Query query2 = FirebaseDatabase.getInstance().getReference("answercount").child(user.getUid());
+        Query query2 = FirebaseDatabase.getInstance().getReference("rankans").child(user.getUid());
         query2.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 int number = (int) dataSnapshot.getChildrenCount();
+
                 System.out.println("My total answers upto now is" + number);
                 if (number >= 0 && number <= 5) {
                     answerRank.setText("Toddler");

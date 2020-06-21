@@ -73,6 +73,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
 
 
             holder.textView.setText(uploadCurrent.getmName());
+
             String value = uploadCurrent.getmComment().toString();
             int val = Integer.parseInt(value);
             if (val >= 0 && val <= 5) {

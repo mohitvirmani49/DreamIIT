@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,9 +20,12 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.like.LikeButton;
+import com.like.OnLikeListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -63,8 +67,92 @@ public class AnsAdapter extends RecyclerView.Adapter<AnsAdapter.ImageViewHolder>
     @Override
     public void onBindViewHolder(@NonNull final ImageViewHolder holder, final int position) {
 
-        Ans_Upload uploadCurrent = uploadsm.get(position);
+        final Ans_Upload uploadCurrent = uploadsm.get(position);
         System.out.println(":::::::::::" + uploadCurrent.getmImageUrl());
+
+        holder.comment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+
+
+                    Intent intent = new Intent(getApplicationContext(), Main21Activity.class);
+
+                    Ans_Upload clickedItem = uploadsm.get(position);
+                    intent.putExtra("correct", clickedItem.getmName());
+                    mContext.startActivity(intent);
+                } catch (Exception e) {
+                    Toast.makeText(getApplicationContext(), "Can't comment on this question", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+
+        holder.like.setOnLikeListener(new OnLikeListener() {
+            @Override
+            public void liked(LikeButton likeButton) {
+                int love = 0;
+                FirebaseAuth firebaseAuth;
+                firebaseAuth = FirebaseAuth.getInstance();
+                final FirebaseUser user = firebaseAuth.getCurrentUser();
+                love = love + 1;
+                final Like like = new Like(String.valueOf(love));
+                DatabaseReference myref = FirebaseDatabase.getInstance().getReference("likes");
+                Ans_Upload my = uploadsm.get(position);
+                myref.child(my.getmName()).child(user.getUid()).setValue(like);
+
+
+                Query query = FirebaseDatabase.getInstance().getReference("likes").child(my.getmName());
+                query.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        int total = (int) dataSnapshot.getChildrenCount();
+                        System.out.println("My val, plz tell" + total);
+                        holder.numberlikes.setText(String.valueOf(total));
+
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+            }
+
+            @Override
+            public void unLiked(LikeButton likeButton) {
+                FirebaseAuth firebaseAuth;
+                firebaseAuth = FirebaseAuth.getInstance();
+                final FirebaseUser user = firebaseAuth.getCurrentUser();
+
+                Ans_Upload my = uploadsm.get(position);
+
+                DatabaseReference myref = FirebaseDatabase.getInstance().getReference("likes").child(my.getmName()).child(user.getUid());
+
+
+                myref.removeValue();
+                Query query = FirebaseDatabase.getInstance().getReference("likes").child(my.getmName()).child(user.getUid());
+                query.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                        int total = (int) dataSnapshot.getChildrenCount();
+                        System.out.println("My val, plz tell" + total);
+                        holder.numberlikes.setText(String.valueOf(total));
+
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
+            }
+        });
+
 
         if (!uploadCurrent.getmImageUrl().equals(null) && !uploadCurrent.getmImageUrl().equals("")) {
 
@@ -89,16 +177,7 @@ public class AnsAdapter extends RecyclerView.Adapter<AnsAdapter.ImageViewHolder>
 //            holder.imageView.setVisibility(View.INVISIBLE);
 
             holder.textView.setText(uploadCurrent.getmName());
-            holder.comment.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(getApplicationContext(), Main21Activity.class);
-
-                    Ans_Upload clickedItem = uploadsm.get(position);
-                    intent.putExtra("correct", clickedItem.getmName());
-                    mContext.startActivity(intent);
-                }
-            });
+            holder.tv2.setText(uploadCurrent.getmDisplayName());
 
 
         }
@@ -116,6 +195,8 @@ public class AnsAdapter extends RecyclerView.Adapter<AnsAdapter.ImageViewHolder>
         public ImageViewZoom imageView;
         public TextView comment;
         public TextView tv2;
+        public LikeButton like;
+        public TextView numberlikes;
 
 
         public ImageViewHolder(@NonNull View itemView) {
@@ -124,7 +205,8 @@ public class AnsAdapter extends RecyclerView.Adapter<AnsAdapter.ImageViewHolder>
             imageView = itemView.findViewById(R.id.ans_image5);
             comment = itemView.findViewById(R.id.comments);
             tv2 = itemView.findViewById(R.id.answer_user_name);
-
+            like = itemView.findViewById(R.id.like);
+            numberlikes = itemView.findViewById(R.id.no_of_likes);
 //            rank = itemView.findViewById(R.id.myvalue);
 //            itemView.setOnClickListener(this);
             itemView.setOnClickListener(new View.OnClickListener() {

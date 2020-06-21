@@ -99,7 +99,7 @@ public class Main17Activity extends AppCompatActivity implements AnsAdapter.OnIt
         uploadsm = new ArrayList<>();
 
 
-        final View vw = (View) findViewById(R.id.l123);
+//        final View vw = (View) findViewById(R.id.l123);
         final View ans_btn5 = (View) findViewById(R.id.answer_question);
 
         SharedPreferences result = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
@@ -142,193 +142,82 @@ public class Main17Activity extends AppCompatActivity implements AnsAdapter.OnIt
 
             }
         });
-
-        Query query = FirebaseDatabase.getInstance().getReference().child("uploads");
-        query.orderByChild("mName").equalTo(txt).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                for (DataSnapshot foodSnapshot : dataSnapshot.getChildren()) {
-                    String key = foodSnapshot.getKey();
-                    DatabaseReference fbdatabase = FirebaseDatabase.getInstance().getReference().child("uploads").child(key);
-                    fbdatabase.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull final DataSnapshot dataSnapshot) {
-
-
-                            Query query1 = FirebaseDatabase.getInstance().getReference("likes").child((dataSnapshot.child("mAnswer").getValue().toString()));
-                            query1.addValueEventListener(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                    int total = (int) dataSnapshot.getChildrenCount();
-                                    System.out.println("My val, plz tell" + total);
-                                    like1.setText(String.valueOf(total));
-
-                                }
-
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                                }
-                            });
-
-
-                            likeButton.setOnLikeListener(new OnLikeListener() {
-                                @Override
-                                public void liked(LikeButton likeButton) {
-                                    FirebaseAuth firebaseAuth;
-                                    firebaseAuth = FirebaseAuth.getInstance();
-                                    final FirebaseUser user = firebaseAuth.getCurrentUser();
-                                    love = love + 1;
-                                    final Like like = new Like(String.valueOf(love));
-                                    DatabaseReference dbr = FirebaseDatabase.getInstance().getReference("likes");
-                                    dbr.child((dataSnapshot.child("mAnswer").getValue().toString())).child(user.getUid()).setValue(like);
-
-
-                                    Query query1 = FirebaseDatabase.getInstance().getReference("likes").child((dataSnapshot.child("mAnswer").getValue().toString()));
-                                    query1.addValueEventListener(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                            int total = (int) dataSnapshot.getChildrenCount();
-                                            System.out.println("My val, plz tell" + total);
-                                            like1.setText(String.valueOf(total));
-
-                                        }
-
-                                        @Override
-                                        public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                                        }
-                                    });
-
-
-                                }
-
-                                @Override
-                                public void unLiked(LikeButton likeButton) {
-                                    FirebaseAuth firebaseAuth;
-                                    firebaseAuth = FirebaseAuth.getInstance();
-                                    final FirebaseUser user = firebaseAuth.getCurrentUser();
-//                                    love = love + 1;
-//                                    final Like like = new Like(String.valueOf(love));
-                                    DatabaseReference dbr = FirebaseDatabase.getInstance().getReference("likes").child((dataSnapshot.child("mAnswer").getValue().toString())).child(user.getUid());
-//                                    dbr.child((dataSnapshot.child("mAnswer").getValue().toString())).child(user.getUid());
-                                    dbr.removeValue();
-
-                                    Query query1 = FirebaseDatabase.getInstance().getReference("likes").child((dataSnapshot.child("mAnswer").getValue().toString()));
-                                    query1.addValueEventListener(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                                            int total = (int) dataSnapshot.getChildrenCount();
-                                            System.out.println("My val, plz tell" + total);
-                                            like1.setText(String.valueOf(total));
-
-                                        }
-
-                                        @Override
-                                        public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                                        }
-                                    });
-
-
-                                }
-                            });
-
 //
-//                            if(likeButton.isLiked()) {
+//        Query query = FirebaseDatabase.getInstance().getReference().child("uploads");
+//        query.orderByChild("mName").equalTo(txt).addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//
+//                for (DataSnapshot foodSnapshot : dataSnapshot.getChildren()) {
+//                    String key = foodSnapshot.getKey();
+//                    DatabaseReference fbdatabase = FirebaseDatabase.getInstance().getReference().child("uploads").child(key);
+//                    fbdatabase.addValueEventListener(new ValueEventListener() {
+//                        @Override
+//                        public void onDataChange(@NonNull final DataSnapshot dataSnapshot) {
 //
 //
-//                                love = love + 1;
-//                            }if(!likeButton.isLiked()){
-//                                love= love+0;
+//                            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+//                            SharedPreferences.Editor editor = sharedPreferences.edit();
+//
+//                            String myAnswer = dataSnapshot.child("mAnswer").getValue().toString();
+//
+//                            editor.putString("myAns", myAnswer);
+//                            editor.apply();
+//
+//                            String myName = dataSnapshot.child("mAnsDisName").getValue().toString();
+//                            String myAnsImage = dataSnapshot.child("mAnsImage").getValue().toString();
+////                            String myImage = dataSnapshot.child("mAnsDisImg").getValue().toString();
+//                            System.out.println("My Answer::::::::" + myAnswer);
+//                            if (myAnswer.matches("") && myAnsImage.matches("")) {
+//                                vw.setVisibility(View.INVISIBLE);
+//                            } else {
+////                                vw.setVisibility(View.VISIBLE);
+//                                answer_text.setText(myAnswer);
+//                                userNameA.setText(myName);
+////                                ans_btn5.setVisibility(View.INVISIBLE);
+//
+//                                userNameA.setOnClickListener(new View.OnClickListener() {
+//                                    @Override
+//                                    public void onClick(View v) {
+//                                        Intent intent = new Intent(Main17Activity.this, Main19Activity.class);
+//                                        startActivity(intent);
+//                                    }
+//                                });
+//
+//                                if (myAnsImage.matches("")) {
+//                                    answer_image.requestLayout();
+//                                    answer_image.getLayoutParams().width = 0;
+//                                    answer_image.getLayoutParams().height = 0;
+//                                    System.out.println("empty");
+//
+//                                } else {
+//                                    answer_image.requestLayout();
+//                                    answer_image.getLayoutParams().width = 200;
+//                                    answer_image.getLayoutParams().height = 200;
+//                                    Picasso.get().load(myAnsImage).into(answer_image);
+//
+//
+//                                }
+//
 //                            }
 //
+//                        }
 //
+//                        @Override
+//                        public void onCancelled(@NonNull DatabaseError databaseError) {
 //
-
-                            DatabaseReference databaseReference1 = FirebaseDatabase.getInstance().getReference("doubts").child(dataSnapshot.child("mAnswer").getValue().toString());
-                            Query query = FirebaseDatabase.getInstance().getReference("doubts").child(dataSnapshot.child("mAnswer").getValue().toString());
-                            query.addValueEventListener(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                    int total = (int) dataSnapshot.getChildrenCount();
-                                    System.out.println("My val, plz tell" + total);
-                                    comments.setText(String.valueOf(total));
-
-
-                                }
-
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                                }
-                            });
-
-
-                            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-                            SharedPreferences.Editor editor = sharedPreferences.edit();
-
-                            String myAnswer = dataSnapshot.child("mAnswer").getValue().toString();
-
-                            editor.putString("myAns", myAnswer);
-                            editor.apply();
-
-                            String myName = dataSnapshot.child("mAnsDisName").getValue().toString();
-                            String myAnsImage = dataSnapshot.child("mAnsImage").getValue().toString();
-//                            String myImage = dataSnapshot.child("mAnsDisImg").getValue().toString();
-                            System.out.println("My Answer::::::::" + myAnswer);
-                            if (myAnswer.matches("") && myAnsImage.matches("")) {
-                                vw.setVisibility(View.INVISIBLE);
-                            } else {
-//                                vw.setVisibility(View.VISIBLE);
-                                answer_text.setText(myAnswer);
-                                userNameA.setText(myName);
-//                                ans_btn5.setVisibility(View.INVISIBLE);
-
-                                userNameA.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        Intent intent = new Intent(Main17Activity.this, Main19Activity.class);
-                                        startActivity(intent);
-                                    }
-                                });
-
-                                if (myAnsImage.matches("")) {
-                                    answer_image.requestLayout();
-                                    answer_image.getLayoutParams().width = 0;
-                                    answer_image.getLayoutParams().height = 0;
-                                    System.out.println("empty");
-
-                                } else {
-                                    answer_image.requestLayout();
-                                    answer_image.getLayoutParams().width = 200;
-                                    answer_image.getLayoutParams().height = 200;
-                                    Picasso.get().load(myAnsImage).into(answer_image);
-
-
-                                }
-
-                            }
-
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                        }
-                    });
-
-                }
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
+//                        }
+//                    });
+//
+//                }
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//            }
+//        });
 
         question_text.setText(txt);
         question_user_name.setText(result.getString("username", "2"));
@@ -363,15 +252,6 @@ public class Main17Activity extends AppCompatActivity implements AnsAdapter.OnIt
         editor.putString("txt", txt);
         editor.apply();
 
-
-        comments.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Main17Activity.this, Main21Activity.class);
-                startActivity(intent);
-
-            }
-        });
 //        question_image.setOnTouchListener(new ImageMatrixTouchHandler(onCreateView().getContext());
 
     }
@@ -401,13 +281,12 @@ public class Main17Activity extends AppCompatActivity implements AnsAdapter.OnIt
 //        editor.apply();
 
 
-        Intent intent = new Intent(this, Main21Activity.class);
-        Ans_Upload clickedItem = uploadsm.get(position);
-
-        intent.putExtra(CORRECT, clickedItem.getmName());
-
-        startActivity(intent);
-
+//        Intent intent = new Intent(this, Main21Activity.class);
+//
+//        intent.putExtra(CORRECT, clickedItem.getmName());
+//
+//        startActivity(intent);
+//
 
     }
 }
