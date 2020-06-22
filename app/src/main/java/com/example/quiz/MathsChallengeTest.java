@@ -1,12 +1,16 @@
 package com.example.quiz;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
+import android.os.Vibrator;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -79,13 +83,30 @@ public class MathsChallengeTest extends AppCompatActivity {
 
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("test");
 
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new AlertDialog.Builder(MathsChallengeTest.this)
+                        .setMessage("Are you sure you want to submit the Test")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                submitTest();
+                            }
+                        }).setNegativeButton("No", null)
+                        .show();
+
+            }
+        });
+
+
         nxt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (alpha <= 9) {
-                    if(optionA.isChecked()|| optionB.isChecked()||optionC.isChecked() ||optionD.isChecked()){
+                    if (optionA.isChecked() || optionB.isChecked() || optionC.isChecked() || optionD.isChecked()) {
 
-                    }else {
+                    } else {
 
 //                        Test test = new Test(optionA.getText().toString(), question.getAnswer());
 
@@ -126,8 +147,17 @@ public class MathsChallengeTest extends AppCompatActivity {
 
             }
         });
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                backpresss();
+
+            }
+        });
+
 
     }
+
     public int random() {
         for (int i = 0; i < array.length; i++) {
             array[i] = i + 1;
@@ -351,7 +381,7 @@ public class MathsChallengeTest extends AppCompatActivity {
             @Override
             public void onFinish() {
                 timer.setText("Times Up!");
-                Toast.makeText(MathsChallengeTest.this,"Time is up! Your test has been submitted automatically",Toast.LENGTH_LONG).show();
+                Toast.makeText(MathsChallengeTest.this, "Time is up! Your test has been submitted automatically", Toast.LENGTH_LONG).show();
                 submitTest();
 
             }
@@ -361,9 +391,44 @@ public class MathsChallengeTest extends AppCompatActivity {
     public String checkDigit(int number) {
         return number <= 9 ? "0" + number : String.valueOf(number);
     }
-    private void submitTest(){
+
+    private void submitTest() {
         Intent myIntent = new Intent(MathsChallengeTest.this, MathsChallengeResult.class);
         myIntent.putExtra("intVariableName", correct);
         startActivity(myIntent);
+    }
+
+
+    private void backpresss() {
+        Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        v.vibrate(700);
+
+        new AlertDialog.Builder(MathsChallengeTest.this)
+                .setMessage("Are you sure you want to exit the Test")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        startActivity(new Intent(MathsChallengeTest.this, Main28Activity.class));
+                    }
+                }).setNegativeButton("No", null)
+                .show();
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        v.vibrate(700);
+
+        new AlertDialog.Builder(MathsChallengeTest.this)
+                .setMessage("Are you sure you want to exit the Test")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        startActivity(new Intent(MathsChallengeTest.this, Main28Activity.class));
+                    }
+                }).setNegativeButton("No", null)
+                .show();
+
     }
 }

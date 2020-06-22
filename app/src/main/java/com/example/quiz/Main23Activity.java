@@ -153,17 +153,15 @@ public class Main23Activity extends AppCompatActivity {
     private void uploadChemFile() {
 
         SharedPreferences result = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-
         final String doubt = result.getString("d", "0");
         final String img = result.getString("down", "1");
         final String usrname = result.getString("user", "2");
         final String pic7 = result.getString("pic", "3");
 
         final SharedPreferences.Editor editor = result.edit();
-
         FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseUser user = auth.getCurrentUser();
-        Query query2 = FirebaseDatabase.getInstance().getReference("rankans").child(user.getUid());
+        Query query2 = FirebaseDatabase.getInstance().getReference("answercount").child(user.getUid());
         query2.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -204,7 +202,6 @@ public class Main23Activity extends AppCompatActivity {
 
             }
         });
-
     }
 
     private void uploadMathsFile() {

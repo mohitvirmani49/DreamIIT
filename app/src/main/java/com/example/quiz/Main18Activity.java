@@ -45,6 +45,8 @@ import com.squareup.picasso.Picasso;
 import java.util.HashMap;
 import java.util.Map;
 
+import ozaydin.serkan.com.image_zoom_view.ImageViewZoom;
+
 import static com.example.quiz.App.CHANNEL_1_ID;
 
 public class Main18Activity extends AppCompatActivity {
@@ -54,9 +56,10 @@ public class Main18Activity extends AppCompatActivity {
     Button submit_ans;
     TextView prev_ans_txt;
     Button attach_ans_img;
-    ImageView imageView;
+    ImageViewZoom imageView;
     private int answersum = 0;
     private NotificationManagerCompat notificationManager;
+    private ImageButton back;
 
     private Uri mImageUri;
 
@@ -75,8 +78,8 @@ public class Main18Activity extends AppCompatActivity {
         submit_ans = (Button) findViewById(R.id.submit_ans);
         prev_ans_txt = (TextView) findViewById(R.id.answer_are_text);
         attach_ans_img = (Button) findViewById(R.id.attach_answer);
-        imageView = (ImageView) findViewById(R.id.verify_image);
-
+        imageView = (ImageViewZoom) findViewById(R.id.verify_image);
+        back = (ImageButton) findViewById(R.id.back);
         notificationManager = NotificationManagerCompat.from(this);
 
         mStorageRef = FirebaseStorage.getInstance().getReference("uploads");
@@ -121,6 +124,12 @@ public class Main18Activity extends AppCompatActivity {
 
             Picasso.get().load(mImageUri).into(imageView);
         }
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Main18Activity.this, Main17Activity.class));
+            }
+        });
     }
 
     private String getFileExtension(Uri uri) {
@@ -183,6 +192,7 @@ public class Main18Activity extends AppCompatActivity {
                                     Ans_Upload ans_upload = new Ans_Upload(main_ans.getText().toString(), downloadUri.toString(), user2.getDisplayName(), "", "");
                                     DatabaseReference solution = FirebaseDatabase.getInstance().getReference("solv");
                                     solution.child(txt).push().setValue(ans_upload);
+                                    openImagesActivity();
 
 
 //                                    Query query = FirebaseDatabase.getInstance().getReference().child("uploads");
@@ -249,9 +259,9 @@ public class Main18Activity extends AppCompatActivity {
             FirebaseUser user2 = firebaseAuth.getCurrentUser();
 
             answersum = answersum + 1;
-            TotalAns count = new TotalAns(String.valueOf(answersum));
-            DatabaseReference rankings = FirebaseDatabase.getInstance().getReference("rankans").child(user2.getUid());
-            rankings.child(main_ans.getText().toString()).push().setValue(count);
+//            TotalAns count = new TotalAns(String.valueOf(answersum));
+//            DatabaseReference rankings = FirebaseDatabase.getInstance().getReference("rankans").child(user2.getUid());
+//            rankings.child(main_ans.getText().toString()).push().setValue(count);
 //            final AnswerNumber answerNumber = new AnswerNumber(String.valueOf(answersum));
 //            DatabaseReference dbr = FirebaseDatabase.getInstance().getReference("answercount").child(user2.getUid());
 //            dbr.push().setValue(answerNumber);
@@ -259,6 +269,10 @@ public class Main18Activity extends AppCompatActivity {
             Ans_Upload ans_upload = new Ans_Upload(main_ans.getText().toString(), "", user2.getDisplayName(), "", "");
             DatabaseReference solution = FirebaseDatabase.getInstance().getReference("solv");
             solution.child(txt).push().setValue(ans_upload);
+
+            Sum sum = new Sum(String.valueOf(answersum));
+            DatabaseReference rank = FirebaseDatabase.getInstance().getReference("rankans").child(user2.getUid());
+            rank.child(main_ans.getText().toString()).push().setValue(sum);
 
 
 //            Query query = FirebaseDatabase.getInstance().getReference().child("uploads");
@@ -316,5 +330,9 @@ public class Main18Activity extends AppCompatActivity {
         notificationManager.notify(1, notification);
     }
 
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(this, Main17Activity.class));
+    }
 }

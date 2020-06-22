@@ -86,6 +86,39 @@ public class AnsAdapter extends RecyclerView.Adapter<AnsAdapter.ImageViewHolder>
                 }
             }
         });
+        Ans_Upload my = uploadsm.get(position);
+        Query query = FirebaseDatabase.getInstance().getReference("likes").child(my.getmName());
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                int total = (int) dataSnapshot.getChildrenCount();
+                System.out.println("My val, plz tell" + total);
+                holder.numberlikes.setText(String.valueOf(total));
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        Query query1 = FirebaseDatabase.getInstance().getReference("doubts").child(my.getmName());
+        query1.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                int total2 = (int) dataSnapshot.getChildrenCount();
+                System.out.println("My val, plz tell" + total2);
+                holder.comment.setText(String.valueOf(total2));
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
 
         holder.like.setOnLikeListener(new OnLikeListener() {
@@ -102,22 +135,6 @@ public class AnsAdapter extends RecyclerView.Adapter<AnsAdapter.ImageViewHolder>
                 myref.child(my.getmName()).child(user.getUid()).setValue(like);
 
 
-                Query query = FirebaseDatabase.getInstance().getReference("likes").child(my.getmName());
-                query.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        int total = (int) dataSnapshot.getChildrenCount();
-                        System.out.println("My val, plz tell" + total);
-                        holder.numberlikes.setText(String.valueOf(total));
-
-
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
             }
 
             @Override

@@ -32,6 +32,13 @@ public class Main13Activity extends AppCompatActivity {
     private TextView userRank, answerRank, rankLeft;
     private Button notification, message, invite, settings;
 
+    private static final String MOHIT = "yDfOwvhJ7eS6eWvwBN3lqZ8ptgZ2";
+    private static final String SMRITI = "uoAzBlr2VddHXkLYS1Hhr8giHQg2";
+    private static final String DREAMIIT = "9IPp81AxH9O918RQaQ1SR2XS2v52";
+    private static final String JKV = "bLvR6e3LQwPwxzhSVQvKaSKBoXQ2";
+    private static final String NEETIKA = "ksKgQxl9YqfLQPHWUokkg5QHt9H3";
+    private static final String PIYUSH = "AW2yUDB0RehcD5SimfrJbSfVe7t2";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,64 +131,76 @@ public class Main13Activity extends AppCompatActivity {
             rankLeft.setText("");
 
         }
-        Query query2 = FirebaseDatabase.getInstance().getReference("rankans").child(user.getUid());
-        query2.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                int number = (int) dataSnapshot.getChildrenCount();
+//        if()
 
-                System.out.println("My total answers upto now is" + number);
-                if (number >= 0 && number <= 5) {
-                    answerRank.setText("Toddler");
+        if (user.getUid().equals(NEETIKA) || user.getUid().equals(MOHIT)
+                || user.getUid().equals(SMRITI) || user.getUid().equals(DREAMIIT)
+                || user.getUid().equals(PIYUSH) || user.getUid().equals(JKV)) {
 
-                } else if (number > 5 && number <= 15) {
-                    answerRank.setText("Rookie");
-                } else if (number > 15 && number < 30) {
-                    answerRank.setText("Rising Star");
+            answerRank.setText("Moderator");
+            ranks.setText("Thanks for being a part of DreamIIT Family");
+            rankLeft.setText("Help make DreamIIT spam free");
 
-                } else if (number >= 30 && number < 50) {
-                    answerRank.setText("Achiever");
-                } else if (number >= 50 && number < 80) {
-                    answerRank.setText("Expert");
-                } else if (number >= 80 && number < 120) {
-                    answerRank.setText("Genius");
-                } else if (number >= 120) {
-                    answerRank.setText("Legend");
+
+        } else {
+            Query query2 = FirebaseDatabase.getInstance().getReference("rankans").child(user.getUid());
+            query2.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    int number = (int) dataSnapshot.getChildrenCount();
+
+                    System.out.println("My total answers upto now is" + number);
+                    if (number >= 0 && number <= 5) {
+                        answerRank.setText("Toddler");
+
+                    } else if (number > 5 && number <= 15) {
+                        answerRank.setText("Rookie");
+                    } else if (number > 15 && number < 30) {
+                        answerRank.setText("Rising Star");
+
+                    } else if (number >= 30 && number < 50) {
+                        answerRank.setText("Achiever");
+                    } else if (number >= 50 && number < 80) {
+                        answerRank.setText("Expert");
+                    } else if (number >= 80 && number < 120) {
+                        answerRank.setText("Genius");
+                    } else if (number >= 120) {
+                        answerRank.setText("Legend");
+                    }
+
+                    if (number >= 0 && number <= 5) {
+                        ranks.setText("Rookie");
+                        rankLeft.setText("Just " + (6 - number) + " quality answers away");
+
+                    } else if (number > 5 && number <= 15) {
+                        ranks.setText("Rising Star");
+                        rankLeft.setText("Just " + (16 - number) + " quality answers away");
+                    } else if (number > 15 && number < 30) {
+                        ranks.setText("Achiever");
+                        rankLeft.setText("Just " + (30 - number) + " quality answers away");
+
+                    } else if (number >= 30 && number < 50) {
+                        ranks.setText("Expert");
+                        rankLeft.setText("Just " + (50 - number) + " quality answers away");
+                    } else if (number >= 50 && number < 80) {
+                        ranks.setText("Genius");
+                        rankLeft.setText("Just " + (80 - number) + " quality answers away");
+                    } else if (number >= 80 && number < 120) {
+                        ranks.setText("Legend");
+                        rankLeft.setText("Just " + (120 - number) + " quality answers away");
+                    } else if (number >= 120) {
+                        ranks.setText("Congrats, you have become DreamIIT Master!");
+                    }
+
                 }
 
-                if (number >= 0 && number <= 5) {
-                    ranks.setText("Rookie");
-                    rankLeft.setText("Just " + (6 - number) + " quality answers away");
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                } else if (number > 5 && number <= 15) {
-                    ranks.setText("Rising Star");
-                    rankLeft.setText("Just " + (16 - number) + " quality answers away");
-                } else if (number > 15 && number < 30) {
-                    ranks.setText("Achiever");
-                    rankLeft.setText("Just " + (30 - number) + " quality answers away");
-
-                } else if (number >= 30 && number < 50) {
-                    ranks.setText("Expert");
-                    rankLeft.setText("Just " + (50 - number) + " quality answers away");
-                } else if (number >= 50 && number < 80) {
-                    ranks.setText("Genius");
-                    rankLeft.setText("Just " + (80 - number) + " quality answers away");
-                } else if (number >= 80 && number < 120) {
-                    ranks.setText("Legend");
-                    rankLeft.setText("Just " + (120 - number) + " quality answers away");
-                } else if (number >= 120) {
-                    ranks.setText("Congrats, you have become DreamIIT Master!");
                 }
+            });
 
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-
+        }
     }
 
     @Override

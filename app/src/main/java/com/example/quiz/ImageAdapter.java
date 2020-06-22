@@ -64,6 +64,21 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
         Upload uploadCurrent = mUploads.get(position);
         System.out.println(":::::::::::" + uploadCurrent.getmImageUrl());
 
+        Query query = FirebaseDatabase.getInstance().getReference("solv").child(uploadCurrent.getmName());
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                int val = (int)dataSnapshot.getChildrenCount();
+                holder.ans.setText(val + " Ans");
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
         if (!uploadCurrent.getmImageUrl().equals(null) && !uploadCurrent.getmImageUrl().equals("")) {
 
 
@@ -76,6 +91,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
 
             String value = uploadCurrent.getmComment().toString();
             int val = Integer.parseInt(value);
+
             if (val >= 0 && val <= 5) {
                 holder.rank.setText("Toddler");
 
@@ -148,6 +164,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
         public TextView textView1;
         public TextView tv2;
         public TextView rank;
+        public TextView ans;
 
 
         public ImageViewHolder(@NonNull View itemView) {
@@ -158,6 +175,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
             textView1 = itemView.findViewById(R.id.display_name5);
             tv2 = itemView.findViewById(R.id.mention_sub);
             rank = itemView.findViewById(R.id.myvalue);
+            ans = itemView.findViewById(R.id.ans);
 //            itemView.setOnClickListener(this);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
