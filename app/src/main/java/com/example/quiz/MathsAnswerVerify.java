@@ -14,6 +14,8 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -57,7 +59,10 @@ public class MathsAnswerVerify extends AppCompatActivity {
         optionD = (RadioButton) findViewById(R.id.d);
         number = (TextView) findViewById(R.id.number);
 
-        reference = FirebaseDatabase.getInstance().getReference("test");
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+
+        reference = FirebaseDatabase.getInstance().getReference("test").child(firebaseUser.getUid());
         random();
         updateQuestion();
 
@@ -65,17 +70,24 @@ public class MathsAnswerVerify extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (letter <= 10) {
-                    radioGroup.clearCheck();
+                    try {
 
-                    optionA.setBackgroundColor(getResources().getColor(R.color.white));
-                    optionB.setBackgroundColor(getResources().getColor(R.color.white));
-                    optionC.setBackgroundColor(getResources().getColor(R.color.white));
-                    optionD.setBackgroundColor(getResources().getColor(R.color.white));
-                    for (int i = 0; i < radioGroup.getChildCount(); i++) {
-                        radioGroup.getChildAt(i).setEnabled(false);
 
+                        radioGroup.clearCheck();
+
+                        optionA.setBackgroundColor(getResources().getColor(R.color.white));
+                        optionB.setBackgroundColor(getResources().getColor(R.color.white));
+                        optionC.setBackgroundColor(getResources().getColor(R.color.white));
+                        optionD.setBackgroundColor(getResources().getColor(R.color.white));
+                        for (int i = 0; i < radioGroup.getChildCount(); i++) {
+                            radioGroup.getChildAt(i).setEnabled(false);
+
+                        }
+                        updateQuestion();
                     }
-                    updateQuestion();
+                    catch (Exception e){
+                        submitTest();
+                    }
                 } else {
                     radioGroup.clearCheck();
 
@@ -186,15 +198,15 @@ public class MathsAnswerVerify extends AppCompatActivity {
                                     optionA.setBackgroundColor(Color.GREEN);
                                 }
                             } else if(mark.equals("")){
-                                if (correctResponse.equals(optionA.getText().toString())) {
-                                    optionA.setBackgroundColor(Color.GREEN);
-                                } else if (correctResponse.equals(optionB.getText().toString())) {
-                                    optionB.setBackgroundColor(Color.GREEN);
-                                } else if (correctResponse.equals(optionC.getText().toString())) {
-                                    optionC.setBackgroundColor(Color.GREEN);
-                                } else {
-                                    optionD.setBackgroundColor(Color.GREEN);
-                                }
+//                                if (correctResponse.equals(optionA.getText().toString())) {
+//                                    optionA.setBackgroundColor(Color.GREEN);
+//                                } else if (correctResponse.equals(optionB.getText().toString())) {
+//                                    optionB.setBackgroundColor(Color.GREEN);
+//                                } else if (correctResponse.equals(optionC.getText().toString())) {
+//                                    optionC.setBackgroundColor(Color.GREEN);
+//                                } else {
+//                                    optionD.setBackgroundColor(Color.GREEN);
+//                                }
                             }
                             letter++;
 

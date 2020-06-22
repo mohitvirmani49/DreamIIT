@@ -20,6 +20,8 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -80,8 +82,13 @@ public class MathsChallengeTest extends AppCompatActivity {
 
         random();
         updateQuestion();
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
 
-        mDatabaseRef = FirebaseDatabase.getInstance().getReference("test");
+
+        Intent intent = getIntent();
+        final String value3 = intent.getStringExtra("val");
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference("test").child(firebaseUser.getUid());
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -393,8 +400,14 @@ public class MathsChallengeTest extends AppCompatActivity {
     }
 
     private void submitTest() {
+        Intent intent = getIntent();
+
         Intent myIntent = new Intent(MathsChallengeTest.this, MathsChallengeResult.class);
         myIntent.putExtra("intVariableName", correct);
+
+        String value = intent.getStringExtra("val");
+        myIntent.putExtra("value", value);
+
         startActivity(myIntent);
     }
 

@@ -52,12 +52,12 @@ public class Main28Activity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        formulae.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(Main28Activity.this, SliderPage.class));
-            }
-        });
+//        formulae.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                startActivity(new Intent(Main28Activity.this, SliderPage.class));
+//            }
+//        });
     }
 
     @Override

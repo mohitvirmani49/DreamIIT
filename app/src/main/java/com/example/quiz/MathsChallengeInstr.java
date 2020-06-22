@@ -11,6 +11,9 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class MathsChallengeInstr extends AppCompatActivity {
 
     private ImageButton back;
@@ -29,6 +32,10 @@ public class MathsChallengeInstr extends AppCompatActivity {
         SharedPreferences result = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         final String chapter = result.getString("chapter", "0");
         tv.setText(chapter);
+
+//        DatabaseReference mydatabase = FirebaseDatabase.getInstance().getReference("test");
+//        mydatabase.removeValue();
+
 
 
         back.setOnClickListener(new View.OnClickListener() {

@@ -93,5 +93,14 @@
         android:text="Next"
         android:id="@+id/check"/>
 
+    <Button
+        android:id="@+id/detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Detailed Comparison"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"/>
+
+
 
 </RelativeLayout>

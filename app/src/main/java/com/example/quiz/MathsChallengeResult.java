@@ -30,6 +30,7 @@ public class MathsChallengeResult extends AppCompatActivity {
     private RelativeLayout my;
     private ImageButton back;
     private Button check;
+    private Button detail;
 
 
     @Override
@@ -45,8 +46,11 @@ public class MathsChallengeResult extends AppCompatActivity {
         loose = (LottieAnimationView) findViewById(R.id.fail);
         back = (ImageButton) findViewById(R.id.back);
         check = (Button) findViewById(R.id.check);
+        detail = (Button) findViewById(R.id.detail);
 
-        Intent myIntent = getIntent();
+        final Intent myIntent = getIntent();
+        final int truth = myIntent.getIntExtra("truth",0);
+        final int bluff = myIntent.getIntExtra("bluff",0);
         int intValue = myIntent.getIntExtra("intVariableName", 0);
         int percent = intValue / 40;
         if (intValue < 4) {
@@ -90,6 +94,16 @@ public class MathsChallengeResult extends AppCompatActivity {
             User user = new User(intValue);
             dr.child(chapter).setValue(user);
         }
+
+        detail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MathsChallengeResult.this, MathsDetail.class);
+                intent.putExtra("truth", truth);
+                intent.putExtra("bluff",bluff);
+                startActivity(intent);
+            }
+        });
 
         // in page13 just query child count if >5 in level1 assign rank =1; else not
 
