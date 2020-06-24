@@ -104,13 +104,13 @@ public class Main13Activity extends AppCompatActivity {
                 if (value > 0 && value <= 2) {
                     userRank.setText("  Level 1");
 
-                } else if (value > 2 && value <= 4) {
+                } else if (value > 2 && value <= 6) {
                     userRank.setText("  Level 2");
-                } else if (value > 4 && value <= 6) {
+                } else if (value > 6 && value <= 12) {
                     userRank.setText("   Level 3");
-                } else if (value > 6 && value <= 8) {
+                } else if (value > 12 && value <= 20) {
                     userRank.setText("  Level 4");
-                } else if (value > 8) {
+                } else if (value > 20) {
                     userRank.setText("  Level 5");
 
                 } else {

@@ -21,6 +21,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.mikhaellopez.circularimageview.CircularImageView;
 import com.squareup.picasso.Picasso;
@@ -31,7 +32,7 @@ public class MathsChallengeResult extends AppCompatActivity {
     private LottieAnimationView pass;
     private RelativeLayout my;
     private ImageButton back;
-    private Button check;
+    private Button check, score1, high;
     private Button detail;
     private TextView name;
     private CircularImageView pic;
@@ -47,7 +48,8 @@ public class MathsChallengeResult extends AppCompatActivity {
         name = (TextView) findViewById(R.id.name);
         pic = (CircularImageView) findViewById(R.id.photo);
         my = (RelativeLayout) findViewById(R.id.my);
-
+        score1 = (Button) findViewById(R.id.score1);
+        high = (Button) findViewById(R.id.high);
         back = (ImageButton) findViewById(R.id.back);
         check = (Button) findViewById(R.id.check);
         detail = (Button) findViewById(R.id.detail);
@@ -56,21 +58,72 @@ public class MathsChallengeResult extends AppCompatActivity {
         final int truth = myIntent.getIntExtra("truth", 0);
         final int bluff = myIntent.getIntExtra("bluff", 0);
         final int not = myIntent.getIntExtra("not", 0);
-        int intValue = myIntent.getIntExtra("intVariableName", 0);
-        int percent = intValue / 40;
-
-        if (intValue < 0) {
-            pass.setVisibility(View.INVISIBLE);
-            my.setBackgroundResource(R.color.red);
+        final String value = myIntent.getStringExtra("value");
+        final int intValue = myIntent.getIntExtra("intVariableName", 0);
 
 
-        } else {
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-            my.setBackgroundResource(R.color.main_page);
+        Query query = FirebaseDatabase.getInstance().getReference("marks").child(user.getUid()).child(value);
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                try {
 
-        }
-        int val = percent * 100;
-        tv1.setText(String.valueOf((100 * intValue) / 40) + "%");
+
+                    int truth = (int) dataSnapshot.getChildrenCount();
+                    int bluff = 10 - (truth+not);
+                    int intValu = (truth * 4) - bluff;
+                    int percent = intValu / 40;
+
+                    if (intValu < 10) {
+                        pass.setVisibility(View.INVISIBLE);
+                        my.setBackgroundResource(R.color.red);
+
+
+                    } else {
+
+                        my.setBackgroundResource(R.color.main_page);
+                        pic.setVisibility(View.INVISIBLE);
+
+                    }
+                    int val = percent * 100;
+                    tv1.setText("Score:\n" + intValu);
+                    score1.setText("Percent:\n" + String.valueOf((100 * intValu) / 40) + "%");
+                    if (intValu >= 32) {
+                        high.setText("Grade:\n" + "A+");
+                    } else if (intValu >= 26 && intValu < 32) {
+                        high.setText("Grade:\n" + "A");
+                    } else if (intValu >= 20 && intValu < 26) {
+                        high.setText("Grade:\n" + "B+");
+                    } else if (intValu >= 14 && intValu < 20) {
+                        high.setText("Grade:\n" + "B");
+                    } else if (intValu >= 10 && intValu < 14) {
+                        high.setText("Grade:\n" + "C");
+                    } else if (intValu < 10) {
+                        high.setText("Grade:\n" + "D");
+                    }
+
+                    SharedPreferences result = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                    final String chapter = result.getString("chapter", "0");
+                    DatabaseReference dr = FirebaseDatabase.getInstance().getReference(user.getUid()).child("level1");
+                    if (intValu >= 10) {
+                        User user = new User(intValu);
+                        dr.child(chapter).setValue(user);
+                    }
+
+
+                } catch (Exception e) {
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,13 +146,6 @@ public class MathsChallengeResult extends AppCompatActivity {
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference(user1.getUid());
 //        databaseReference.child("Maths").push().setValue(user);
 
-        SharedPreferences result = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        final String chapter = result.getString("chapter", "0");
-        DatabaseReference dr = FirebaseDatabase.getInstance().getReference(user1.getUid()).child("level1");
-        if (intValue >= 2) {
-            User user = new User(intValue);
-            dr.child(chapter).setValue(user);
-        }
 
         detail.setOnClickListener(new View.OnClickListener() {
             @Override

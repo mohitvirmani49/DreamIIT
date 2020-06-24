@@ -187,12 +187,16 @@ public class MathsChallengeTest extends AppCompatActivity {
 
         } else {
 
+            FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+            final FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+
+
             Intent intent = getIntent();
             final String value = intent.getStringExtra("val");
 
             SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
             SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putString("value",value);
+            editor.putString("value", value);
             editor.apply();
 //                            String myAnswer = dataSnapshot.child("mAnswer").getValue().toString();
 //
@@ -226,6 +230,21 @@ public class MathsChallengeTest extends AppCompatActivity {
 
 
                                 mDatabaseRef.child(String.valueOf(alpha)).updateChildren(updates);
+
+                                DatabaseReference dab = FirebaseDatabase.getInstance().getReference("marks").child(firebaseUser.getUid()).child(value);
+
+
+                                Map<String, Object> updates1 = new HashMap<String, Object>();
+                                updates.clear();
+                                if(optionA.getText().toString().equals(question.getAnswer())){
+                                    updates1.put("marks",String.valueOf(1));
+
+                                }
+//                                updates.put("optionMarked", optionA.getText().toString());
+//                                updates.put("correctAns", question.getAnswer());
+
+
+                                dab.child(String.valueOf(alpha)).updateChildren(updates1);
 
 
                                 System.out.println("Hurray uploaded");
@@ -269,6 +288,22 @@ public class MathsChallengeTest extends AppCompatActivity {
                                 mDatabaseRef.child(String.valueOf(alpha)).updateChildren(updates);
 
 
+                                DatabaseReference dab = FirebaseDatabase.getInstance().getReference("marks").child(firebaseUser.getUid()).child(value);
+
+
+                                Map<String, Object> updates1 = new HashMap<String, Object>();
+                                updates.clear();
+                                if(optionB.getText().toString().equals(question.getAnswer())){
+                                    updates1.put("marks",String.valueOf(1));
+                                }
+//                                updates.put("optionMarked", optionA.getText().toString());
+//                                updates.put("correctAns", question.getAnswer());
+
+
+                                dab.child(String.valueOf(alpha)).updateChildren(updates1);
+
+
+
                                 if (optionB.getText().toString().equals(question.getAnswer())) {
 
                                     Handler handler = new Handler();
@@ -308,6 +343,22 @@ public class MathsChallengeTest extends AppCompatActivity {
                                 mDatabaseRef.child(String.valueOf(alpha)).updateChildren(updates);
 
 
+                                DatabaseReference dab = FirebaseDatabase.getInstance().getReference("marks").child(firebaseUser.getUid()).child(value);
+
+
+                                Map<String, Object> updates1 = new HashMap<String, Object>();
+                                updates.clear();
+                                if(optionC.getText().toString().equals(question.getAnswer())){
+                                    updates1.put("marks",String.valueOf(1));
+                                }
+//                                updates.put("optionMarked", optionA.getText().toString());
+//                                updates.put("correctAns", question.getAnswer());
+
+
+                                dab.child(String.valueOf(alpha)).updateChildren(updates1);
+
+
+
                                 if (optionC.getText().toString().equals(question.getAnswer())) {
 
                                     Handler handler = new Handler();
@@ -344,6 +395,22 @@ public class MathsChallengeTest extends AppCompatActivity {
 
 
                                 mDatabaseRef.child(String.valueOf(alpha)).updateChildren(updates);
+
+
+                                DatabaseReference dab = FirebaseDatabase.getInstance().getReference("marks").child(firebaseUser.getUid()).child(value);
+
+
+                                Map<String, Object> updates1 = new HashMap<String, Object>();
+                                updates.clear();
+                                if(optionD.getText().toString().equals(question.getAnswer())){
+                                    updates1.put("marks",String.valueOf(1));
+                                }
+//                                updates.put("optionMarked", optionA.getText().toString());
+//                                updates.put("correctAns", question.getAnswer());
+
+
+                                dab.child(String.valueOf(alpha)).updateChildren(updates1);
+
 
 
                                 if (optionD.getText().toString().equals(question.getAnswer())) {

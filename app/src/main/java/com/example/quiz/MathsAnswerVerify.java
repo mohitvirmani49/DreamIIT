@@ -24,12 +24,16 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
+
+import Model.Question;
+import ozaydin.serkan.com.image_zoom_view.ImageViewZoom;
 
 public class MathsAnswerVerify extends AppCompatActivity {
 
     private ImageButton back;
     private Button submit, nxt;
-    private ImageView question_img;
+    private ImageViewZoom question_img;
     private TextView chapterName, marks, number;
     private RadioGroup radioGroup;
     private RadioButton optionA, optionB, optionC, optionD;
@@ -53,7 +57,7 @@ public class MathsAnswerVerify extends AppCompatActivity {
         chapterName = (TextView) findViewById(R.id.chapterName);
         nxt = (Button) findViewById(R.id.next);
         marks = (TextView) findViewById(R.id.my_marks);
-        question_img = (ImageView) findViewById(R.id.main_qs);
+        question_img = (ImageViewZoom) findViewById(R.id.main_qs);
         radioGroup = (RadioGroup) findViewById(R.id.radio);
         optionA = (RadioButton) findViewById(R.id.a);
         optionB = (RadioButton) findViewById(R.id.b);

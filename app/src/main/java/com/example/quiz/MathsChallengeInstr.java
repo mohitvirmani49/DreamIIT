@@ -40,10 +40,11 @@ public class MathsChallengeInstr extends AppCompatActivity {
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("test").child(u.getUid()).child(chapter);
         databaseReference.removeValue();
 
+        DatabaseReference d = FirebaseDatabase.getInstance().getReference("marks").child(u.getUid()).child(chapter);
+        d.removeValue();
 
 //        DatabaseReference mydatabase = FirebaseDatabase.getInstance().getReference("test");
 //        mydatabase.removeValue();
-
 
 
         back.setOnClickListener(new View.OnClickListener() {
@@ -58,7 +59,7 @@ public class MathsChallengeInstr extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MathsChallengeInstr.this, MathsChallengeTest.class);
-                intent.putExtra("val",chapter);
+                intent.putExtra("val", chapter);
                 startActivity(intent);
 
             }
