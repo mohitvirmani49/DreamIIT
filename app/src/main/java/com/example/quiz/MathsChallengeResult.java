@@ -22,15 +22,19 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.mikhaellopez.circularimageview.CircularImageView;
+import com.squareup.picasso.Picasso;
 
 public class MathsChallengeResult extends AppCompatActivity {
 
-    private TextView tv1;
-    private LottieAnimationView pass, fail, succ, loose;
+    private Button tv1;
+    private LottieAnimationView pass;
     private RelativeLayout my;
     private ImageButton back;
     private Button check;
     private Button detail;
+    private TextView name;
+    private CircularImageView pic;
 
 
     @Override
@@ -38,12 +42,12 @@ public class MathsChallengeResult extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maths_challenge_result);
 
-        tv1 = (TextView) findViewById(R.id.result);
-        pass = (LottieAnimationView) findViewById(R.id.my_progress);
-        fail = (LottieAnimationView) findViewById(R.id.my_progress2);
+        tv1 = (Button) findViewById(R.id.score);
+        pass = (LottieAnimationView) findViewById(R.id.pass);
+        name = (TextView) findViewById(R.id.name);
+        pic = (CircularImageView) findViewById(R.id.photo);
         my = (RelativeLayout) findViewById(R.id.my);
-        succ = (LottieAnimationView) findViewById(R.id.pass);
-        loose = (LottieAnimationView) findViewById(R.id.fail);
+
         back = (ImageButton) findViewById(R.id.back);
         check = (Button) findViewById(R.id.check);
         detail = (Button) findViewById(R.id.detail);
@@ -54,15 +58,16 @@ public class MathsChallengeResult extends AppCompatActivity {
         final int not = myIntent.getIntExtra("not", 0);
         int intValue = myIntent.getIntExtra("intVariableName", 0);
         int percent = intValue / 40;
-        if (intValue < 4) {
+
+        if (intValue < 0) {
             pass.setVisibility(View.INVISIBLE);
             my.setBackgroundResource(R.color.red);
-            succ.setVisibility(View.INVISIBLE);
+
 
         } else {
-            fail.setVisibility(View.INVISIBLE);
+
             my.setBackgroundResource(R.color.main_page);
-            loose.setVisibility(View.INVISIBLE);
+
         }
         int val = percent * 100;
         tv1.setText(String.valueOf((100 * intValue) / 40) + "%");
@@ -91,7 +96,7 @@ public class MathsChallengeResult extends AppCompatActivity {
         SharedPreferences result = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         final String chapter = result.getString("chapter", "0");
         DatabaseReference dr = FirebaseDatabase.getInstance().getReference(user1.getUid()).child("level1");
-        if (intValue >= 5) {
+        if (intValue >= 2) {
             User user = new User(intValue);
             dr.child(chapter).setValue(user);
         }
@@ -106,6 +111,10 @@ public class MathsChallengeResult extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        name.setText(user1.getDisplayName());
+        Picasso.get().load(user1.getPhotoUrl()).into(pic);
+
 
         // in page13 just query child count if >5 in level1 assign rank =1; else not
 

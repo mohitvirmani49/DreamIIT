@@ -4,8 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -61,8 +63,9 @@ public class MathsAnswerVerify extends AppCompatActivity {
 
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
-
-        reference = FirebaseDatabase.getInstance().getReference("test").child(firebaseUser.getUid());
+        SharedPreferences result = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        String v = result.getString("value", "0");
+        reference = FirebaseDatabase.getInstance().getReference("test").child(firebaseUser.getUid()).child(v);
         random();
         updateQuestion();
 
@@ -84,8 +87,7 @@ public class MathsAnswerVerify extends AppCompatActivity {
 
                         }
                         updateQuestion();
-                    }
-                    catch (Exception e){
+                    } catch (Exception e) {
                         submitTest();
                     }
                 } else {
@@ -105,6 +107,7 @@ public class MathsAnswerVerify extends AppCompatActivity {
         });
 
     }
+
     private void updateQuestion() {
         if (letter > 10) {
             submitTest();
@@ -113,91 +116,93 @@ public class MathsAnswerVerify extends AppCompatActivity {
         } else {
             number.setText("Q" + no);
             no++;
-            Query query = FirebaseDatabase.getInstance().getReference().child("test");
+            SharedPreferences result = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+            String v = result.getString("value", "0");
+            System.out.println("::::::::::::::::::" + v);
+            FirebaseUser u = FirebaseAuth.getInstance().getCurrentUser();
+            Query query = FirebaseDatabase.getInstance().getReference().child("test").child(u.getUid()).child(v);
             query.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                    DatabaseReference fbdatabase = reference;
-                    reference.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    try {
 
-                            String mark = dataSnapshot.child(String.valueOf(letter)).child("optionMarked").getValue().toString();
-                            String correctResponse = dataSnapshot.child(String.valueOf(letter)).child("correctAns").getValue().toString();
-                            System.out.println("I am alha" + alpha);
-                            System.out.println(correctResponse);
+
+                        String mark = dataSnapshot.child(String.valueOf(letter)).child("optionMarked").getValue().toString();
+                        String correctResponse = dataSnapshot.child(String.valueOf(letter)).child("correctAns").getValue().toString();
+                        System.out.println("I am alha" + alpha);
+                        System.out.println(correctResponse);
 
 //                            String correctResponse = dataSnapshot.child(String.valueOf(letter)).child("CorrectAns").getValue().toString();
 
-                            System.out.println("Mark Mate" + mark);
+                        System.out.println("Mark Mate" + mark);
 //                            System.out.println("correct" + correctResponse);
 
-                            if (mark.equals(optionA.getText().toString())) {
-                                if (mark.equals(correctResponse)) {
-                                    System.out.println("Mark val" + mark);
-                                    System.out.println("hi" + correctResponse);
-                                    optionA.setBackgroundColor(Color.GREEN);
-                                } else if (correctResponse.equals(optionB.getText().toString())) {
-                                    System.out.println("Mark val" + mark);
-                                    System.out.println("hiB" + correctResponse);
-                                    optionA.setBackgroundColor(Color.RED);
-                                    optionB.setBackgroundColor(Color.GREEN);
-                                } else if (correctResponse.equals(optionC.getText().toString())) {
-                                    System.out.println("Mark val" + mark);
-                                    System.out.println("hiC" + correctResponse);
-                                    optionA.setBackgroundColor(Color.RED);
-                                    optionC.setBackgroundColor(Color.GREEN);
+                        if (mark.equals(optionA.getText().toString())) {
+                            if (mark.equals(correctResponse)) {
+                                System.out.println("Mark val" + mark);
+                                System.out.println("hi" + correctResponse);
+                                optionA.setBackgroundColor(Color.GREEN);
+                            } else if (correctResponse.equals(optionB.getText().toString())) {
+                                System.out.println("Mark val" + mark);
+                                System.out.println("hiB" + correctResponse);
+                                optionA.setBackgroundColor(Color.RED);
+                                optionB.setBackgroundColor(Color.GREEN);
+                            } else if (correctResponse.equals(optionC.getText().toString())) {
+                                System.out.println("Mark val" + mark);
+                                System.out.println("hiC" + correctResponse);
+                                optionA.setBackgroundColor(Color.RED);
+                                optionC.setBackgroundColor(Color.GREEN);
 
-                                } else {
-                                    System.out.println("Mark val" + mark);
-                                    System.out.println("hiD" + correctResponse);
-                                    optionA.setBackgroundColor(Color.RED);
-                                    optionD.setBackgroundColor(Color.GREEN);
-                                }
-                            } else if (mark.equals(optionB.getText().toString())) {
-                                if (mark.equals(correctResponse)) {
-                                    optionB.setBackgroundColor(Color.GREEN);
-                                } else if (correctResponse.equals(optionA.getText().toString())) {
-                                    optionB.setBackgroundColor(Color.RED);
-                                    optionA.setBackgroundColor(Color.GREEN);
-                                } else if (correctResponse.equals(optionC.getText().toString())) {
-                                    optionB.setBackgroundColor(Color.RED);
-                                    optionC.setBackgroundColor(Color.GREEN);
+                            } else {
+                                System.out.println("Mark val" + mark);
+                                System.out.println("hiD" + correctResponse);
+                                optionA.setBackgroundColor(Color.RED);
+                                optionD.setBackgroundColor(Color.GREEN);
+                            }
+                        } else if (mark.equals(optionB.getText().toString())) {
+                            if (mark.equals(correctResponse)) {
+                                optionB.setBackgroundColor(Color.GREEN);
+                            } else if (correctResponse.equals(optionA.getText().toString())) {
+                                optionB.setBackgroundColor(Color.RED);
+                                optionA.setBackgroundColor(Color.GREEN);
+                            } else if (correctResponse.equals(optionC.getText().toString())) {
+                                optionB.setBackgroundColor(Color.RED);
+                                optionC.setBackgroundColor(Color.GREEN);
 
-                                } else {
-                                    optionB.setBackgroundColor(Color.RED);
-                                    optionD.setBackgroundColor(Color.GREEN);
-                                }
-                            } else if (mark.equals(optionC.getText().toString())) {
-                                if (mark.equals(correctResponse)) {
-                                    optionC.setBackgroundColor(Color.GREEN);
-                                } else if (correctResponse.equals(optionB.getText().toString())) {
-                                    optionC.setBackgroundColor(Color.RED);
-                                    optionB.setBackgroundColor(Color.GREEN);
-                                } else if (correctResponse.equals(optionA.getText().toString())) {
-                                    optionC.setBackgroundColor(Color.RED);
-                                    optionC.setBackgroundColor(Color.GREEN);
+                            } else {
+                                optionB.setBackgroundColor(Color.RED);
+                                optionD.setBackgroundColor(Color.GREEN);
+                            }
+                        } else if (mark.equals(optionC.getText().toString())) {
+                            if (mark.equals(correctResponse)) {
+                                optionC.setBackgroundColor(Color.GREEN);
+                            } else if (correctResponse.equals(optionB.getText().toString())) {
+                                optionC.setBackgroundColor(Color.RED);
+                                optionB.setBackgroundColor(Color.GREEN);
+                            } else if (correctResponse.equals(optionA.getText().toString())) {
+                                optionC.setBackgroundColor(Color.RED);
+                                optionC.setBackgroundColor(Color.GREEN);
 
-                                } else {
-                                    optionC.setBackgroundColor(Color.RED);
-                                    optionD.setBackgroundColor(Color.GREEN);
-                                }
-                            } else if (mark.equals(optionD.getText().toString())) {
-                                if (mark.equals(correctResponse)) {
-                                    optionD.setBackgroundColor(Color.GREEN);
-                                } else if (correctResponse.equals(optionB.getText().toString())) {
-                                    optionD.setBackgroundColor(Color.RED);
-                                    optionB.setBackgroundColor(Color.GREEN);
-                                } else if (correctResponse.equals(optionC.getText().toString())) {
-                                    optionD.setBackgroundColor(Color.RED);
-                                    optionC.setBackgroundColor(Color.GREEN);
+                            } else {
+                                optionC.setBackgroundColor(Color.RED);
+                                optionD.setBackgroundColor(Color.GREEN);
+                            }
+                        } else if (mark.equals(optionD.getText().toString())) {
+                            if (mark.equals(correctResponse)) {
+                                optionD.setBackgroundColor(Color.GREEN);
+                            } else if (correctResponse.equals(optionB.getText().toString())) {
+                                optionD.setBackgroundColor(Color.RED);
+                                optionB.setBackgroundColor(Color.GREEN);
+                            } else if (correctResponse.equals(optionC.getText().toString())) {
+                                optionD.setBackgroundColor(Color.RED);
+                                optionC.setBackgroundColor(Color.GREEN);
 
-                                } else {
-                                    optionD.setBackgroundColor(Color.RED);
-                                    optionA.setBackgroundColor(Color.GREEN);
-                                }
-                            } else if(mark.equals("")){
+                            } else {
+                                optionD.setBackgroundColor(Color.RED);
+                                optionA.setBackgroundColor(Color.GREEN);
+                            }
+                        } else if (mark.equals("")) {
 //                                if (correctResponse.equals(optionA.getText().toString())) {
 //                                    optionA.setBackgroundColor(Color.GREEN);
 //                                } else if (correctResponse.equals(optionB.getText().toString())) {
@@ -207,27 +212,22 @@ public class MathsAnswerVerify extends AppCompatActivity {
 //                                } else {
 //                                    optionD.setBackgroundColor(Color.GREEN);
 //                                }
-                            }
-                            letter++;
-
-
                         }
+                        letter++;
+                    } catch (Exception e) {
 
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-                            System.out.println("sorry error");
+                    }
 
-                        }
-                    });
 
                 }
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
-                    System.out.println("sorry error2");
+                    System.out.println("sorry error");
 
                 }
             });
+
 
         }
 
@@ -242,7 +242,9 @@ public class MathsAnswerVerify extends AppCompatActivity {
     }
 
     private void submitTest() {
-        startActivity(new Intent(this, ImagesActivity.class));
+
+
+        startActivity(new Intent(this, MathsChallenge.class));
 
     }
 

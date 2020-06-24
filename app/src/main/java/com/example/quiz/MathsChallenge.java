@@ -11,6 +11,11 @@ import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.ImageButton;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -66,6 +71,8 @@ public class MathsChallenge extends AppCompatActivity implements Phy_Adapter.OnI
                 startActivity(intent);
             }
         });
+
+
 
     }
 

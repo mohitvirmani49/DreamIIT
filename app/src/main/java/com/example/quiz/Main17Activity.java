@@ -1,6 +1,7 @@
 package com.example.quiz;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,6 +15,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.view.MenuInflater;
@@ -344,5 +346,6 @@ public class Main17Activity extends AppCompatActivity implements AnsAdapter.OnIt
     public void itemClicked(int position) {
 
     }
+
 
 }

@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -32,6 +34,12 @@ public class MathsChallengeInstr extends AppCompatActivity {
         SharedPreferences result = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         final String chapter = result.getString("chapter", "0");
         tv.setText(chapter);
+
+        FirebaseUser u = FirebaseAuth.getInstance().getCurrentUser();
+
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("test").child(u.getUid()).child(chapter);
+        databaseReference.removeValue();
+
 
 //        DatabaseReference mydatabase = FirebaseDatabase.getInstance().getReference("test");
 //        mydatabase.removeValue();

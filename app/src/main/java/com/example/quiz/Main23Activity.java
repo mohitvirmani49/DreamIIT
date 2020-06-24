@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.example.quiz.notification.Token;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -27,6 +28,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
@@ -67,6 +69,7 @@ public class Main23Activity extends AppCompatActivity {
                     Toast.makeText(Main23Activity.this, "Upload in progress", Toast.LENGTH_LONG).show();
                 } else {
                     uploadPhyFile();
+
                 }
             }
         });
@@ -77,6 +80,7 @@ public class Main23Activity extends AppCompatActivity {
                     Toast.makeText(Main23Activity.this, "Upload in progress", Toast.LENGTH_LONG).show();
                 } else {
                     uploadChemFile();
+
                 }
 
             }
@@ -88,6 +92,7 @@ public class Main23Activity extends AppCompatActivity {
                     Toast.makeText(Main23Activity.this, "Upload in progress", Toast.LENGTH_LONG).show();
                 } else {
                     uploadMathsFile();
+
                 }
             }
         });

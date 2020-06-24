@@ -36,7 +36,7 @@ public class Main11Activity extends AppCompatActivity {
                 Main11Activity.this.startActivity(new Intent(Main11Activity.this, Main12Activity.class));
                 Main11Activity.this.finish();
             }
-        }, 2400);
+        }, 1800);
 
     }
 

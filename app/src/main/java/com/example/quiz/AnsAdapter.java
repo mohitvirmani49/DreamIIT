@@ -199,6 +199,28 @@ public class AnsAdapter extends RecyclerView.Adapter<AnsAdapter.ImageViewHolder>
 
             }
         });
+        FirebaseAuth firebaseAuth;
+        firebaseAuth = FirebaseAuth.getInstance();
+        final FirebaseUser user2 = firebaseAuth.getCurrentUser();
+
+        Query query4 = FirebaseDatabase.getInstance().getReference("likes").child(my.getmName()).child(user2.getUid());
+        query4.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                int c = (int) dataSnapshot.getChildrenCount();
+                if(c==1){
+                    holder.like.setLiked(true);
+                }else if(c==0){
+                    holder.like.setLiked(false);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
 
         holder.like.setOnLikeListener(new OnLikeListener() {
@@ -227,9 +249,8 @@ public class AnsAdapter extends RecyclerView.Adapter<AnsAdapter.ImageViewHolder>
 
                 DatabaseReference myref = FirebaseDatabase.getInstance().getReference("likes").child(my.getmName()).child(user.getUid());
 
-
                 myref.removeValue();
-                Query query = FirebaseDatabase.getInstance().getReference("likes").child(my.getmName()).child(user.getUid());
+                Query query = FirebaseDatabase.getInstance().getReference("likes").child(my.getmName());
                 query.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -323,5 +344,8 @@ public class AnsAdapter extends RecyclerView.Adapter<AnsAdapter.ImageViewHolder>
                 }
             });
         }
+
     }
+
+
 }

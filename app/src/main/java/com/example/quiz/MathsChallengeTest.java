@@ -7,10 +7,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Vibrator;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -26,6 +28,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
@@ -81,7 +84,7 @@ public class MathsChallengeTest extends AppCompatActivity {
 
         timer = (TextView) findViewById(R.id.my_marks);
         startTimer();
-
+//        Query query = FirebaseDatabase.getInstance().getReference()
 
         random();
         updateQuestion();
@@ -91,7 +94,7 @@ public class MathsChallengeTest extends AppCompatActivity {
 
         Intent intent = getIntent();
         final String value3 = intent.getStringExtra("val");
-        mDatabaseRef = FirebaseDatabase.getInstance().getReference("test").child(firebaseUser.getUid());
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference("test").child(firebaseUser.getUid()).child(value3);
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -186,6 +189,16 @@ public class MathsChallengeTest extends AppCompatActivity {
 
             Intent intent = getIntent();
             final String value = intent.getStringExtra("val");
+
+            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("value",value);
+            editor.apply();
+//                            String myAnswer = dataSnapshot.child("mAnswer").getValue().toString();
+//
+//                            editor.putString("myAns", myAnswer);
+//                            editor.apply();
+//
             chapterName.setText(value);
 
             reference = FirebaseDatabase.getInstance().getReference("Maths").child(intent.getStringExtra("val")).child(String.valueOf(array[alpha]));
@@ -410,7 +423,7 @@ public class MathsChallengeTest extends AppCompatActivity {
         myIntent.putExtra("intVariableName", correct);
         myIntent.putExtra("truth", truth);
         myIntent.putExtra("bluff", bluff);
-        myIntent.putExtra("not",notattempt);
+        myIntent.putExtra("not", notattempt);
 
         String value = intent.getStringExtra("val");
         myIntent.putExtra("value", value);
