@@ -17,6 +17,8 @@ import android.widget.ImageButton;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 
+import com.example.quiz.notification.APIService;
+import com.example.quiz.notification.Client;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -54,6 +56,9 @@ public class Main21Activity extends AppCompatActivity {
     private static final String NEETIKA = "ksKgQxl9YqfLQPHWUokkg5QHt9H3";
     private static final String PIYUSH = "AW2yUDB0RehcD5SimfrJbSfVe7t2";
 
+    APIService apiService;
+    boolean notify = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +77,9 @@ public class Main21Activity extends AppCompatActivity {
         recyclerView.setLayoutManager(linearLayoutManager);
         mUploads = new ArrayList<>();
 
+
+//        apiService = Client.getRetrofit("https://fcm.googleapis.com/").create(APIService.class);
+
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("uploads");
         send.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,6 +89,7 @@ public class Main21Activity extends AppCompatActivity {
                 } else {
                     uploadFile();
                     comment.getText();
+                    notify = true;
                 }
             }
         });

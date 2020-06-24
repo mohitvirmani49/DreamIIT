@@ -13,7 +13,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="15 Mock Test Papers to give real feel of the Exam."
+            android:text="10 Mock Test Papers to give real feel of the Exam."
             android:textSize="20dp"
             android:fontFamily="sans-serif"
             android:textColor="@color/white"

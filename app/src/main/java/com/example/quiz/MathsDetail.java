@@ -28,6 +28,7 @@ public class MathsDetail extends AppCompatActivity {
         final Intent myIntent = getIntent();
         final int truth = myIntent.getIntExtra("truth", 0);
         final int bluff = myIntent.getIntExtra("bluff", 0);
+        final int not = myIntent.getIntExtra("not",0);
 
         pie.setUsePercentValues(true);
         pie.getDescription().setEnabled(false);
@@ -41,16 +42,17 @@ public class MathsDetail extends AppCompatActivity {
         ArrayList<PieEntry> yValues = new ArrayList<>();
         yValues.add(new PieEntry(truth, "Correct Answers"));
         yValues.add(new PieEntry(bluff, "Wrong Answers"));
+        yValues.add(new PieEntry(not, "Not Attempted"));
 
         PieDataSet dataSet = new PieDataSet(yValues, "Marks");
         dataSet.setSliceSpace(3);
         dataSet.setSelectionShift(5);
-        dataSet.setColors(ColorTemplate.JOYFUL_COLORS);
+        dataSet.setColors(ColorTemplate.MATERIAL_COLORS);
 
 
         PieData data = new PieData(dataSet);
         data.setValueTextSize(10);
-        data.setValueTextColor(Color.YELLOW);
+        data.setValueTextColor(Color.BLACK);
         pie.setData(data);
 
 

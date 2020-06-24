@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_color"
+    android:orientation="vertical"
+    tools:context=".FullTestResult">
+
+
+    <ImageButton
+        android:id="@+id/pop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_margin="6dp"
+        android:background="@color/transparent"
+        android:onClick="showPopup1"
+        android:src="@drawable/popup_white" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:layout_margin="10dp">
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/profileCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="4dp"
+            app:cardElevation="4dp"
+            app:cardUseCompatPadding="false">
+
+            <LinearLayout
+                android:id="@+id/me"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="15dp"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:paddingTop="14dp">
+
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:fontFamily="sans-serif"
+                    android:padding="10dp"
+                    android:text="Name"
+                    android:textColor="#130008"
+                    android:textSize="32sp" />
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    >
+
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true">
+
+
+                        <Button
+                            android:id="@+id/score"
+                            android:layout_width="wrap_content"
+                            android:layout_height="100dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginBottom="25dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/main_pg_phy"
+                            android:clickable="false"
+                            android:paddingEnd="10dp"
+                            android:text="Score"
+                            android:textAlignment="center"
+                            android:textSize="20dp" />
+
+                        <Button
+                            android:id="@+id/high"
+                            android:layout_width="wrap_content"
+                            android:layout_height="100dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginBottom="25dp"
+                            android:layout_toRightOf="@+id/score"
+                            android:layout_weight="1"
+                            android:background="@drawable/main_pg_chem"
+                            android:clickable="false"
+                            android:paddingEnd="10dp"
+                            android:text="High"
+                            android:textAlignment="center"
+                            android:textSize="20dp" />
+
+                        <Button
+                            android:id="@+id/rankpred"
+                            android:layout_width="wrap_content"
+                            android:layout_height="100dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginBottom="25dp"
+                            android:layout_toRightOf="@+id/high"
+                            android:layout_weight="1"
+                            android:background="@drawable/filter_color"
+                            android:clickable="false"
+                            android:paddingEnd="10dp"
+                            android:text=""
+                            android:textSize="20dp"
+                            android:textStyle="normal" />
+
+
+                    </RelativeLayout>
+
+                </RelativeLayout>
+
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+
+        <com.mikhaellopez.circularimageview.CircularImageView
+            android:id="@+id/photo"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="100dp"
+            android:elevation="8dp"
+            android:src="@mipmap/ic_launcher"
+            app:civ_border_color_end="#1FD1F9"
+            app:civ_border_color_start="#B621FE"
+            app:civ_border_width="2dp" />
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

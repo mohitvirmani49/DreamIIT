@@ -83,49 +83,54 @@
                 android:textSize="25dp" />
 
             <RelativeLayout
+                android:id="@+id/myvalue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/p_user_nm"
-                android:id="@+id/myvalue"
-                android:layout_centerHorizontal="true"
                 android:layout_centerInParent="true"
-                >
+                android:layout_centerHorizontal="true">
 
-            <TextView
-                android:id="@+id/user_rank"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/star"
-                android:fontFamily="sans-serif-light"
-                android:padding="10dp"
-                android:text="  Beginner"
-                android:textAlignment="center"
-                android:textColor="#FFFFFF"
-                android:textSize="20dp" />
+                <TextView
+                    android:id="@+id/user_rank"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/star"
+                    android:fontFamily="sans-serif-light"
+                    android:paddingStart="10dp"
+                    android:paddingTop="10dp"
+                    android:paddingEnd="10dp"
+                    android:text="  Beginner"
+                    android:textAlignment="center"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20dp" />
 
-            <TextView
-                android:id="@+id/arrow"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/user_rank"
-                android:text="|"
-                android:textSize="20dp"
-                android:fontFamily="sans-serif"
-                android:textColor="@color/white"
-                android:textAlignment="center"
-                android:padding="10dp"/>
+                <TextView
+                    android:id="@+id/arrow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/user_rank"
+                    android:fontFamily="sans-serif"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:paddingTop="10dp"
+                    android:text="|"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="20dp" />
 
                 <TextView
                     android:id="@+id/answerrank"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Beginner"
-                    android:textSize="20dp"
+                    android:layout_toRightOf="@+id/arrow"
                     android:fontFamily="sans-serif-light"
-                    android:textColor="@color/white"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:paddingTop="10dp"
+                    android:text="Beginner"
                     android:textAlignment="center"
-                    android:padding="10dp"
-                    android:layout_toRightOf="@+id/arrow"/>
+                    android:textColor="@color/white"
+                    android:textSize="20dp" />
 
 
             </RelativeLayout>
@@ -141,61 +146,35 @@
                 android:drawableLeft="@drawable/notify"
                 android:fontFamily="sans-serif"
                 android:paddingLeft="20dp"
+                android:paddingTop="10dp"
                 android:paddingEnd="20dp"
                 android:text="Notifications"
-                android:textColor="#fff"
-                android:paddingTop="10dp"/>
+                android:textColor="#fff" />
 
             <TextView
                 android:id="@+id/notifyline"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/notify"
-                android:layout_marginTop="0dp"
-                android:background="@drawable/btn_bottom_line"
                 android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"/>
-
-
-            <Button
-                android:id="@+id/msg"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/notifyline"
-                android:background="@color/transparent"
-                android:drawableLeft="@drawable/msg"
-                android:paddingLeft="20dp"
-                android:paddingEnd="20dp"
-                android:text="Messages"
-                android:textColor="#fff"
-                android:paddingTop="10dp"
-                android:fontFamily="sans-serif"/>
-
-
-            <TextView
-                android:id="@+id/notifyline2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/msg"
                 android:layout_marginTop="0dp"
-                android:background="@drawable/btn_bottom_line"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"/>
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/btn_bottom_line" />
 
 
             <Button
                 android:id="@+id/invite_frnds"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/notifyline2"
+                android:layout_below="@+id/notifyline"
                 android:background="@color/transparent"
                 android:drawableLeft="@drawable/invite"
                 android:fontFamily="sans-serif"
                 android:paddingLeft="20dp"
+                android:paddingTop="10dp"
                 android:paddingEnd="20dp"
                 android:text="Invite Friends"
-                android:textColor="#fff"
-                android:paddingTop="10dp"/>
+                android:textColor="#fff" />
 
 
             <TextView
@@ -203,10 +182,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/invite_frnds"
-                android:layout_marginTop="0dp"
-                android:background="@drawable/btn_bottom_line"
                 android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"/>
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/btn_bottom_line" />
 
 
             <Button
@@ -218,10 +197,10 @@
                 android:drawableLeft="@drawable/logout"
                 android:fontFamily="sans-serif"
                 android:paddingLeft="20dp"
+                android:paddingTop="10dp"
                 android:paddingEnd="20dp"
                 android:text="Log Out"
-                android:textColor="#fff"
-                android:paddingTop="10dp"/>
+                android:textColor="#fff" />
 
 
             <TextView
@@ -229,52 +208,49 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/settings"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="0dp"
-                android:background="@drawable/btn_bottom_line"
                 android:layout_marginEnd="10dp"
-                android:layout_marginStart="10dp"/>
+                android:background="@drawable/btn_bottom_line" />
 
             <TextView
                 android:id="@+id/nxtGoal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Next Goal"
                 android:layout_below="@+id/notifyline4"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="20dp"
-                android:textColor="#fff"
                 android:fontFamily="sans-serif"
+                android:text="Next Goal"
+                android:textColor="#fff"
                 android:textSize="20dp"
-                android:textStyle="bold"
-                android:layout_marginStart="10dp"/>
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/rank"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Ambitious"
                 android:layout_below="@+id/nxtGoal"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
-                android:textColor="#fff"
                 android:fontFamily="sans-serif"
-                android:textSize="15dp"
-                android:layout_marginStart="10dp"/>
+                android:text="Ambitious"
+                android:textColor="#fff"
+                android:textSize="15dp" />
 
 
             <TextView
                 android:id="@+id/rank_ans"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=""
                 android:layout_below="@+id/rank"
-                android:layout_marginTop="8dp"
-                android:textColor="#fff"
-                android:fontFamily="sans-serif"
-                android:textSize="15dp"
                 android:layout_marginStart="10dp"
-                android:layout_marginBottom="20dp"/>
-
-
-
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="20dp"
+                android:fontFamily="sans-serif"
+                android:text=""
+                android:textColor="#fff"
+                android:textSize="15dp" />
 
 
         </RelativeLayout>

@@ -14,7 +14,6 @@ import android.os.Vibrator;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -29,8 +28,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -38,13 +35,13 @@ import Model.Question;
 import Model.Test;
 import ozaydin.serkan.com.image_zoom_view.ImageViewZoom;
 
-public class MathsChallengeTest extends AppCompatActivity {
+public class FullTestExam extends AppCompatActivity {
 
     private TextView timer;
-    private int time = 1800;
+    private int time = 10800;
 
     private ImageButton back;
-    private Button submit, nxt;
+    private Button submit, nxt, prev;
     private ImageViewZoom question_img;
     private TextView chapterName, number;
     private RadioGroup radioGroup;
@@ -65,7 +62,8 @@ public class MathsChallengeTest extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_maths_challenge_test);
+        setContentView(R.layout.activity_full_test_exam);
+
 
         back = (ImageButton) findViewById(R.id.back);
         submit = (Button) findViewById(R.id.submit);
@@ -78,12 +76,12 @@ public class MathsChallengeTest extends AppCompatActivity {
         optionC = (RadioButton) findViewById(R.id.c);
         optionD = (RadioButton) findViewById(R.id.d);
         number = (TextView) findViewById(R.id.number);
+        prev = (Button) findViewById(R.id.prev);
 
         timer = (TextView) findViewById(R.id.my_marks);
         startTimer();
 
 
-        random();
         updateQuestion();
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
@@ -91,12 +89,13 @@ public class MathsChallengeTest extends AppCompatActivity {
 
         Intent intent = getIntent();
         final String value3 = intent.getStringExtra("val");
-        mDatabaseRef = FirebaseDatabase.getInstance().getReference("test").child(firebaseUser.getUid());
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference("fulltest").child(firebaseUser.getUid());
+
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new AlertDialog.Builder(MathsChallengeTest.this)
+                new AlertDialog.Builder(FullTestExam.this)
                         .setMessage("Are you sure you want to submit the Test")
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
@@ -113,7 +112,7 @@ public class MathsChallengeTest extends AppCompatActivity {
         nxt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (alpha <= 9) {
+                if (total <= 89) {
                     if (optionA.isChecked() || optionB.isChecked() || optionC.isChecked() || optionD.isChecked()) {
 
                     } else {
@@ -124,7 +123,7 @@ public class MathsChallengeTest extends AppCompatActivity {
                         updates.clear();
                         updates.put("optionMarked", "");
                         updates.put("correctAns", "");
-                        mDatabaseRef.child(String.valueOf(alpha)).updateChildren(updates);
+                        mDatabaseRef.child(String.valueOf(total)).updateChildren(updates);
 
 
                     }
@@ -168,17 +167,9 @@ public class MathsChallengeTest extends AppCompatActivity {
 
     }
 
-    public int random() {
-        for (int i = 0; i < array.length; i++) {
-            array[i] = i + 1;
-        }
-        Collections.shuffle(Arrays.asList(array));
-        return array[alpha];
-    }
-
     private void updateQuestion() {
 
-        if (alpha > 10) {
+        if (total > 90) {
             submitTest();
 
 
@@ -188,8 +179,9 @@ public class MathsChallengeTest extends AppCompatActivity {
             final String value = intent.getStringExtra("val");
             chapterName.setText(value);
 
-            reference = FirebaseDatabase.getInstance().getReference("Maths").child(intent.getStringExtra("val")).child(String.valueOf(array[alpha]));
-            alpha++;
+            reference = FirebaseDatabase.getInstance().getReference(intent.getStringExtra("val")).child(String.valueOf(total));
+//            alpha++;
+            total++;
             number.setText("Q" + no + " :");
             no++;
             reference.addValueEventListener(new ValueEventListener() {
@@ -212,7 +204,7 @@ public class MathsChallengeTest extends AppCompatActivity {
                                 updates.put("correctAns", question.getAnswer());
 
 
-                                mDatabaseRef.child(String.valueOf(alpha)).updateChildren(updates);
+                                mDatabaseRef.child(String.valueOf(total)).updateChildren(updates);
 
 
                                 System.out.println("Hurray uploaded");
@@ -253,7 +245,7 @@ public class MathsChallengeTest extends AppCompatActivity {
                                 updates.put("correctAns", question.getAnswer());
 
 
-                                mDatabaseRef.child(String.valueOf(alpha)).updateChildren(updates);
+                                mDatabaseRef.child(String.valueOf(total)).updateChildren(updates);
 
 
                                 if (optionB.getText().toString().equals(question.getAnswer())) {
@@ -292,7 +284,7 @@ public class MathsChallengeTest extends AppCompatActivity {
                                 updates.put("correctAns", question.getAnswer());
 
 
-                                mDatabaseRef.child(String.valueOf(alpha)).updateChildren(updates);
+                                mDatabaseRef.child(String.valueOf(total)).updateChildren(updates);
 
 
                                 if (optionC.getText().toString().equals(question.getAnswer())) {
@@ -330,7 +322,7 @@ public class MathsChallengeTest extends AppCompatActivity {
                                 updates.put("correctAns", question.getAnswer());
 
 
-                                mDatabaseRef.child(String.valueOf(alpha)).updateChildren(updates);
+                                mDatabaseRef.child(String.valueOf(total)).updateChildren(updates);
 
 
                                 if (optionD.getText().toString().equals(question.getAnswer())) {
@@ -392,7 +384,7 @@ public class MathsChallengeTest extends AppCompatActivity {
             @Override
             public void onFinish() {
                 timer.setText("Times Up!");
-                Toast.makeText(MathsChallengeTest.this, "Time is up! Your test has been submitted automatically", Toast.LENGTH_LONG).show();
+                Toast.makeText(FullTestExam.this, "Time is up! Your test has been submitted automatically", Toast.LENGTH_LONG).show();
                 submitTest();
 
             }
@@ -406,11 +398,11 @@ public class MathsChallengeTest extends AppCompatActivity {
     private void submitTest() {
         Intent intent = getIntent();
 
-        Intent myIntent = new Intent(MathsChallengeTest.this, MathsChallengeResult.class);
+        Intent myIntent = new Intent(FullTestExam.this, FullTestResult.class);
         myIntent.putExtra("intVariableName", correct);
         myIntent.putExtra("truth", truth);
         myIntent.putExtra("bluff", bluff);
-        myIntent.putExtra("not",notattempt);
+        myIntent.putExtra("not", notattempt);
 
         String value = intent.getStringExtra("val");
         myIntent.putExtra("value", value);
@@ -423,32 +415,17 @@ public class MathsChallengeTest extends AppCompatActivity {
         Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         v.vibrate(700);
 
-        new AlertDialog.Builder(MathsChallengeTest.this)
+        new AlertDialog.Builder(FullTestExam.this)
                 .setMessage("Are you sure you want to exit the Test")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        startActivity(new Intent(MathsChallengeTest.this, Main28Activity.class));
+                        startActivity(new Intent(FullTestExam.this, Main14Activity.class));
                     }
                 }).setNegativeButton("No", null)
                 .show();
     }
 
-    @Override
-    public void onBackPressed() {
-
-        Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        v.vibrate(700);
-
-        new AlertDialog.Builder(MathsChallengeTest.this)
-                .setMessage("Are you sure you want to exit the Test")
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        startActivity(new Intent(MathsChallengeTest.this, Main28Activity.class));
-                    }
-                }).setNegativeButton("No", null)
-                .show();
-
-    }
 }
+
+

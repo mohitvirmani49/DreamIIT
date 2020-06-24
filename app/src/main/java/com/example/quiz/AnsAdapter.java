@@ -5,10 +5,14 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -69,6 +73,82 @@ public class AnsAdapter extends RecyclerView.Adapter<AnsAdapter.ImageViewHolder>
 
         final Ans_Upload uploadCurrent = uploadsm.get(position);
         System.out.println(":::::::::::" + uploadCurrent.getmImageUrl());
+
+        holder.popup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PopupMenu popup = new PopupMenu(getApplicationContext(), v);
+                MenuInflater inflater = popup.getMenuInflater();
+                inflater.inflate(R.menu.menu_4, popup.getMenu());
+                popup.show();
+
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch (item.getItemId()) {
+                            case R.id.report_ans:
+
+
+                                String MOHIT = "yDfOwvhJ7eS6eWvwBN3lqZ8ptgZ2";
+                                String SMRITI = "uoAzBlr2VddHXkLYS1Hhr8giHQg2";
+                                String DREAMIIT = "9IPp81AxH9O918RQaQ1SR2XS2v52";
+                                String JKV = "bLvR6e3LQwPwxzhSVQvKaSKBoXQ2";
+                                String NEETIKA = "ksKgQxl9YqfLQPHWUokkg5QHt9H3";
+                                String PIYUSH = "AW2yUDB0RehcD5SimfrJbSfVe7t2";
+
+
+                                FirebaseAuth mAuth = FirebaseAuth.getInstance();
+                                FirebaseUser user = mAuth.getCurrentUser();
+                                if (user.getUid().equals(NEETIKA) || user.getUid().equals(MOHIT)
+                                        || user.getUid().equals(SMRITI) || user.getUid().equals(DREAMIIT)
+                                        || user.getUid().equals(PIYUSH) || user.getUid().equals(JKV)) {
+
+                                    System.out.println("Check" + user.getUid());
+                                    SharedPreferences result = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                                    String txt = result.getString("question", "1");
+                                    Query query = FirebaseDatabase.getInstance().getReference("solv");
+                                    final Ans_Upload my5 = uploadsm.get(position);
+                                    query.orderByChild("mName").equalTo(txt).addValueEventListener(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                            for (DataSnapshot foodSnapshot : dataSnapshot.getChildren()) {
+
+                                                String key = foodSnapshot.getKey();
+                                                DatabaseReference fbdatabase = FirebaseDatabase.getInstance().getReference().child("solv").child(my5.getmName());
+                                                fbdatabase.removeValue();
+                                                Toast.makeText(getApplicationContext(), "Successfully deleted question", Toast.LENGTH_SHORT).show();
+//                                                startActivity(new Intent(Main17Activity.this, ImagesActivity.class));
+//                                                Intent intent = new Intent(getApplicationContext(), ImagesActivity.class);
+//
+
+                                            }
+
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                                            Toast.makeText(getApplicationContext(), "Sorry, Something went goofy", Toast.LENGTH_SHORT).show();
+
+                                        }
+                                    });
+
+                                } else {
+
+                                    Toast.makeText(getApplicationContext(), "Thanks for reporting the question, Our Moderators will have a look at it soon", Toast.LENGTH_SHORT).show();
+                                }
+                                return true;
+
+
+                            default:
+                                return false;
+
+                        }
+
+                    }
+                });
+
+            }
+        });
 
         holder.comment.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -176,7 +256,7 @@ public class AnsAdapter extends RecyclerView.Adapter<AnsAdapter.ImageViewHolder>
 
             holder.imageView.requestLayout();
             holder.imageView.getLayoutParams().height = 460;
-            holder.imageView.getLayoutParams().width = 1050;
+            holder.imageView.getLayoutParams().width = ViewGroup.LayoutParams.MATCH_PARENT;
 
 
             holder.textView.setText(uploadCurrent.getmName());
@@ -214,6 +294,7 @@ public class AnsAdapter extends RecyclerView.Adapter<AnsAdapter.ImageViewHolder>
         public TextView tv2;
         public LikeButton like;
         public TextView numberlikes;
+        public ImageButton popup;
 
 
         public ImageViewHolder(@NonNull View itemView) {
@@ -224,6 +305,9 @@ public class AnsAdapter extends RecyclerView.Adapter<AnsAdapter.ImageViewHolder>
             tv2 = itemView.findViewById(R.id.answer_user_name);
             like = itemView.findViewById(R.id.like);
             numberlikes = itemView.findViewById(R.id.no_of_likes);
+            popup = (ImageButton) itemView.findViewById(R.id.popup);
+
+
 //            rank = itemView.findViewById(R.id.myvalue);
 //            itemView.setOnClickListener(this);
             itemView.setOnClickListener(new View.OnClickListener() {

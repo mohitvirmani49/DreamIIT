@@ -49,8 +49,9 @@ public class MathsChallengeResult extends AppCompatActivity {
         detail = (Button) findViewById(R.id.detail);
 
         final Intent myIntent = getIntent();
-        final int truth = myIntent.getIntExtra("truth",0);
-        final int bluff = myIntent.getIntExtra("bluff",0);
+        final int truth = myIntent.getIntExtra("truth", 0);
+        final int bluff = myIntent.getIntExtra("bluff", 0);
+        final int not = myIntent.getIntExtra("not", 0);
         int intValue = myIntent.getIntExtra("intVariableName", 0);
         int percent = intValue / 40;
         if (intValue < 4) {
@@ -100,7 +101,8 @@ public class MathsChallengeResult extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MathsChallengeResult.this, MathsDetail.class);
                 intent.putExtra("truth", truth);
-                intent.putExtra("bluff",bluff);
+                intent.putExtra("bluff", bluff);
+                intent.putExtra("not", not);
                 startActivity(intent);
             }
         });

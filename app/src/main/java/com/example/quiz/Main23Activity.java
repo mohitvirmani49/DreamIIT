@@ -12,6 +12,7 @@ import android.preference.PreferenceManager;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.Continuation;
@@ -35,6 +36,7 @@ public class Main23Activity extends AppCompatActivity {
     private Button physics;
     private Button chemistry;
     private Button maths;
+    private ImageButton back;
 
     private Uri mImageUri;
 
@@ -52,6 +54,7 @@ public class Main23Activity extends AppCompatActivity {
         physics = (Button) findViewById(R.id.phy_filter);
         chemistry = (Button) findViewById(R.id.chem_filter);
         maths = (Button) findViewById(R.id.maths_filter);
+        back = (ImageButton) findViewById(R.id.back);
 
         mStorageRef = FirebaseStorage.getInstance().getReference("uploads");
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("uploads");
@@ -86,6 +89,13 @@ public class Main23Activity extends AppCompatActivity {
                 } else {
                     uploadMathsFile();
                 }
+            }
+        });
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openImagesActivity();
             }
         });
 
@@ -140,6 +150,7 @@ public class Main23Activity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(Main23Activity.this, "Something wrong happened. Try again later", Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -199,6 +210,7 @@ public class Main23Activity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(Main23Activity.this, "Something wrong happened. Try again later", Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -255,9 +267,15 @@ public class Main23Activity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                Toast.makeText(Main23Activity.this, "Something wrong happened. Try again later", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        openImagesActivity();
     }
 
     private void openImagesActivity() {

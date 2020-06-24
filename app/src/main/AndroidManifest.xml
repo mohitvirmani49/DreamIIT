@@ -18,7 +18,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MathsDetail"></activity>
+        <activity android:name=".ReportExam"></activity>
+        <activity android:name=".FullTestResult" />
+        <activity android:name=".FullTestExam" />
+        <activity android:name=".FullTestInstr" />
+        <activity android:name=".FullTest" />
+        <activity android:name=".MathsDetail" />
         <activity android:name=".MathsAnswerVerify" />
         <activity android:name=".MathsChallengeResult" />
         <activity android:name=".MathsChallengeTest" />

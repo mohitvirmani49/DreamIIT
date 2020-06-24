@@ -32,6 +32,18 @@
         4. +4 for every correct answer and -1 for incorrect.\n
     </string>
 
+    <string name="full_test_instr">
+        1. Test consists of 90 questions.\n
+        2. 30 Questions each from Physics, Chemistry and Mathematics.\n
+        3. Each question carries 4 marks.\n
+        4. +4 for every correct answer and -1 for incorrect.\n
+        5. Test Duration will be of 3 hours(180 Minutes). After which test will be submitted automatically. \n
+    </string>
+    <string name="examreport">
+        Although utmost care have been taken to provide high quality and error free questions, some human errors might have crept in.\n
+        It would be highly appreciated if you help us identify those errors and help making the questions better.\n
+    </string>
+
     <string name="smriti">
         uoAzBlr2VddHXkLYS1Hhr8giHQg2
     </string>

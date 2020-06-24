@@ -23,6 +23,16 @@
                 android:textSize="20dp"
                 android:textStyle="bold" />
 
+            <ImageButton
+                android:id="@+id/popup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/popup"
+                android:background="@color/transparent"
+                android:layout_alignParentRight="true"
+                android:layout_marginEnd="10dp"
+                android:onClick="showPopup1"/>
+
             <ozaydin.serkan.com.image_zoom_view.ImageViewZoom
                 android:id="@+id/ans_image5"
                 android:layout_width="match_parent"

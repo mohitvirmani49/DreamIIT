@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <TextView
+        android:id="@+id/tv3"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="sans-serif"
+        android:paddingLeft="20dp"
+        android:text=""
+        android:textColor="#130008"
+        android:textSize="20sp"
+        android:layout_marginTop="14dp"/>
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1.1dp"
+        android:layout_alignParentBottom="true"
+        android:alpha=".2"
+        android:background="#130008" />
+
+</RelativeLayout>

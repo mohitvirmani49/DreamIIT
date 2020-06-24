@@ -30,7 +30,7 @@ public class Main13Activity extends AppCompatActivity {
     private ImageView imageView;
     private ImageButton back;
     private TextView userRank, answerRank, rankLeft;
-    private Button notification, message, invite, settings;
+    private Button notification, invite, settings;
 
     private static final String MOHIT = "yDfOwvhJ7eS6eWvwBN3lqZ8ptgZ2";
     private static final String SMRITI = "uoAzBlr2VddHXkLYS1Hhr8giHQg2";
@@ -49,7 +49,6 @@ public class Main13Activity extends AppCompatActivity {
         imageView = (ImageView) findViewById(R.id.profile_other_user_pic);
         back = (ImageButton) findViewById(R.id.back_button);
         notification = (Button) findViewById(R.id.notify);
-        message = (Button) findViewById(R.id.msg);
         invite = (Button) findViewById(R.id.invite_frnds);
         settings = (Button) findViewById(R.id.settings);
         ranks = (TextView) findViewById(R.id.rank);

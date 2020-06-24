@@ -23,6 +23,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -62,6 +63,7 @@ public class Main18Activity extends AppCompatActivity {
     private ImageButton back;
 
     private Uri mImageUri;
+    private LottieAnimationView progress;
 
     private StorageReference mStorageRef;
     private DatabaseReference mDatabaseRef;
@@ -81,7 +83,7 @@ public class Main18Activity extends AppCompatActivity {
         imageView = (ImageViewZoom) findViewById(R.id.verify_image);
         back = (ImageButton) findViewById(R.id.back);
         notificationManager = NotificationManagerCompat.from(this);
-
+        progress = (LottieAnimationView) findViewById(R.id.my_progress);
         mStorageRef = FirebaseStorage.getInstance().getReference("uploads");
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("uploads");
 
@@ -100,6 +102,8 @@ public class Main18Activity extends AppCompatActivity {
                 } else {
                     uploadFile();
                     notify_person();
+                    progress.setVisibility(View.VISIBLE);
+                    submit_ans.setVisibility(View.INVISIBLE);
 //
 //
                 }

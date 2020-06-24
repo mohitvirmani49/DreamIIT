@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -54,7 +55,7 @@ public class Main16Activity extends AppCompatActivity {
     private EditText mEditTextFileName;
     private ImageView mImageView;
     private ProgressBar mProgressBar;
-
+    private LottieAnimationView prog;
     private Uri mImageUri;
 
     private StorageReference mStorageRef;
@@ -69,7 +70,7 @@ public class Main16Activity extends AppCompatActivity {
 
         mButtonChooseImage = findViewById(R.id.chooseimg);
         mButtonUpload = findViewById(R.id.upload);
-
+        prog = (LottieAnimationView) findViewById(R.id.my_progress);
         mEditTextFileName = findViewById(R.id.main_doubt);
         mImageView = findViewById(R.id.imv1);
         mProgressBar = findViewById(R.id.progress_bar);
@@ -88,8 +89,9 @@ public class Main16Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 uploadFile();
-                Intent intent = new Intent(Main16Activity.this, Main23Activity.class);
-                startActivity(intent);
+                prog.setVisibility(View.VISIBLE);
+                mButtonUpload.setVisibility(View.INVISIBLE);
+
 
             }
         });
@@ -174,7 +176,8 @@ public class Main16Activity extends AppCompatActivity {
 //                                    mDatabaseRef.push().setValue(upload);
 //                                    mDatabaseRef.push().setValue(upload1);
                                     Toast.makeText(Main16Activity.this, "Upload successful", Toast.LENGTH_LONG).show();
-
+                                    Intent intent = new Intent(Main16Activity.this, Main23Activity.class);
+                                    startActivity(intent);
 //                                    openImagesActivity();
 
                                 } else {
@@ -214,6 +217,8 @@ public class Main16Activity extends AppCompatActivity {
 //                    "", "", "", "", "", "","");
 //            mDatabaseRef.push().setValue(upload);
             Toast.makeText(Main16Activity.this, "Upload successful", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(Main16Activity.this, Main23Activity.class);
+            startActivity(intent);
 //            openImagesActivity();
 
 

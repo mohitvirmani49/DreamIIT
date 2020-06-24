@@ -91,7 +91,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:text="Next"
-        android:id="@+id/check"/>
+        android:id="@+id/check"
+        android:background="@drawable/ask_doubt"
+        android:layout_margin="10dp"/>
 
     <Button
         android:id="@+id/detail"
@@ -99,7 +101,9 @@
         android:layout_height="wrap_content"
         android:text="Detailed Comparison"
         android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"/>
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/ask_doubt"
+        android:layout_margin="10dp"/>
 
 
 

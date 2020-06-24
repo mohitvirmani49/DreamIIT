@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -17,11 +18,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.codemybrainsout.ratingdialog.RatingDialog;
+import com.example.quiz.notification.Token;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 public class Main14Activity extends AppCompatActivity {
     CardView cardView_phy, cardView_chem, cardView_maths, cardView_fulltest;
@@ -104,11 +107,19 @@ public class Main14Activity extends AppCompatActivity {
             }
         });
 
+        cardView_fulltest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Main14Activity.this, FullTest.class);
+                startActivity(intent);
+            }
+        });
 
-
+//        updateToken(FirebaseInstanceId.getInstance().getToken());
 
 
     }
+
 
     public void showPopup(View v) {
         PopupMenu popup = new PopupMenu(this, v);
@@ -173,6 +184,11 @@ public class Main14Activity extends AppCompatActivity {
         });
     }
 
+//    @Override
+//    protected void onResume() {
+//        status();
+//        super.onResume();
+//    }
 
     private Boolean exit = false;
 
@@ -199,6 +215,24 @@ public class Main14Activity extends AppCompatActivity {
 
         }
 
+    }
+
+    private void updateToken(String token) {
+        FirebaseUser u = FirebaseAuth.getInstance().getCurrentUser();
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Tokens");
+        Token mToken = new Token(token);
+        reference.child(u.getUid()).setValue(mToken);
+
+    }
+
+    private void status() {
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        String mUid = firebaseUser.getUid();
+
+        SharedPreferences sp = getSharedPreferences("SP_USER", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putString("Current_USERID", mUid);
+        editor.apply();
     }
 
 

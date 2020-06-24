@@ -68,7 +68,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                int val = (int)dataSnapshot.getChildrenCount();
+                int val = (int) dataSnapshot.getChildrenCount();
                 holder.ans.setText(val + " Ans");
 
             }
@@ -84,7 +84,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
 
             holder.imageView.requestLayout();
             holder.imageView.getLayoutParams().height = 460;
-            holder.imageView.getLayoutParams().width = 1050;
+            holder.imageView.getLayoutParams().width = ViewGroup.LayoutParams.MATCH_PARENT;
 
 
             holder.textView.setText(uploadCurrent.getmName());
