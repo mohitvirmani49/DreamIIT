@@ -14,17 +14,17 @@ import android.widget.ImageButton;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Main31Activity extends AppCompatActivity implements Phy_Adapter.OnItemClickListener {
+public class PhysicalChallenge extends AppCompatActivity implements Phy_Adapter.OnItemClickListener{
 
     private RecyclerView mRecyclerView;
     private ImageButton back;
     private List<Phy> list;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main31);
-
+        setContentView(R.layout.activity_physical_challenge);
 
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_me);
@@ -33,44 +33,31 @@ public class Main31Activity extends AppCompatActivity implements Phy_Adapter.OnI
         back = (ImageButton) findViewById(R.id.back);
 //        List<Phy> list = new ArrayList<>();
         list = new ArrayList<>();
-        list.add(new Phy("General Organic Chemistry"));
-        list.add(new Phy("Isomerism"));
-        list.add(new Phy("Hydrocarbons"));
-        list.add(new Phy("Alcohol Ether and Epoxides"));
-        list.add(new Phy("Aldehydes and Ketones"));
-        list.add(new Phy("Aldol and Cannizaro reactions"));
-        list.add(new Phy("Carboxylic acid & Amines"));
-        list.add(new Phy("Qualitative Analysis"));
-        list.add(new Phy("Aromatic Compounds"));
-        list.add(new Phy("Nomenclature"));
-        Phy_Adapter mAdapter2 = new Phy_Adapter(Main31Activity.this, list);
+        list.add(new Phy("Stoichiometry"));
+        list.add(new Phy("Atomic Structure"));
+        list.add(new Phy("Gaseous State"));
+        list.add(new Phy("Thermodynamics"));
+        list.add(new Phy("Chemical Equilibrium"));
+        list.add(new Phy("Ionic Equilibrium"));
+        list.add(new Phy("Chemical Kinetics and Nuclear Chemistry"));
+        list.add(new Phy("Dilute Solution"));
+        list.add(new Phy("Solid State"));
+        list.add(new Phy("Surface Chemistry"));
+
+        Phy_Adapter mAdapter2 = new Phy_Adapter(PhysicalChallenge.this, list);
 //        mAdapter = new Phy_Adapter(Main29Activity.this,mUploads);
 
-        mAdapter2.setOnItemClickListener(Main31Activity.this);
+        mAdapter2.setOnItemClickListener(PhysicalChallenge.this);
         mRecyclerView.setAdapter(mAdapter2);
 
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Main31Activity.this, Main27Activity.class);
+                Intent intent = new Intent(PhysicalChallenge.this, Main27Activity.class);
                 startActivity(intent);
             }
         });
-
-
-//        list.add(new Phy("General Organic Chemistry"));
-//        list.add(new Phy("Isomerism"));
-//        list.add(new Phy("Practical Organic Chemistry"));
-//        list.add(new Phy("Hydrocarbons"));
-//        list.add(new Phy("Alcohol Ether and Epoxides"));
-//        list.add(new Phy("Aldehydes and Ketones"));
-//        list.add(new Phy("Aldol and Cannizaro reactions"));
-//        list.add(new Phy("Carboxylic acid & Amines"));
-//        list.add(new Phy("Aromatic Compounds"));
-//        list.add(new Phy("Nomenclature"));
-//
-
 
     }
 
@@ -87,7 +74,8 @@ public class Main31Activity extends AppCompatActivity implements Phy_Adapter.OnI
         editor.apply();
 
 
-        Intent intent = new Intent(Main31Activity.this, OrganicPracticeInstr.class);
+
+        Intent intent = new Intent(PhysicalChallenge.this, PhysicalChallengeInstr.class);
         startActivity(intent);
 
     }

@@ -4,8 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    tools:context=".MathsAnswerVerify">
+    tools:context=".InorganicCTest"
+    android:background="@color/white">
+
 
     <RelativeLayout
         android:id="@+id/inst"
@@ -31,12 +32,24 @@
             android:layout_marginTop="15dp"
             android:layout_marginEnd="15dp"
             android:layout_marginBottom="15dp"
-            android:background="@color/transparent"
+            android:background="@drawable/border_white"
             android:fontFamily="sans-serif"
-            android:text=""
+            android:text="Submit"
             android:textColor="#fff"
             android:textStyle="bold" />
 
+        <TextView
+            android:id="@+id/chapterName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/back"
+            android:fontFamily="sans-serif"
+            android:text="Kinematics"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="15dp"
+            android:textAlignment="center"
+            android:textColor="#fff"
+            android:textStyle="bold" />
     </RelativeLayout>
 
     <TextView
@@ -47,7 +60,7 @@
         android:layout_marginStart="15dp"
         android:layout_marginTop="15dp"
         android:fontFamily="sans-serif"
-        android:text="+4 / 0"
+        android:text="+4 / -1"
         android:textColor="#130008"
         android:textSize="15dp" />
 
@@ -57,33 +70,34 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/inst"
         android:layout_centerHorizontal="true"
+        android:text="Timer"
         android:layout_marginTop="15dp"
-        android:text="My Marks: 0"
-        android:textColor="#130008"
-        android:textSize="15dp"
         android:textStyle="bold"
-        android:visibility="gone" />
+        android:textColor="#130008"
+        android:textSize="15dp"/>
 
     <TextView
         android:id="@+id/number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/my_marks"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="35dp"
-        android:text="Q1"
+        android:textStyle="bold"
         android:textColor="#130008"
         android:textSize="15dp"
-        android:textStyle="bold" />
+        android:layout_marginTop="25dp"
+        android:text="Q1"
+        android:layout_below="@+id/my_marks"/>
 
     <ozaydin.serkan.com.image_zoom_view.ImageViewZoom
         android:id="@+id/main_qs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/number"
         android:layout_marginTop="2dp"
-        android:minHeight="175dp"
-        android:src="@drawable/image" />
+        android:src="@drawable/image"
+        android:minHeight="115dp"
+        android:layout_below="@+id/number"
+        android:scaleType="fitXY"
+        android:layout_margin="10dp"/>
 
     <LinearLayout
         android:id="@+id/my_linear"
@@ -94,17 +108,17 @@
         android:orientation="horizontal">
 
         <RadioGroup
-            android:id="@+id/radio"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:id="@+id/radio">
 
             <RadioButton
                 android:id="@+id/a"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:paddingEnd="10dp"
-                android:text="Option A" />
+                android:text="Option A"
+                android:paddingEnd="10dp"/>
 
             <RadioButton
                 android:id="@+id/b"
@@ -112,8 +126,8 @@
                 android:layout_height="0dp"
                 android:layout_marginTop="10dp"
                 android:layout_weight="1"
-                android:paddingEnd="10dp"
-                android:text="Option B" />
+                android:text="Option B"
+                android:paddingEnd="10dp"/>
 
             <RadioButton
                 android:id="@+id/c"
@@ -121,8 +135,8 @@
                 android:layout_height="0dp"
                 android:layout_marginTop="10dp"
                 android:layout_weight="1"
-                android:paddingEnd="10dp"
-                android:text="Option C" />
+                android:text="Option C"
+                android:paddingEnd="10dp"/>
 
             <RadioButton
                 android:id="@+id/d"
@@ -130,8 +144,8 @@
                 android:layout_height="0dp"
                 android:layout_marginTop="10dp"
                 android:layout_weight="1"
-                android:paddingEnd="10dp"
-                android:text="Option D" />
+                android:text="Option D"
+                android:paddingEnd="10dp"/>
         </RadioGroup>
 
 
@@ -147,19 +161,20 @@
             android:id="@+id/next"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:layout_centerHorizontal="true"
             android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp"
+            android:layout_centerHorizontal="true"
             android:background="@drawable/start_btn"
             android:drawableEnd="@drawable/nxt"
             android:fontFamily="sans-serif"
-            android:padding="10dp"
             android:text="Next"
             android:textAlignment="center"
             android:textColor="#fff"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:padding="10dp"
+            android:layout_marginBottom="10dp"/>
 
     </RelativeLayout>
+
 
 
 </RelativeLayout>

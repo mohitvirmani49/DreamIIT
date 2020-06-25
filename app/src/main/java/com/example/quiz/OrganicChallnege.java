@@ -14,7 +14,8 @@ import android.widget.ImageButton;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Main31Activity extends AppCompatActivity implements Phy_Adapter.OnItemClickListener {
+public class OrganicChallnege extends AppCompatActivity implements Phy_Adapter.OnItemClickListener {
+
 
     private RecyclerView mRecyclerView;
     private ImageButton back;
@@ -23,8 +24,7 @@ public class Main31Activity extends AppCompatActivity implements Phy_Adapter.OnI
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main31);
-
+        setContentView(R.layout.activity_organic_challnege);
 
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_me);
@@ -43,34 +43,20 @@ public class Main31Activity extends AppCompatActivity implements Phy_Adapter.OnI
         list.add(new Phy("Qualitative Analysis"));
         list.add(new Phy("Aromatic Compounds"));
         list.add(new Phy("Nomenclature"));
-        Phy_Adapter mAdapter2 = new Phy_Adapter(Main31Activity.this, list);
+        Phy_Adapter mAdapter2 = new Phy_Adapter(OrganicChallnege.this, list);
 //        mAdapter = new Phy_Adapter(Main29Activity.this,mUploads);
 
-        mAdapter2.setOnItemClickListener(Main31Activity.this);
+        mAdapter2.setOnItemClickListener(OrganicChallnege.this);
         mRecyclerView.setAdapter(mAdapter2);
 
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Main31Activity.this, Main27Activity.class);
+                Intent intent = new Intent(OrganicChallnege.this, Main27Activity.class);
                 startActivity(intent);
             }
         });
-
-
-//        list.add(new Phy("General Organic Chemistry"));
-//        list.add(new Phy("Isomerism"));
-//        list.add(new Phy("Practical Organic Chemistry"));
-//        list.add(new Phy("Hydrocarbons"));
-//        list.add(new Phy("Alcohol Ether and Epoxides"));
-//        list.add(new Phy("Aldehydes and Ketones"));
-//        list.add(new Phy("Aldol and Cannizaro reactions"));
-//        list.add(new Phy("Carboxylic acid & Amines"));
-//        list.add(new Phy("Aromatic Compounds"));
-//        list.add(new Phy("Nomenclature"));
-//
-
 
     }
 
@@ -87,8 +73,7 @@ public class Main31Activity extends AppCompatActivity implements Phy_Adapter.OnI
         editor.apply();
 
 
-        Intent intent = new Intent(Main31Activity.this, OrganicPracticeInstr.class);
+        Intent intent = new Intent(OrganicChallnege.this, OrganicCInstr.class);
         startActivity(intent);
-
     }
 }

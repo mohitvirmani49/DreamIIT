@@ -14,18 +14,17 @@ import android.widget.ImageButton;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Main31Activity extends AppCompatActivity implements Phy_Adapter.OnItemClickListener {
+public class Inorganic extends AppCompatActivity implements Phy_Adapter.OnItemClickListener {
 
     private RecyclerView mRecyclerView;
     private ImageButton back;
     private List<Phy> list;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main31);
-
-
+        setContentView(R.layout.activity_inorganic);
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_me);
         mRecyclerView.setHasFixedSize(true);
@@ -33,49 +32,35 @@ public class Main31Activity extends AppCompatActivity implements Phy_Adapter.OnI
         back = (ImageButton) findViewById(R.id.back);
 //        List<Phy> list = new ArrayList<>();
         list = new ArrayList<>();
-        list.add(new Phy("General Organic Chemistry"));
-        list.add(new Phy("Isomerism"));
-        list.add(new Phy("Hydrocarbons"));
-        list.add(new Phy("Alcohol Ether and Epoxides"));
-        list.add(new Phy("Aldehydes and Ketones"));
-        list.add(new Phy("Aldol and Cannizaro reactions"));
-        list.add(new Phy("Carboxylic acid & Amines"));
+        list.add(new Phy("Periodic Properties"));
+        list.add(new Phy("Chemical Bonding"));
+        list.add(new Phy("Coordinate Compounds"));
+        list.add(new Phy("s block Elements"));
+        list.add(new Phy("p block Elements"));
+        list.add(new Phy("d block Elements"));
+        list.add(new Phy("Types of Reactions"));
         list.add(new Phy("Qualitative Analysis"));
-        list.add(new Phy("Aromatic Compounds"));
-        list.add(new Phy("Nomenclature"));
-        Phy_Adapter mAdapter2 = new Phy_Adapter(Main31Activity.this, list);
+
+        Phy_Adapter mAdapter2 = new Phy_Adapter(Inorganic.this, list);
 //        mAdapter = new Phy_Adapter(Main29Activity.this,mUploads);
 
-        mAdapter2.setOnItemClickListener(Main31Activity.this);
+        mAdapter2.setOnItemClickListener(Inorganic.this);
         mRecyclerView.setAdapter(mAdapter2);
 
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Main31Activity.this, Main27Activity.class);
+                Intent intent = new Intent(Inorganic.this, Main27Activity.class);
                 startActivity(intent);
             }
         });
-
-
-//        list.add(new Phy("General Organic Chemistry"));
-//        list.add(new Phy("Isomerism"));
-//        list.add(new Phy("Practical Organic Chemistry"));
-//        list.add(new Phy("Hydrocarbons"));
-//        list.add(new Phy("Alcohol Ether and Epoxides"));
-//        list.add(new Phy("Aldehydes and Ketones"));
-//        list.add(new Phy("Aldol and Cannizaro reactions"));
-//        list.add(new Phy("Carboxylic acid & Amines"));
-//        list.add(new Phy("Aromatic Compounds"));
-//        list.add(new Phy("Nomenclature"));
-//
-
 
     }
 
     @Override
     public void itemClicked(int position) {
+
 
         Phy myList = list.get(position);
 
@@ -87,8 +72,11 @@ public class Main31Activity extends AppCompatActivity implements Phy_Adapter.OnI
         editor.apply();
 
 
-        Intent intent = new Intent(Main31Activity.this, OrganicPracticeInstr.class);
+
+        Intent intent = new Intent(Inorganic.this, InorganicInstr.class);
         startActivity(intent);
+
+
 
     }
 }

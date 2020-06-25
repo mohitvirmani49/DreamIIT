@@ -34,14 +34,14 @@ public class Main27Activity extends AppCompatActivity {
         practice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Main27Activity.this, Main31Activity.class);
+                Intent intent = new Intent(Main27Activity.this, ChemChoise.class);
                 startActivity(intent);
             }
         });
         challenge.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Main27Activity.this, Main32Activity.class);
+                Intent intent = new Intent(Main27Activity.this, Choise.class);
                 startActivity(intent);
             }
         });

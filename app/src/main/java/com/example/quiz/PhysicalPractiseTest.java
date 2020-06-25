@@ -7,20 +7,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
-import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -35,7 +31,8 @@ import java.util.Collections;
 import Model.Question;
 import ozaydin.serkan.com.image_zoom_view.ImageViewZoom;
 
-public class Main34Activity extends AppCompatActivity {
+public class PhysicalPractiseTest extends AppCompatActivity {
+
     private ImageButton back;
     private Button submit, nxt;
     private ImageViewZoom question_img;
@@ -54,7 +51,8 @@ public class Main34Activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main34);
+        setContentView(R.layout.activity_physical_practise_test);
+
 
         back = (ImageButton) findViewById(R.id.back);
         submit = (Button) findViewById(R.id.submit);
@@ -75,7 +73,7 @@ public class Main34Activity extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new AlertDialog.Builder(Main34Activity.this)
+                new AlertDialog.Builder(PhysicalPractiseTest.this)
                         .setMessage("Are you sure you want to submit the Test")
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
@@ -132,6 +130,7 @@ public class Main34Activity extends AppCompatActivity {
 
     }
 
+
     public int random() {
         for (int i = 0; i < array.length; i++) {
             array[i] = i + 1;
@@ -152,7 +151,7 @@ public class Main34Activity extends AppCompatActivity {
             final String value = intent.getStringExtra("val");
             chapterName.setText(value);
 
-            reference = FirebaseDatabase.getInstance().getReference("Physics").child(intent.getStringExtra("val")).child(String.valueOf(array[alpha]));
+            reference = FirebaseDatabase.getInstance().getReference("Physical Chem").child(intent.getStringExtra("val")).child(String.valueOf(array[alpha]));
             alpha++;
             number.setText("Q" + no + " :");
             no++;
@@ -344,7 +343,7 @@ public class Main34Activity extends AppCompatActivity {
     }
 
     private void submitTest() {
-        Intent myIntent = new Intent(Main34Activity.this, MathsResultPractice.class);
+        Intent myIntent = new Intent(PhysicalPractiseTest.this, MathsResultPractice.class);
         myIntent.putExtra("intVariableName", correct);
         startActivity(myIntent);
 
@@ -355,12 +354,12 @@ public class Main34Activity extends AppCompatActivity {
         Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         v.vibrate(700);
 
-        new AlertDialog.Builder(Main34Activity.this)
+        new AlertDialog.Builder(PhysicalPractiseTest.this)
                 .setMessage("Are you sure you want to exit the Test")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        startActivity(new Intent(Main34Activity.this, Main26Activity.class));
+                        startActivity(new Intent(PhysicalPractiseTest.this, Main27Activity.class));
                     }
                 }).setNegativeButton("No", null)
                 .show();
@@ -377,9 +376,10 @@ public class Main34Activity extends AppCompatActivity {
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        startActivity(new Intent(Main34Activity.this, Main26Activity.class));
+                        startActivity(new Intent(PhysicalPractiseTest.this, Main27Activity.class));
                     }
                 }).setNegativeButton("No", null)
                 .show();
     }
 }
+
