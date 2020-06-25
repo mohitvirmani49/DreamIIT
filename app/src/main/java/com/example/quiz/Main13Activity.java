@@ -93,6 +93,14 @@ public class Main13Activity extends AppCompatActivity {
             }
         });
 
+        userRank.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Main13Activity.this, OverallRank.class));
+
+            }
+        });
+
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         FirebaseUser user1 = mAuth.getCurrentUser();
 

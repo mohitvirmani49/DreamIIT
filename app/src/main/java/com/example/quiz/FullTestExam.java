@@ -92,6 +92,18 @@ public class FullTestExam extends AppCompatActivity {
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("fulltest").child(firebaseUser.getUid());
 
 
+        prev.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (total == 2) {
+
+                } else {
+                    total = total - 2;
+                    no = no - 2;
+                    updateQuestion();
+                }
+            }
+        });
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -187,179 +199,183 @@ public class FullTestExam extends AppCompatActivity {
             reference.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    final Question question = dataSnapshot.getValue(Question.class);
-                    Picasso.get().load(question.getQuestion()).fit().into(question_img);
+                    try {
+                        final Question question = dataSnapshot.getValue(Question.class);
+                        Picasso.get().load(question.getQuestion()).fit().into(question_img);
 
-                    radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-                        @Override
-                        public void onCheckedChanged(RadioGroup group, int checkedId) {
-                            System.out.println(question.getAnswer() + "Name:::::::::");
-                            if (optionA.isChecked()) {
+                        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                            @Override
+                            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                                System.out.println(question.getAnswer() + "Name:::::::::");
+                                if (optionA.isChecked()) {
 
-                                Test test = new Test(optionA.getText().toString(), question.getAnswer());
+                                    Test test = new Test(optionA.getText().toString(), question.getAnswer());
 
-                                Map<String, Object> updates = new HashMap<String, Object>();
-                                updates.clear();
-                                updates.put("optionMarked", optionA.getText().toString());
-                                updates.put("correctAns", question.getAnswer());
-
-
-                                mDatabaseRef.child(String.valueOf(total)).updateChildren(updates);
+                                    Map<String, Object> updates = new HashMap<String, Object>();
+                                    updates.clear();
+                                    updates.put("optionMarked", optionA.getText().toString());
+                                    updates.put("correctAns", question.getAnswer());
 
 
-                                System.out.println("Hurray uploaded");
-
-                                if (optionA.getText().toString().equals(question.getAnswer())) {
-                                    Handler handler = new Handler();
-                                    handler.postDelayed(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            correct = correct + 4;
-                                            truth++;
+                                    mDatabaseRef.child(String.valueOf(total)).updateChildren(updates);
 
 
-                                        }
-                                    }, 1000);
+                                    System.out.println("Hurray uploaded");
+
+                                    if (optionA.getText().toString().equals(question.getAnswer())) {
+                                        Handler handler = new Handler();
+                                        handler.postDelayed(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                correct = correct + 4;
+                                                truth++;
 
 
-                                } else {
-                                    correct = correct - 1;
-                                    bluff++;
-                                    Handler handler = new Handler();
-                                    handler.postDelayed(new Runnable() {
-                                        @Override
-                                        public void run() {
+                                            }
+                                        }, 1000);
 
 
-                                        }
-                                    }, 1000);
+                                    } else {
+                                        correct = correct - 1;
+                                        bluff++;
+                                        Handler handler = new Handler();
+                                        handler.postDelayed(new Runnable() {
+                                            @Override
+                                            public void run() {
 
+
+                                            }
+                                        }, 1000);
+
+                                    }
+                                } else if (optionB.isChecked()) {
+
+
+                                    Test test = new Test(optionA.getText().toString(), question.getAnswer());
+
+                                    Map<String, Object> updates = new HashMap<String, Object>();
+                                    updates.put("optionMarked", optionB.getText().toString());
+                                    updates.put("correctAns", question.getAnswer());
+
+
+                                    mDatabaseRef.child(String.valueOf(total)).updateChildren(updates);
+
+
+                                    if (optionB.getText().toString().equals(question.getAnswer())) {
+
+                                        Handler handler = new Handler();
+                                        handler.postDelayed(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                correct = correct + 4;
+                                                truth++;
+
+                                            }
+                                        }, 1000);
+
+
+                                    } else {
+                                        correct = correct - 1;
+                                        bluff++;
+                                        Handler handler = new Handler();
+                                        handler.postDelayed(new Runnable() {
+                                            @Override
+                                            public void run() {
+
+
+                                            }
+                                        }, 1000);
+
+                                    }
+                                } else if (optionC.isChecked()) {
+
+
+                                    Test test = new Test(optionA.getText().toString(), question.getAnswer());
+
+                                    Map<String, Object> updates = new HashMap<String, Object>();
+                                    updates.put("optionMarked", optionC.getText().toString());
+                                    updates.put("correctAns", question.getAnswer());
+
+
+                                    mDatabaseRef.child(String.valueOf(total)).updateChildren(updates);
+
+
+                                    if (optionC.getText().toString().equals(question.getAnswer())) {
+
+                                        Handler handler = new Handler();
+                                        handler.postDelayed(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                correct = correct + 4;
+                                                truth++;
+
+                                            }
+                                        }, 1000);
+
+                                    } else {
+                                        correct = correct - 1;
+                                        bluff++;
+
+                                        Handler handler = new Handler();
+                                        handler.postDelayed(new Runnable() {
+                                            @Override
+                                            public void run() {
+
+                                            }
+                                        }, 1000);
+
+                                    }
+                                } else if (optionD.isChecked()) {
+
+
+                                    Test test = new Test(optionA.getText().toString(), question.getAnswer());
+
+                                    Map<String, Object> updates = new HashMap<String, Object>();
+                                    updates.put("optionMarked", optionD.getText().toString());
+                                    updates.put("correctAns", question.getAnswer());
+
+
+                                    mDatabaseRef.child(String.valueOf(total)).updateChildren(updates);
+
+
+                                    if (optionD.getText().toString().equals(question.getAnswer())) {
+
+                                        Handler handler = new Handler();
+                                        handler.postDelayed(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                correct = correct + 4;
+                                                truth++;
+
+                                            }
+                                        }, 1000);
+
+
+                                    } else {
+                                        correct = correct - 1;
+                                        bluff++;
+                                        Handler handler = new Handler();
+                                        handler.postDelayed(new Runnable() {
+                                            @Override
+                                            public void run() {
+
+                                            }
+                                        }, 1000);
+
+                                    }
                                 }
-                            } else if (optionB.isChecked()) {
 
-
-                                Test test = new Test(optionA.getText().toString(), question.getAnswer());
-
-                                Map<String, Object> updates = new HashMap<String, Object>();
-                                updates.put("optionMarked", optionB.getText().toString());
-                                updates.put("correctAns", question.getAnswer());
-
-
-                                mDatabaseRef.child(String.valueOf(total)).updateChildren(updates);
-
-
-                                if (optionB.getText().toString().equals(question.getAnswer())) {
-
-                                    Handler handler = new Handler();
-                                    handler.postDelayed(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            correct = correct + 4;
-                                            truth++;
-
-                                        }
-                                    }, 1000);
-
-
-                                } else {
-                                    correct = correct - 1;
-                                    bluff++;
-                                    Handler handler = new Handler();
-                                    handler.postDelayed(new Runnable() {
-                                        @Override
-                                        public void run() {
-
-
-                                        }
-                                    }, 1000);
-
-                                }
-                            } else if (optionC.isChecked()) {
-
-
-                                Test test = new Test(optionA.getText().toString(), question.getAnswer());
-
-                                Map<String, Object> updates = new HashMap<String, Object>();
-                                updates.put("optionMarked", optionC.getText().toString());
-                                updates.put("correctAns", question.getAnswer());
-
-
-                                mDatabaseRef.child(String.valueOf(total)).updateChildren(updates);
-
-
-                                if (optionC.getText().toString().equals(question.getAnswer())) {
-
-                                    Handler handler = new Handler();
-                                    handler.postDelayed(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            correct = correct + 4;
-                                            truth++;
-
-                                        }
-                                    }, 1000);
-
-                                } else {
-                                    correct = correct - 1;
-                                    bluff++;
-
-                                    Handler handler = new Handler();
-                                    handler.postDelayed(new Runnable() {
-                                        @Override
-                                        public void run() {
-
-                                        }
-                                    }, 1000);
-
-                                }
-                            } else if (optionD.isChecked()) {
-
-
-                                Test test = new Test(optionA.getText().toString(), question.getAnswer());
-
-                                Map<String, Object> updates = new HashMap<String, Object>();
-                                updates.put("optionMarked", optionD.getText().toString());
-                                updates.put("correctAns", question.getAnswer());
-
-
-                                mDatabaseRef.child(String.valueOf(total)).updateChildren(updates);
-
-
-                                if (optionD.getText().toString().equals(question.getAnswer())) {
-
-                                    Handler handler = new Handler();
-                                    handler.postDelayed(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            correct = correct + 4;
-                                            truth++;
-
-                                        }
-                                    }, 1000);
-
-
-                                } else {
-                                    correct = correct - 1;
-                                    bluff++;
-                                    Handler handler = new Handler();
-                                    handler.postDelayed(new Runnable() {
-                                        @Override
-                                        public void run() {
-
-                                        }
-                                    }, 1000);
-
-                                }
                             }
+                        });
 
-                        }
-                    });
+                    }catch (Exception e){
 
-
+                    }
                 }
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
+                    Toast.makeText(getApplicationContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
 
                 }
             });

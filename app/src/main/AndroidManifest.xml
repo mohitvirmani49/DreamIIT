@@ -18,7 +18,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ReportExam"></activity>
+        <activity android:name=".OverallRank"></activity>
+        <activity android:name=".ReportExam" />
         <activity android:name=".FullTestResult" />
         <activity android:name=".FullTestExam" />
         <activity android:name=".FullTestInstr" />

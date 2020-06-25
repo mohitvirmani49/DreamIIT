@@ -107,7 +107,7 @@ public class MathsChallengeResult extends AppCompatActivity {
                     SharedPreferences result = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                     final String chapter = result.getString("chapter", "0");
                     DatabaseReference dr = FirebaseDatabase.getInstance().getReference(user.getUid()).child("level1");
-                    if (intValu >= 10) {
+                    if (intValu >= 16) {
                         User user = new User(intValu);
                         dr.child(chapter).setValue(user);
                     }
