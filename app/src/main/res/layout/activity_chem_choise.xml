@@ -9,6 +9,26 @@
     android:orientation="vertical"
     android:background="@drawable/gradient_color">
 
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:src="@drawable/back_24"
+        android:background="@color/transparent"
+        android:id="@+id/back"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Choose "
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:fontFamily="sans-serif"
+        android:textColor="@color/white"
+        android:textAlignment="center"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="15dp"/>
+
 
     <Button
         android:layout_width="match_parent"
@@ -18,8 +38,8 @@
         android:background="@drawable/cylender_btn"
         android:id="@+id/physical"
         android:layout_above="@+id/inorganic"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"/>
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"/>
 
     <Button
         android:layout_width="match_parent"
@@ -30,8 +50,8 @@
         android:layout_centerInParent="true"
         android:id="@+id/inorganic"
         android:layout_marginTop="20dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"/>
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"/>
 
     <Button
         android:layout_width="match_parent"
@@ -41,7 +61,8 @@
         android:layout_below="@+id/inorganic"
         android:layout_marginTop="20dp"
         android:textSize="25dp"
-        android:layout_margin="15dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
         android:id="@+id/organic"/>
 
 

@@ -31,14 +31,6 @@
 
     </item>
 
-    <item
-        android:id="@+id/bug"
-        android:title="Report a Bug"
-        android:icon="@drawable/report_bug"
-        app:showAsAction="never"
-        android:orderInCategory="100">
-
-    </item>
 
 
 </menu>

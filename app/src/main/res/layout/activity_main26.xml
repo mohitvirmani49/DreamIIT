@@ -80,8 +80,8 @@
             android:layout_height="0dp"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="50dp"
             android:layout_marginRight="8dp"
             android:layout_marginBottom="16dp"
             android:background="@drawable/cardview_color"
@@ -96,9 +96,9 @@
                 <ImageView
                     android:id="@+id/prac"
                     android:layout_width="wrap_content"
-                    android:layout_height="60dp"
-                    android:layout_marginTop="6dp"
-                    android:src="@drawable/practice" />
+                    android:layout_height="56dp"
+                    android:src="@drawable/practice"
+                    android:layout_centerInParent="true"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -106,9 +106,6 @@
                     android:layout_below="@+id/prac"
                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
                     android:fontFamily="sans-serif-medium"
                     android:text="Practice"
                     android:textAlignment="center"
@@ -127,8 +124,8 @@
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
             android:layout_marginLeft="8dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginRight="30dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginRight="40dp"
             android:layout_marginBottom="16dp"
             android:background="@drawable/cardview_color"
             app:cardCornerRadius="8dp"
@@ -142,7 +139,8 @@
                 <ImageView
                     android:id="@+id/challenge"
                     android:layout_width="wrap_content"
-                    android:layout_height="60dp"
+                    android:layout_centerInParent="true"
+                    android:layout_height="56dp"
                     android:layout_marginTop="6dp"
                     android:src="@drawable/tar" />
 
@@ -153,8 +151,6 @@
                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
                     android:layout_marginStart="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
                     android:fontFamily="sans-serif-medium"
                     android:text="Challenge"
                     android:textAlignment="center"
@@ -170,9 +166,9 @@
             android:layout_height="0dp"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:layout_marginLeft="30dp"
+            android:layout_marginLeft="40dp"
             android:layout_marginRight="8dp"
-            android:layout_marginBottom="30dp"
+            android:layout_marginBottom="50dp"
             app:cardCornerRadius="8dp"
             app:cardElevation="16dp">
 
@@ -184,7 +180,8 @@
                 <ImageView
                     android:id="@+id/formulae"
                     android:layout_width="wrap_content"
-                    android:layout_height="60dp"
+                    android:layout_height="56dp"
+                    android:layout_centerInParent="true"
                     android:layout_marginTop="6dp"
                     android:src="@drawable/albert" />
 
@@ -195,8 +192,6 @@
                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
                     android:layout_marginStart="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
                     android:fontFamily="sans-serif-medium"
                     android:text="Formulae"
                     android:textAlignment="center"
@@ -213,8 +208,8 @@
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
             android:layout_marginLeft="8dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginBottom="30dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginBottom="50dp"
             app:cardCornerRadius="8dp"
             app:cardElevation="16dp">
 
@@ -226,9 +221,10 @@
                 <ImageView
                     android:id="@+id/doubts_image"
                     android:layout_width="wrap_content"
-                    android:layout_height="60dp"
+                    android:layout_height="56dp"
                     android:layout_marginTop="6dp"
-                    android:src="@drawable/quest" />
+                    android:src="@drawable/quest"
+                    android:layout_centerInParent="true"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -237,8 +233,6 @@
                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
                     android:layout_marginStart="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
                     android:fontFamily="sans-serif-medium"
                     android:text="Doubts"
                     android:textAlignment="center"

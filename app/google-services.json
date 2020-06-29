@@ -8,20 +8,41 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:579849053093:android:46d63940df2e8ff3407e4c",
+        "mobilesdk_app_id": "1:579849053093:android:4093d259fb237253407e4c",
         "android_client_info": {
-          "package_name": "com.example.quiz"
+          "package_name": "com.mohit.quiz"
         }
       },
       "oauth_client": [
         {
-          "client_id": "579849053093-agfe0j71ddg8q0ct009pecuonjfoimn4.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.quiz",
-            "certificate_hash": "18104980d847a1859db0dec0977209a662e1472b"
-          }
-        },
+          "client_id": "579849053093-jgfr53epho4k1etm9taorla1li1h9ei4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAzmapjHab6pFgRBm7_FseG-IZe_TAvld8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "579849053093-6kmiej2gfpu1n018dt3vm79es31th2qr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:579849053093:android:93a1714c9c997d8e407e4c",
+        "android_client_info": {
+          "package_name": "com.mohitvirmani.dreamiit"
+        }
+      },
+      "oauth_client": [
         {
           "client_id": "579849053093-jgfr53epho4k1etm9taorla1li1h9ei4.apps.googleusercontent.com",
           "client_type": 3

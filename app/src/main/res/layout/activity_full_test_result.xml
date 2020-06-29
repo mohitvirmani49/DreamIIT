@@ -9,15 +9,6 @@
     tools:context=".FullTestResult">
 
 
-    <ImageButton
-        android:id="@+id/pop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_margin="6dp"
-        android:background="@color/transparent"
-        android:onClick="showPopup1"
-        android:src="@drawable/popup_white" />
 
     <RelativeLayout
         android:layout_width="match_parent"

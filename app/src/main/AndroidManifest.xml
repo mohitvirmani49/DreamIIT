@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:dist="http://schemas.android.com/apk/distribution"
-    package="com.example.quiz">
+    package="com.mohit.quiz">
 
     <dist:module dist:instant="true" />
 
@@ -20,6 +20,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".OrganicV"></activity>
         <activity android:name=".InorganicVerify" />
+        <activity android:name=".Notificat" />
         <activity android:name=".PhysicalResultCheck" />
         <activity android:name=".OrganicResult" />
         <activity android:name=".InorganicResult" />
@@ -44,6 +45,9 @@
         <activity android:name=".Physical" />
         <activity android:name=".ChemChoise" />
         <activity android:name=".OverallRank" />
+        <activity android:name=".MathsForm" />
+        <activity android:name=".ChemF" />
+        <activity android:name=".PhyForm" />
         <activity android:name=".ReportExam" />
         <activity android:name=".FullTestResult" />
         <activity android:name=".FullTestExam" />
@@ -93,11 +97,14 @@
         <activity android:name=".Main5Activity" />
         <activity android:name=".Main4Activity" />
         <activity android:name=".Main3Activity" />
+        <activity android:name=".MF" />
+        <activity android:name=".PForm" />
+        <activity android:name=".CehmFormulae" />
         <activity
-            android:name=".Main2Activity"
+            android:name="com.mohit.quiz.Main2Activity"
             android:label="@string/title_activity_main2"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Main11Activity">
+        <activity android:name="com.mohit.quiz.Main11Activity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -109,7 +116,7 @@
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
 
-        <service android:name=".Messaging_Service">
+        <service android:name="com.mohit.quiz.Messaging_Service">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>

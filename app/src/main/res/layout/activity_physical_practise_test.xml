@@ -95,7 +95,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
         android:src="@drawable/image"
-        android:minHeight="95dp"
+        android:minHeight="100dp"
+        android:layout_margin="10dp"
         android:layout_below="@+id/number"/>
 
     <LinearLayout

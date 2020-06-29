@@ -67,7 +67,8 @@
         android:fontFamily="sans-serif"
         android:text="@string/practice_instructions"
         android:textColor="#130008"
-        android:textSize="15dp" />
+        android:textSize="18dp"
+        android:padding="10dp"/>
 
 
     <Button

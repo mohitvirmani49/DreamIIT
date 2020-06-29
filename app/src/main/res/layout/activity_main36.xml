@@ -88,13 +88,13 @@
         android:text="Q1"
         android:layout_below="@+id/my_marks"/>
 
-    <ImageView
+    <ozaydin.serkan.com.image_zoom_view.ImageViewZoom
         android:id="@+id/main_qs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
         android:src="@drawable/image"
-        android:minHeight="50dp"
+        android:minHeight="175dp"
         android:layout_below="@+id/number"/>
 
     <LinearLayout
