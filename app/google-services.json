@@ -8,9 +8,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:579849053093:android:4093d259fb237253407e4c",
+        "mobilesdk_app_id": "1:579849053093:android:93a1714c9c997d8e407e4c",
         "android_client_info": {
-          "package_name": "com.mohit.quiz"
+          "package_name": "com.mohitvirmani.dreamiit"
         }
       },
       "oauth_client": [
@@ -37,9 +37,9 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:579849053093:android:93a1714c9c997d8e407e4c",
+        "mobilesdk_app_id": "1:579849053093:android:3c7c93cdb6c9b296407e4c",
         "android_client_info": {
-          "package_name": "com.mohitvirmani.dreamiit"
+          "package_name": "com.mohitvirmani.quiz"
         }
       },
       "oauth_client": [
