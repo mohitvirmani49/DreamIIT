@@ -1,8 +1,8 @@
-DreamIIT: 
+This the the official source code repository for [DreamIIT](https://play.google.com/store/apps/details?id=com.mohitvirmani.quiz), a one stop solution for all your JEE Preparations
 
+The App consists of more than 15000 practice questions from Physics, Chemistry and Mathematics and a big community where you can ask and answer wach other's doubts.
 
-An android application under development that will aim to create the biggest community of JEE Aspirants where they can ask and answer each other doubts.
-The app will also have a very large database of around 50000 questions from Physics, Chemistry and Mathematics.
+Feel free to rate/review the app or to contribute via pull requests !
 
 © Mohit Virmani
 Licensed under [MIT License](LICENSE)
