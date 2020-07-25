@@ -111,7 +111,7 @@ public class InorganicVerify extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), Main27Activity.class));
+                startActivity(new Intent(getApplicationContext(), ChemistryCard.class));
             }
         });
 
@@ -253,7 +253,7 @@ public class InorganicVerify extends AppCompatActivity {
     private void submitTest() {
 
 
-        startActivity(new Intent(this, Main27Activity.class));
+        startActivity(new Intent(this, ChemistryCard.class));
 
     }
 
@@ -261,6 +261,6 @@ public class InorganicVerify extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         System.out.println("My My my");
-        startActivity(new Intent(this, Main27Activity.class));
+        startActivity(new Intent(this, ChemistryCard.class));
     }
 }

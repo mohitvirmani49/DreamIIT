@@ -39,7 +39,7 @@ import Model.Question;
 import Model.Test;
 import ozaydin.serkan.com.image_zoom_view.ImageViewZoom;
 
-public class Main36Activity extends AppCompatActivity {
+public class PhysicsChTst extends AppCompatActivity {
 
     private TextView timer;
     private int time = 1800;
@@ -98,7 +98,7 @@ public class Main36Activity extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new AlertDialog.Builder(Main36Activity.this)
+                new AlertDialog.Builder(PhysicsChTst.this)
                         .setMessage("Are you sure you want to submit the Test")
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
@@ -472,7 +472,7 @@ public class Main36Activity extends AppCompatActivity {
             @Override
             public void onFinish() {
                 timer.setText("Times Up!");
-                Toast.makeText(Main36Activity.this, "Time is up! Your test has been submitted automatically", Toast.LENGTH_LONG).show();
+                Toast.makeText(PhysicsChTst.this, "Time is up! Your test has been submitted automatically", Toast.LENGTH_LONG).show();
                 submitTest();
 
             }
@@ -486,7 +486,7 @@ public class Main36Activity extends AppCompatActivity {
     private void submitTest() {
         Intent intent = getIntent();
 
-        Intent myIntent = new Intent(Main36Activity.this, Main3Activity.class);
+        Intent myIntent = new Intent(PhysicsChTst.this, Main3Activity.class);
         myIntent.putExtra("intVariableName", correct);
         myIntent.putExtra("truth", truth);
         myIntent.putExtra("bluff", bluff);
@@ -503,12 +503,12 @@ public class Main36Activity extends AppCompatActivity {
         Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         v.vibrate(700);
 
-        new AlertDialog.Builder(Main36Activity.this)
+        new AlertDialog.Builder(PhysicsChTst.this)
                 .setMessage("Are you sure you want to exit the Test")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        startActivity(new Intent(Main36Activity.this, Main26Activity.class));
+                        startActivity(new Intent(PhysicsChTst.this, PhysicsCard.class));
                     }
                 }).setNegativeButton("No", null)
                 .show();
@@ -520,12 +520,12 @@ public class Main36Activity extends AppCompatActivity {
         Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         v.vibrate(700);
 
-        new AlertDialog.Builder(Main36Activity.this)
+        new AlertDialog.Builder(PhysicsChTst.this)
                 .setMessage("Are you sure you want to exit the Test")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        startActivity(new Intent(Main36Activity.this, Main26Activity.class));
+                        startActivity(new Intent(PhysicsChTst.this, PhysicsCard.class));
                     }
                 }).setNegativeButton("No", null)
                 .show();

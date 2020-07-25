@@ -14,6 +14,7 @@ import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -36,7 +37,7 @@ import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
 
-public class Main16Activity extends AppCompatActivity {
+public class QuestionsUpload extends AppCompatActivity {
     private static final int PICK_IMAGE_REQUEST = 1;
 
     private Button mButtonChooseImage;
@@ -47,6 +48,7 @@ public class Main16Activity extends AppCompatActivity {
     private ProgressBar mProgressBar;
     private LottieAnimationView prog;
     private Uri mImageUri;
+    private ImageButton back;
 
     private StorageReference mStorageRef;
     private DatabaseReference mDatabaseRef;
@@ -64,7 +66,7 @@ public class Main16Activity extends AppCompatActivity {
         mEditTextFileName = findViewById(R.id.main_doubt);
         mImageView = findViewById(R.id.imv1);
         mProgressBar = findViewById(R.id.progress_bar);
-
+        back = (ImageButton) findViewById(R.id.back);
         mStorageRef = FirebaseStorage.getInstance().getReference("uploads");
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("uploads");
 
@@ -83,6 +85,12 @@ public class Main16Activity extends AppCompatActivity {
                 mButtonUpload.setVisibility(View.INVISIBLE);
 
 
+            }
+        });
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(QuestionsUpload.this, ImagesActivity.class));
             }
         });
 
@@ -165,20 +173,20 @@ public class Main16Activity extends AppCompatActivity {
 
 //                                    mDatabaseRef.push().setValue(upload);
 //                                    mDatabaseRef.push().setValue(upload1);
-                                    Toast.makeText(Main16Activity.this, "Upload successful", Toast.LENGTH_LONG).show();
-                                    Intent intent = new Intent(Main16Activity.this, Main23Activity.class);
+                                    Toast.makeText(QuestionsUpload.this, "Upload successful", Toast.LENGTH_LONG).show();
+                                    Intent intent = new Intent(QuestionsUpload.this, Main23Activity.class);
                                     startActivity(intent);
 //                                    openImagesActivity();
 
                                 } else {
-                                    Toast.makeText(Main16Activity.this, "upload failed: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                                    Toast.makeText(QuestionsUpload.this, "upload failed: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
                                 }
                             }
                         })
                         .addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(Main16Activity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                                Toast.makeText(QuestionsUpload.this, e.getMessage(), Toast.LENGTH_LONG).show();
                             }
                         });
             }
@@ -206,8 +214,8 @@ public class Main16Activity extends AppCompatActivity {
 //                    username.trim(), pic.toString(), "", "", "",
 //                    "", "", "", "", "", "","");
 //            mDatabaseRef.push().setValue(upload);
-            Toast.makeText(Main16Activity.this, "Upload successful", Toast.LENGTH_LONG).show();
-            Intent intent = new Intent(Main16Activity.this, Main23Activity.class);
+            Toast.makeText(QuestionsUpload.this, "Upload successful", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(QuestionsUpload.this, Main23Activity.class);
             startActivity(intent);
 //            openImagesActivity();
 

@@ -358,7 +358,7 @@ public class MathsPracticeTest extends AppCompatActivity {
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        startActivity(new Intent(MathsPracticeTest.this, Main28Activity.class));
+                        startActivity(new Intent(MathsPracticeTest.this, MathsCard.class));
                     }
                 }).setNegativeButton("No", null)
                 .show();
@@ -375,7 +375,7 @@ public class MathsPracticeTest extends AppCompatActivity {
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        startActivity(new Intent(MathsPracticeTest.this, Main28Activity.class));
+                        startActivity(new Intent(MathsPracticeTest.this, MathsCard.class));
                     }
                 }).setNegativeButton("No", null)
                 .show();

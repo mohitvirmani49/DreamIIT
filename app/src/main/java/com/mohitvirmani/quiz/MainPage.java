@@ -26,14 +26,13 @@ import com.codemybrainsout.ratingdialog.RatingDialog;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class Main14Activity extends AppCompatActivity {
+public class MainPage extends AppCompatActivity {
     CardView cardView_phy, cardView_chem, cardView_maths, cardView_fulltest;
     RelativeLayout doubt;
     BottomNavigationView menu;
     private int menuId;
     private NotificationManagerCompat notificationManager;
     private TextView intro, intro1;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,12 +57,12 @@ public class Main14Activity extends AppCompatActivity {
                         return true;
 
                     case R.id.profile9:
-                        startActivity(new Intent(getApplicationContext(), Main13Activity.class));
+                        startActivity(new Intent(getApplicationContext(), Profile.class));
                         overridePendingTransition(0, 0);
                         return true;
 
                     case R.id.home:
-                        startActivity(new Intent(getApplicationContext(), Main14Activity.class));
+                        startActivity(new Intent(getApplicationContext(), MainPage.class));
                         overridePendingTransition(0, 0);
                         return true;
                 }
@@ -74,13 +73,14 @@ public class Main14Activity extends AppCompatActivity {
         try {
 
 
-//            FirebaseAuth mAuth = FirebaseAuth.getInstance();
-//
-//            FirebaseUser user = mAuth.getCurrentUser();
 
             SharedPreferences result = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
             String name = result.getString("name", "0");
-//            String name = intent.getStringExtra("name");
+
+            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("name", name);
+            editor.apply();
             intro.setText("Hello, " + name + " !");
 
             Shader textShader = new LinearGradient(0, 0, 0, intro.getTextSize(),
@@ -119,7 +119,7 @@ public class Main14Activity extends AppCompatActivity {
         cardView_phy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Main14Activity.this, Main26Activity.class);
+                Intent intent = new Intent(MainPage.this, PhysicsCard.class);
                 startActivity(intent);
 
             }
@@ -129,7 +129,7 @@ public class Main14Activity extends AppCompatActivity {
         cardView_chem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Main14Activity.this, Main27Activity.class);
+                Intent intent = new Intent(MainPage.this, ChemistryCard.class);
                 startActivity(intent);
 
 
@@ -139,7 +139,7 @@ public class Main14Activity extends AppCompatActivity {
         cardView_maths.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Main14Activity.this, Main28Activity.class);
+                Intent intent = new Intent(MainPage.this, MathsCard.class);
                 startActivity(intent);
 
 
@@ -148,7 +148,7 @@ public class Main14Activity extends AppCompatActivity {
         doubt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Main14Activity.this, ImagesActivity.class);
+                Intent intent = new Intent(MainPage.this, ImagesActivity.class);
                 startActivity(intent);
             }
         });
@@ -156,16 +156,13 @@ public class Main14Activity extends AppCompatActivity {
         cardView_fulltest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Main14Activity.this, FullTest.class);
+                Intent intent = new Intent(MainPage.this, FullTest.class);
                 startActivity(intent);
             }
         });
 
         notificationManager = NotificationManagerCompat.from(this);
-//        quer();
-
-
-//        updateToken(FirebaseInstanceId.getInstance().getToken());
+        System.out.println("Fatal Error: Web API and Console link are different! Get the console link from Signing in reports!");
 
 
     }
@@ -186,21 +183,20 @@ public class Main14Activity extends AppCompatActivity {
                         Intent intent = new Intent(Intent.ACTION_SEND);
                         intent.setType("text/plain");
                         intent.putExtra(Intent.EXTRA_SUBJECT, "DreamIIT");
-                        intent.putExtra(Intent.EXTRA_TEXT, "Check out this app! Best Student JEE Prep companion\n https://play.google.com/store/apps/details?id=com.mohitvirmani.quiz&hl=en&gl=US&fbclid=IwAR3bg3aD86fyGr1yzyHhQ6VD3B_gZsxNqg5L7NKobbqj_G0p4PYTJ1ZNwo0");
+                        intent.putExtra(Intent.EXTRA_TEXT, "Check out this app! Best Student JEE Prep companion\n https://lnkd.in/eesXWpk");
                         startActivity(Intent.createChooser(intent, "Invite Friends"));
                         return true;
 
 
                     case R.id.rate_us:
-                        System.out.println("Hello");
 
-                        final RatingDialog ratingDialog = new RatingDialog.Builder(Main14Activity.this)
+                        final RatingDialog ratingDialog = new RatingDialog.Builder(MainPage.this)
                                 .threshold(3)
                                 .playstoreUrl("https://play.google.com/store/apps/details?id=com.mohitvirmani.quiz&hl=en&gl=US&fbclid=IwAR3bg3aD86fyGr1yzyHhQ6VD3B_gZsxNqg5L7NKobbqj_G0p4PYTJ1ZNwo0")
                                 .onRatingBarFormSumbit(new RatingDialog.Builder.RatingDialogFormListener() {
                                     @Override
                                     public void onFormSubmitted(String feedback) {
-                                        Toast.makeText(Main14Activity.this, "Thanks for your feedback", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(MainPage.this, "Thanks for your feedback", Toast.LENGTH_SHORT).show();
 
                                     }
                                 }).build();
@@ -221,7 +217,7 @@ public class Main14Activity extends AppCompatActivity {
                             startActivity(chooser);
 
                         } else {
-                            Toast.makeText(Main14Activity.this, "Something went Goofy", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainPage.this, "Something went Goofy", Toast.LENGTH_SHORT).show();
 
                         }
 
@@ -234,12 +230,6 @@ public class Main14Activity extends AppCompatActivity {
             }
         });
     }
-
-//    @Override
-//    protected void onResume() {
-//        status();
-//        super.onResume();
-//    }
 
     private Boolean exit = false;
 
@@ -263,11 +253,6 @@ public class Main14Activity extends AppCompatActivity {
                     exit = false;
                 }
             }, 3 * 1000);
-
         }
-
     }
-
-
 }
-

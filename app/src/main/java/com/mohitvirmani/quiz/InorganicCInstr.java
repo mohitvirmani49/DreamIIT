@@ -54,7 +54,7 @@ public class InorganicCInstr extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(InorganicCInstr.this, Main26Activity.class);
+                Intent intent = new Intent(InorganicCInstr.this, PhysicsCard.class);
                 startActivity(intent);
             }
         });

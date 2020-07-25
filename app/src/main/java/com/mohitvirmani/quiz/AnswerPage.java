@@ -40,7 +40,7 @@ import java.util.List;
 
 import ozaydin.serkan.com.image_zoom_view.ImageViewZoom;
 
-public class Main17Activity extends AppCompatActivity implements AnsAdapter.OnItemClickListener {
+public class AnswerPage extends AppCompatActivity implements AnsAdapter.OnItemClickListener {
     private ImageViewZoom question_image;
     private TextView question_text;
     private CircularImageView question_user_pic;
@@ -132,8 +132,8 @@ public class Main17Activity extends AppCompatActivity implements AnsAdapter.OnIt
                     Ans_Upload upload = postSnapshot.getValue(Ans_Upload.class);
                     uploadsm.add(upload);
                 }
-                mAdapter = new AnsAdapter(Main17Activity.this, uploadsm);
-                mAdapter.setOnItemClickListener(Main17Activity.this);
+                mAdapter = new AnsAdapter(AnswerPage.this, uploadsm);
+                mAdapter.setOnItemClickListener(AnswerPage.this);
                 mRecyclerView.setAdapter(mAdapter);
 
             }
@@ -146,7 +146,7 @@ public class Main17Activity extends AppCompatActivity implements AnsAdapter.OnIt
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Main17Activity.this, ImagesActivity.class));
+                startActivity(new Intent(AnswerPage.this, ImagesActivity.class));
             }
         });
 //
@@ -230,26 +230,12 @@ public class Main17Activity extends AppCompatActivity implements AnsAdapter.OnIt
         question_user_name.setText(result.getString("username", "2"));
         Picasso.get().load(result.getString("userpic", "3")).fit().centerCrop().into(question_user_pic);
 
-        question_user_name.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Main17Activity.this, Main19Activity.class);
-                startActivity(intent);
-            }
-        });
-        question_user_pic.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Main17Activity.this, Main19Activity.class);
-                startActivity(intent);
-            }
-        });
 
 
         answer_question.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Main17Activity.this, Main18Activity.class);
+                Intent intent = new Intent(AnswerPage.this, AnswerUpload.class);
                 startActivity(intent);
             }
         });
@@ -265,7 +251,7 @@ public class Main17Activity extends AppCompatActivity implements AnsAdapter.OnIt
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(Main17Activity.this, ImagesActivity.class);
+        Intent intent = new Intent(AnswerPage.this, ImagesActivity.class);
         startActivity(intent);
     }
 
@@ -300,8 +286,8 @@ public class Main17Activity extends AppCompatActivity implements AnsAdapter.OnIt
                                         String key = foodSnapshot.getKey();
                                         DatabaseReference fbdatabase = FirebaseDatabase.getInstance().getReference().child("uploads").child(key);
                                         fbdatabase.removeValue();
-                                        Toast.makeText(Main17Activity.this, "Successfully deleted question", Toast.LENGTH_SHORT).show();
-                                        startActivity(new Intent(Main17Activity.this, ImagesActivity.class));
+                                        Toast.makeText(AnswerPage.this, "Successfully deleted question", Toast.LENGTH_SHORT).show();
+                                        startActivity(new Intent(AnswerPage.this, ImagesActivity.class));
 
                                     }
 
@@ -309,14 +295,14 @@ public class Main17Activity extends AppCompatActivity implements AnsAdapter.OnIt
 
                                 @Override
                                 public void onCancelled(@NonNull DatabaseError databaseError) {
-                                    Toast.makeText(Main17Activity.this, "Sorry, Something went goofy", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(AnswerPage.this, "Sorry, Something went goofy", Toast.LENGTH_SHORT).show();
 
                                 }
                             });
 
                         } else {
 
-                            Toast.makeText(Main17Activity.this, "Thanks for reporting the question, Our Moderators will have a look at it soon", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AnswerPage.this, "Thanks for reporting the question, Our Moderators will have a look at it soon", Toast.LENGTH_SHORT).show();
                         }
                         return true;
 

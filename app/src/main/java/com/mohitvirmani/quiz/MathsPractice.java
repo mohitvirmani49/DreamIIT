@@ -35,7 +35,7 @@ public class MathsPractice extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MathsPractice.this, Main28Activity.class);
+                Intent intent = new Intent(MathsPractice.this, MathsCard.class);
                 startActivity(intent);
             }
         });

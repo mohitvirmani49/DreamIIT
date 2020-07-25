@@ -7,7 +7,7 @@
     android:background="#fff"
     android:orientation="vertical"
     android:weightSum="5"
-    tools:context=".Main28Activity">
+    tools:context=".MathsCard">
 
 
     <RelativeLayout

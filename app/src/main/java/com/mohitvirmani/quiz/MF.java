@@ -54,7 +54,7 @@ public class MF extends AppCompatActivity {
                 try {
                     updateQuestion();
                 } catch (Exception e) {
-                    startActivity(new Intent(getApplicationContext(), Main28Activity.class));
+                    startActivity(new Intent(getApplicationContext(), MathsCard.class));
                 }
             }
         });
@@ -75,7 +75,7 @@ public class MF extends AppCompatActivity {
                     final Question question = dataSnapshot.getValue(Question.class);
                     Picasso.get().load(question.getQuestion()).fit().into(formulaes);
                 } catch (Exception e) {
-                    startActivity(new Intent(getApplicationContext(), Main28Activity.class));
+                    startActivity(new Intent(getApplicationContext(), MathsCard.class));
 
                 }
 

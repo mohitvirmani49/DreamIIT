@@ -8,7 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 
-public class Main27Activity extends AppCompatActivity {
+public class ChemistryCard extends AppCompatActivity {
     private ImageButton back;
     private CardView practice, challenge, formulae, doubts;
 
@@ -27,35 +27,35 @@ public class Main27Activity extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Main27Activity.this, Main14Activity.class);
+                Intent intent = new Intent(ChemistryCard.this, MainPage.class);
                 startActivity(intent);
             }
         });
         practice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Main27Activity.this, ChemChoise.class);
+                Intent intent = new Intent(ChemistryCard.this, ChemChoise.class);
                 startActivity(intent);
             }
         });
         challenge.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Main27Activity.this, Choise.class);
+                Intent intent = new Intent(ChemistryCard.this, Choise.class);
                 startActivity(intent);
             }
         });
         doubts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Main27Activity.this, ImagesActivity.class);
+                Intent intent = new Intent(ChemistryCard.this, ImagesActivity.class);
                 startActivity(intent);
             }
         });
         formulae.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Main27Activity.this, ChemF.class);
+                Intent intent = new Intent(ChemistryCard.this, ChemF.class);
                 startActivity(intent);
             }
         });
@@ -64,6 +64,6 @@ public class Main27Activity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(this, Main14Activity.class));
+        startActivity(new Intent(this, MainPage.class));
     }
 }

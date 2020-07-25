@@ -31,11 +31,11 @@ import com.google.firebase.storage.StorageTask;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Main21Activity extends AppCompatActivity {
+public class CommentPage extends AppCompatActivity {
     private ImageButton back_button;
     private RecyclerView recyclerView;
     private EditText comment;
-    private ImageButton send;
+    private ImageButton send, back;
     private DatabaseReference mDatabaseRef;
     private List<Comm> mUploads;
     private StorageTask mUploadTask;
@@ -50,7 +50,6 @@ public class Main21Activity extends AppCompatActivity {
     private static final String PIYUSH = "AW2yUDB0RehcD5SimfrJbSfVe7t2";
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,7 +59,13 @@ public class Main21Activity extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.comment_recycler);
         comment = (EditText) findViewById(R.id.main_comment);
         send = (ImageButton) findViewById(R.id.comment_send);
-
+        back = (ImageButton) findViewById(R.id.comments_back);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(CommentPage.this, AnswerPage.class));
+            }
+        });
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setReverseLayout(false);
@@ -76,7 +81,7 @@ public class Main21Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (mUploadTask != null && mUploadTask.isInProgress()) {
-                    Toast.makeText(Main21Activity.this, "Hold On !!! Uploading", Toast.LENGTH_LONG).show();
+                    Toast.makeText(CommentPage.this, "Hold On !!! Uploading", Toast.LENGTH_LONG).show();
                 } else {
                     uploadFile();
                     comment.getText();
@@ -124,7 +129,7 @@ public class Main21Activity extends AppCompatActivity {
                     Comm upload = postSnapshot.getValue(Comm.class);
                     mUploads.add(upload);
                 }
-                mAdapter = new MessageAdapter(Main21Activity.this, mUploads);
+                mAdapter = new MessageAdapter(CommentPage.this, mUploads);
                 recyclerView.setAdapter(mAdapter);
 
 
@@ -135,6 +140,7 @@ public class Main21Activity extends AppCompatActivity {
 
             }
         });
+
 
 
     }
@@ -192,8 +198,8 @@ public class Main21Activity extends AppCompatActivity {
                                         String key = foodSnapshot.getKey();
                                         DatabaseReference fbdatabase = FirebaseDatabase.getInstance().getReference().child("doubts").child(comm2);
                                         fbdatabase.removeValue();
-                                        Toast.makeText(Main21Activity.this, "Successfully deleted question", Toast.LENGTH_SHORT).show();
-                                        startActivity(new Intent(Main21Activity.this, Main17Activity.class));
+                                        Toast.makeText(CommentPage.this, "Successfully deleted question", Toast.LENGTH_SHORT).show();
+                                        startActivity(new Intent(CommentPage.this, AnswerPage.class));
 
                                     }
 
@@ -201,14 +207,14 @@ public class Main21Activity extends AppCompatActivity {
 
                                 @Override
                                 public void onCancelled(@NonNull DatabaseError databaseError) {
-                                    Toast.makeText(Main21Activity.this, "Sorry, Something went goofy", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(CommentPage.this, "Sorry, Something went goofy", Toast.LENGTH_SHORT).show();
 
                                 }
                             });
 
                         } else {
 
-                            Toast.makeText(Main21Activity.this, "Thanks for reporting the comments, Our Moderators will have a look at it soon", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(CommentPage.this, "Thanks for reporting the comments, Our Moderators will have a look at it soon", Toast.LENGTH_SHORT).show();
                         }
                         return true;
 
@@ -225,7 +231,7 @@ public class Main21Activity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(Main21Activity.this, Main17Activity.class);
+        Intent intent = new Intent(CommentPage.this, AnswerPage.class);
         startActivity(intent);
     }
 }

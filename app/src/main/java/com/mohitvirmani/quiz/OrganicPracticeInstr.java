@@ -36,7 +36,7 @@ public class OrganicPracticeInstr extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(OrganicPracticeInstr.this, Main27Activity.class);
+                Intent intent = new Intent(OrganicPracticeInstr.this, ChemistryCard.class);
                 startActivity(intent);
             }
         });

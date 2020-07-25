@@ -14,7 +14,7 @@ import android.widget.ImageButton;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Main30Activity extends AppCompatActivity implements Phy_Adapter.OnItemClickListener {
+public class PhyPracticeCh extends AppCompatActivity implements Phy_Adapter.OnItemClickListener {
     private RecyclerView mRecyclerView;
     private ImageButton back;
     private List<Phy> list;
@@ -54,17 +54,17 @@ public class Main30Activity extends AppCompatActivity implements Phy_Adapter.OnI
         list.add(new Phy("Atomic Structure, Nucleus and SemiConductors"));
 
 
-        Phy_Adapter mAdapter2 = new Phy_Adapter(Main30Activity.this, list);
+        Phy_Adapter mAdapter2 = new Phy_Adapter(PhyPracticeCh.this, list);
 //        mAdapter = new Phy_Adapter(Main29Activity.this,mUploads);
 
-        mAdapter2.setOnItemClickListener(Main30Activity.this);
+        mAdapter2.setOnItemClickListener(PhyPracticeCh.this);
         mRecyclerView.setAdapter(mAdapter2);
 
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Main30Activity.this, Main26Activity.class);
+                Intent intent = new Intent(PhyPracticeCh.this, PhysicsCard.class);
                 startActivity(intent);
             }
         });
@@ -86,7 +86,7 @@ public class Main30Activity extends AppCompatActivity implements Phy_Adapter.OnI
 
 
 
-        Intent intent = new Intent(Main30Activity.this, Main35Activity.class);
+        Intent intent = new Intent(PhyPracticeCh.this, PhysicsChInstr.class);
         startActivity(intent);
 
     }

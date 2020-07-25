@@ -11,12 +11,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
-public class Main35Activity extends AppCompatActivity {
+public class PracticeInstr extends AppCompatActivity {
     private ImageButton back;
     private Button next;
     private TextView tv;
@@ -24,31 +19,20 @@ public class Main35Activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main35);
+        setContentView(R.layout.activity_main33);
 
         back = (ImageButton) findViewById(R.id.back9);
         next = (Button) findViewById(R.id.next);
         tv = (TextView) findViewById(R.id.chapter8);
-
+//
         SharedPreferences result = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         final String chapter = result.getString("chapter", "0");
-
-
-        FirebaseUser u = FirebaseAuth.getInstance().getCurrentUser();
-
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("test").child(u.getUid()).child(chapter);
-        databaseReference.removeValue();
-
-        DatabaseReference d = FirebaseDatabase.getInstance().getReference("marks").child(u.getUid()).child(chapter);
-        d.removeValue();
-
-//        tv.setText(chapter);
 
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Main35Activity.this, Main26Activity.class);
+                Intent intent = new Intent(PracticeInstr.this, PhysicsCard.class);
                 startActivity(intent);
             }
         });
@@ -56,12 +40,11 @@ public class Main35Activity extends AppCompatActivity {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Main35Activity.this, Main36Activity.class);
-                intent.putExtra("val", chapter);
+                Intent intent = new Intent(PracticeInstr.this, PhysicsPrTest.class);
+                intent.putExtra("val",chapter);
                 startActivity(intent);
 
             }
         });
-
     }
 }

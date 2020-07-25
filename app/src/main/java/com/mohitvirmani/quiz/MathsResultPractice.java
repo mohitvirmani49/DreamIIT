@@ -80,7 +80,7 @@ public class MathsResultPractice extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MathsResultPractice.this, Main14Activity.class);
+                Intent intent = new Intent(MathsResultPractice.this, MainPage.class);
                 startActivity(intent);
             }
         });
@@ -93,6 +93,6 @@ public class MathsResultPractice extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(this, Main14Activity.class));
+        startActivity(new Intent(this, MainPage.class));
     }
 }

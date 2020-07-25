@@ -130,7 +130,7 @@ public class PhysicalResult extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(PhysicalResult.this, Main28Activity.class);
+                Intent intent = new Intent(PhysicalResult.this, MathsCard.class);
                 startActivity(intent);
             }
         });
@@ -192,6 +192,6 @@ public class PhysicalResult extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(this, Main27Activity.class));
+        startActivity(new Intent(this, ChemistryCard.class));
     }
 }

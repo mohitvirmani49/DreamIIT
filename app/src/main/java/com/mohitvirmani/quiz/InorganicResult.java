@@ -127,7 +127,7 @@ public class InorganicResult extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(InorganicResult.this, Main27Activity.class);
+                Intent intent = new Intent(InorganicResult.this, ChemistryCard.class);
                 startActivity(intent);
             }
         });
@@ -190,6 +190,6 @@ public class InorganicResult extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(this, Main27Activity.class));
+        startActivity(new Intent(this, ChemistryCard.class));
     }
 }

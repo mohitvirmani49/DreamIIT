@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
@@ -42,7 +43,7 @@ import com.facebook.FacebookSdk;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class Main12Activity extends AppCompatActivity {
+public class Login extends AppCompatActivity {
 
     // google
     private SignInButton signInButton;
@@ -68,6 +69,7 @@ public class Main12Activity extends AppCompatActivity {
     Timer timer;
     final long DELAY_MS = 500;//delay in milliseconds before task is to be executed
     final long PERIOD_MS = 3000;
+    private LottieAnimationView load;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +82,7 @@ public class Main12Activity extends AppCompatActivity {
 
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
-
+        load = (LottieAnimationView) findViewById(R.id.my_progress1);
 
         mPagerAdapter = new MPagerAdapter(layouts, this);
         viewPager.setAdapter(mPagerAdapter);
@@ -114,6 +116,7 @@ public class Main12Activity extends AppCompatActivity {
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                load.setVisibility(View.VISIBLE);
                 signIn();
             }
         });
@@ -179,7 +182,7 @@ public class Main12Activity extends AppCompatActivity {
 
                 } else {
                     Log.d(TAG1, "Failure", task.getException());
-                    Toast.makeText(Main12Activity.this, "Auth Failed", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Login.this, "Auth Failed", Toast.LENGTH_SHORT).show();
                     updateUI(null);
                 }
             }
@@ -202,7 +205,7 @@ public class Main12Activity extends AppCompatActivity {
 //                            editor.apply();
 //
 
-            Intent intent = new Intent(this, Main14Activity.class);
+            Intent intent = new Intent(this, MainPage.class);
 //            intent.putExtra("name", firebaseUser.getDisplayName());
             startActivity(intent);
 
@@ -249,10 +252,9 @@ public class Main12Activity extends AppCompatActivity {
 
         try {
             GoogleSignInAccount acc = completed_task.getResult(ApiException.class);
-            Toast.makeText(getApplicationContext(), "Signing Success", Toast.LENGTH_SHORT).show();
+
             FirebaseGoogleAuth(acc);
-            //email
-            firebaseAuth.sendPasswordResetEmail(acc.getEmail());
+
 
             SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
             SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -265,10 +267,10 @@ public class Main12Activity extends AppCompatActivity {
 //                            editor.apply();
 //
 
-            Intent intent = new Intent(Main12Activity.this, Main14Activity.class);
-            intent.putExtra("message", acc.getDisplayName());
-//            intent.putExtra("name", acc.getDisplayName());
-            startActivity(intent);
+//            Intent intent = new Intent(Main12Activity.this, Main14Activity.class);
+//            intent.putExtra("message", acc.getDisplayName());
+////            intent.putExtra("name", acc.getDisplayName());
+//            startActivity(intent);
 
 
         } catch (ApiException e) {
@@ -278,17 +280,38 @@ public class Main12Activity extends AppCompatActivity {
 
     }
 
-    private void FirebaseGoogleAuth(GoogleSignInAccount acct) {
+    private void FirebaseGoogleAuth(final GoogleSignInAccount acct) {
+        System.out.println("::::1::::2:::::3");
         AuthCredential authCredential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
         firebaseAuth.signInWithCredential(authCredential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    Toast.makeText(Main12Activity.this, "SignIn Success", Toast.LENGTH_SHORT).show();
+                    System.out.println("::::4::::5:::::6");
+
+
+                    boolean isNewUser = task.getResult().getAdditionalUserInfo().isNewUser();
+                    System.out.println(":::::::::::::::::::::::::::::::::::::::::::" + isNewUser);
+                    if (isNewUser) {
+
+                        //email
+
+                        firebaseAuth.sendPasswordResetEmail(acct.getEmail());
+                        System.out.println("first");
+
+                    }else{
+                        System.out.println("second");
+                    }
+
+                    System.out.println("OOpsey");
+                    Toast.makeText(getApplicationContext(), "Signing In Success", Toast.LENGTH_SHORT).show();
+
+//                    Toast.makeText(Main12Activity.this, "SignIn Success", Toast.LENGTH_SHORT).show();
                     FirebaseUser user = firebaseAuth.getCurrentUser();
+
                     updateUI(user);
                 } else {
-                    Toast.makeText(Main12Activity.this, "SignIn Failure", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Login.this, "SignIn Failure", Toast.LENGTH_SHORT).show();
                     updateUI(null);
                 }
 
@@ -302,7 +325,11 @@ public class Main12Activity extends AppCompatActivity {
                     String familyName = account.getFamilyName();
                     String email = account.getEmail();
                     Uri pic = account.getPhotoUrl();
-                    Toast.makeText(Main12Activity.this, personName + familyName + email, Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(Main12Activity.this, personName + familyName + email, Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(Login.this, MainPage.class);
+                    intent.putExtra("message", acct.getDisplayName());
+//            intent.putExtra("name", acc.getDisplayName());
+                    startActivity(intent);
 
                 }
 

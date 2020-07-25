@@ -8,14 +8,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 
-public class Main26Activity extends AppCompatActivity {
+public class MathsCard extends AppCompatActivity {
     private ImageButton back;
     private CardView practice, challenge, formulae, doubts;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main26);
+        setContentView(R.layout.activity_main28);
 
         back = (ImageButton) findViewById(R.id.back1);
         practice = (CardView) findViewById(R.id.phy_phy);
@@ -26,37 +27,35 @@ public class Main26Activity extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Main26Activity.this, Main14Activity.class);
+                Intent intent = new Intent(MathsCard.this, MainPage.class);
                 startActivity(intent);
             }
         });
         practice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Main26Activity.this, Main29Activity.class);
+                Intent intent = new Intent(MathsCard.this, MathsLayoutPractice.class);
                 startActivity(intent);
             }
         });
         challenge.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Main26Activity.this, Main30Activity.class);
+                Intent intent = new Intent(MathsCard.this, MathsChallenge.class);
                 startActivity(intent);
             }
         });
         doubts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Main26Activity.this, ImagesActivity.class);
+                Intent intent = new Intent(MathsCard.this, ImagesActivity.class);
                 startActivity(intent);
             }
         });
         formulae.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Main26Activity.this, PhyForm.class);
-                startActivity(intent);
-
+                startActivity(new Intent(MathsCard.this, MathsForm.class));
             }
         });
     }
@@ -64,6 +63,6 @@ public class Main26Activity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(this, Main14Activity.class));
+        startActivity(new Intent(this, MainPage.class));
     }
 }

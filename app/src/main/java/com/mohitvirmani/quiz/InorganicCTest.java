@@ -504,7 +504,7 @@ public class InorganicCTest extends AppCompatActivity {
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        startActivity(new Intent(InorganicCTest.this, Main27Activity.class));
+                        startActivity(new Intent(InorganicCTest.this, ChemistryCard.class));
                     }
                 }).setNegativeButton("No", null)
                 .show();
@@ -521,7 +521,7 @@ public class InorganicCTest extends AppCompatActivity {
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        startActivity(new Intent(InorganicCTest.this, Main27Activity.class));
+                        startActivity(new Intent(InorganicCTest.this, ChemistryCard.class));
                     }
                 }).setNegativeButton("No", null)
                 .show();

@@ -8,7 +8,7 @@
     android:background="#fff"
     android:orientation="vertical"
     android:weightSum="5"
-    tools:context=".Main27Activity">
+    tools:context=".ChemistryCard">
 
     <RelativeLayout
         android:id="@+id/my_layout2"

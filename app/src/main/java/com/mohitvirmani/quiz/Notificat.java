@@ -116,7 +116,7 @@ public class Notificat extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), Main14Activity.class);
+                Intent intent = new Intent(getApplicationContext(), MainPage.class);
                 startActivity(intent);
             }
         });
@@ -126,7 +126,7 @@ public class Notificat extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent intent = new Intent(getApplicationContext(), Main14Activity.class);
+        Intent intent = new Intent(getApplicationContext(), MainPage.class);
         startActivity(intent);
 
     }

@@ -57,7 +57,7 @@ public class FullTest extends AppCompatActivity implements Phy_Adapter.OnItemCli
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(FullTest.this, Main14Activity.class));
+                startActivity(new Intent(FullTest.this, MainPage.class));
             }
         });
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
@@ -91,6 +91,6 @@ public class FullTest extends AppCompatActivity implements Phy_Adapter.OnItemCli
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(this, Main14Activity.class));
+        startActivity(new Intent(this, MainPage.class));
     }
 }

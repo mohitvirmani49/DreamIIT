@@ -62,7 +62,7 @@ public class ImagesActivity extends AppCompatActivity implements ImageAdapter.On
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ImagesActivity.this, Main16Activity.class);
+                Intent intent = new Intent(ImagesActivity.this, QuestionsUpload.class);
                 startActivity(intent);
             }
         });
@@ -104,7 +104,7 @@ public class ImagesActivity extends AppCompatActivity implements ImageAdapter.On
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ImagesActivity.this, Main14Activity.class);
+                Intent intent = new Intent(ImagesActivity.this, MainPage.class);
                 startActivity(intent);
             }
         });
@@ -127,14 +127,14 @@ public class ImagesActivity extends AppCompatActivity implements ImageAdapter.On
         editor.putString("userpic", clickedItem.getmDisplayImage());
         editor.apply();
 
-        Intent intent = new Intent(this, Main17Activity.class);
+        Intent intent = new Intent(this, AnswerPage.class);
         startActivity(intent);
 
     }
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(ImagesActivity.this, Main14Activity.class);
+        Intent intent = new Intent(ImagesActivity.this, MainPage.class);
         startActivity(intent);
     }
 

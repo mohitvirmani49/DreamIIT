@@ -39,14 +39,14 @@ public class ChemChoise extends AppCompatActivity {
         organic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ChemChoise.this, Main31Activity.class));
+                startActivity(new Intent(ChemChoise.this, OrganicCh.class));
             }
         });
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ChemChoise.this, Main27Activity.class));
+                startActivity(new Intent(ChemChoise.this, ChemistryCard.class));
             }
         });
 
@@ -56,6 +56,6 @@ public class ChemChoise extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(ChemChoise.this, Main27Activity.class));
+        startActivity(new Intent(ChemChoise.this, ChemistryCard.class));
     }
 }

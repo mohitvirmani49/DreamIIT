@@ -26,7 +26,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import ozaydin.serkan.com.image_zoom_view.ImageViewZoom;
 
-public class Main37Activity extends AppCompatActivity {
+public class PhyResultVerify extends AppCompatActivity {
     private ImageButton back;
     private Button submit, nxt;
     private ImageViewZoom question_img;
@@ -245,7 +245,7 @@ public class Main37Activity extends AppCompatActivity {
     private void submitTest() {
 
 
-        startActivity(new Intent(this, Main26Activity.class));
+        startActivity(new Intent(this, PhysicsCard.class));
 
     }
 

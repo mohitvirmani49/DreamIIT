@@ -59,7 +59,7 @@ public class PhyForm extends AppCompatActivity implements Phy_Adapter.OnItemClic
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(PhyForm.this, Main26Activity.class);
+                Intent intent = new Intent(PhyForm.this, PhysicsCard.class);
                 startActivity(intent);
             }
         });
@@ -86,6 +86,6 @@ public class PhyForm extends AppCompatActivity implements Phy_Adapter.OnItemClic
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(this, Main26Activity.class));
+        startActivity(new Intent(this, PhysicsCard.class));
     }
 }

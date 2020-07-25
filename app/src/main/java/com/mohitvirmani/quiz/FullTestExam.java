@@ -436,7 +436,7 @@ public class FullTestExam extends AppCompatActivity {
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        startActivity(new Intent(FullTestExam.this, Main14Activity.class));
+                        startActivity(new Intent(FullTestExam.this, MainPage.class));
                     }
                 }).setNegativeButton("No", null)
                 .show();
@@ -453,7 +453,7 @@ public class FullTestExam extends AppCompatActivity {
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        startActivity(new Intent(FullTestExam.this, Main14Activity.class));
+                        startActivity(new Intent(FullTestExam.this, MainPage.class));
                     }
                 }).setNegativeButton("No", null)
                 .show();

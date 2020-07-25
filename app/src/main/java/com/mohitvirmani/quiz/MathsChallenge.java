@@ -61,7 +61,7 @@ public class MathsChallenge extends AppCompatActivity implements Phy_Adapter.OnI
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MathsChallenge.this, Main28Activity.class);
+                Intent intent = new Intent(MathsChallenge.this, MathsCard.class);
                 startActivity(intent);
             }
         });

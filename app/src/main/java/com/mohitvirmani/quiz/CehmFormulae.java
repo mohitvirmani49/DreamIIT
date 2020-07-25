@@ -54,7 +54,7 @@ public class CehmFormulae extends AppCompatActivity {
                 try {
                     updateQuestion();
                 } catch (Exception e) {
-                    startActivity(new Intent(getApplicationContext(), Main27Activity.class));
+                    startActivity(new Intent(getApplicationContext(), ChemistryCard.class));
                 }
             }
         });
@@ -74,7 +74,7 @@ public class CehmFormulae extends AppCompatActivity {
                     final Question question = dataSnapshot.getValue(Question.class);
                     Picasso.get().load(question.getQuestion()).fit().into(formulaes);
                 } catch (Exception e) {
-                    startActivity(new Intent(getApplicationContext(), Main27Activity.class));
+                    startActivity(new Intent(getApplicationContext(), ChemistryCard.class));
 
                 }
 

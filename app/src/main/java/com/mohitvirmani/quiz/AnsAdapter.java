@@ -153,7 +153,7 @@ public class AnsAdapter extends RecyclerView.Adapter<AnsAdapter.ImageViewHolder>
                 try {
 
 
-                    Intent intent = new Intent(getApplicationContext(), Main21Activity.class);
+                    Intent intent = new Intent(getApplicationContext(), CommentPage.class);
 
                     Ans_Upload clickedItem = uploadsm.get(position);
                     intent.putExtra("correct", clickedItem.getmName());

@@ -12,7 +12,7 @@ import android.widget.ImageButton;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Main32Activity extends AppCompatActivity {
+public class PhyicalCh extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private ImageButton back;
 
@@ -62,7 +62,7 @@ public class Main32Activity extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Main32Activity.this, Main27Activity.class);
+                Intent intent = new Intent(PhyicalCh.this, ChemistryCard.class);
                 startActivity(intent);
             }
         });

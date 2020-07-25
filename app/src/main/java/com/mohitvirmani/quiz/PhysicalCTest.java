@@ -508,7 +508,7 @@ public class PhysicalCTest extends AppCompatActivity {
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        startActivity(new Intent(PhysicalCTest.this, Main27Activity.class));
+                        startActivity(new Intent(PhysicalCTest.this, ChemistryCard.class));
                     }
                 }).setNegativeButton("No", null)
                 .show();
@@ -525,7 +525,7 @@ public class PhysicalCTest extends AppCompatActivity {
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        startActivity(new Intent(PhysicalCTest.this, Main27Activity.class));
+                        startActivity(new Intent(PhysicalCTest.this, ChemistryCard.class));
                     }
                 }).setNegativeButton("No", null)
                 .show();

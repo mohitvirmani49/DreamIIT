@@ -53,7 +53,7 @@ public class Physical extends AppCompatActivity implements Phy_Adapter.OnItemCli
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Physical.this, Main27Activity.class);
+                Intent intent = new Intent(Physical.this, ChemistryCard.class);
                 startActivity(intent);
             }
         });
@@ -84,6 +84,6 @@ public class Physical extends AppCompatActivity implements Phy_Adapter.OnItemCli
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(this, Main27Activity.class));
+        startActivity(new Intent(this, ChemistryCard.class));
     }
 }

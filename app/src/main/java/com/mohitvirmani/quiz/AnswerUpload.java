@@ -42,7 +42,7 @@ import ozaydin.serkan.com.image_zoom_view.ImageViewZoom;
 
 import static com.mohitvirmani.quiz.App.CHANNEL_1_ID;
 
-public class Main18Activity extends AppCompatActivity {
+public class AnswerUpload extends AppCompatActivity {
     private static final int PICK_IMAGE_REQUEST = 1;
     EditText main_ans;
     ImageButton prev_img_qs;
@@ -89,7 +89,7 @@ public class Main18Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (mUploadTask != null && mUploadTask.isInProgress()) {
-                    Toast.makeText(Main18Activity.this, "Upload in progress", Toast.LENGTH_LONG).show();
+                    Toast.makeText(AnswerUpload.this, "Upload in progress", Toast.LENGTH_LONG).show();
 
                 } else {
                     uploadFile();
@@ -123,7 +123,7 @@ public class Main18Activity extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Main18Activity.this, Main17Activity.class));
+                startActivity(new Intent(AnswerUpload.this, AnswerPage.class));
             }
         });
     }
@@ -227,19 +227,19 @@ public class Main18Activity extends AppCompatActivity {
 //                                        }
 //                                    });
 
-                                    Toast.makeText(Main18Activity.this, "Upload successful", Toast.LENGTH_LONG).
+                                    Toast.makeText(AnswerUpload.this, "Upload successful", Toast.LENGTH_LONG).
 
                                             show();
 
                                 } else {
-                                    Toast.makeText(Main18Activity.this, "upload failed: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                                    Toast.makeText(AnswerUpload.this, "upload failed: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
                                 }
                             }
                         }).
                         addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(Main18Activity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                                Toast.makeText(AnswerUpload.this, e.getMessage(), Toast.LENGTH_LONG).show();
                             }
                         });
             }
@@ -301,18 +301,18 @@ public class Main18Activity extends AppCompatActivity {
 ////            });
 
 
-            Toast.makeText(Main18Activity.this, "Upload successful", Toast.LENGTH_LONG).show();
+            Toast.makeText(AnswerUpload.this, "Upload successful", Toast.LENGTH_LONG).show();
             openImagesActivity();
         }
     }
 
     private void openImagesActivity() {
-        Intent intent = new Intent(this, Main17Activity.class);
+        Intent intent = new Intent(this, AnswerPage.class);
         startActivity(intent);
     }
 
     private void notify_person() {
-        Notification notification = new NotificationCompat.Builder(Main18Activity.this, CHANNEL_1_ID)
+        Notification notification = new NotificationCompat.Builder(AnswerUpload.this, CHANNEL_1_ID)
                 .setSmallIcon(R.drawable.mohitpic)
                 .setContentTitle("New Comment")
                 .setContentText("Your question has been answered")
@@ -329,6 +329,6 @@ public class Main18Activity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(this, Main17Activity.class));
+        startActivity(new Intent(this, AnswerPage.class));
     }
 }

@@ -61,7 +61,7 @@ public class MathsLayoutPractice extends AppCompatActivity implements Phy_Adapte
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MathsLayoutPractice.this, Main29Activity.class));
+                startActivity(new Intent(MathsLayoutPractice.this, PhysicsRecyclerV.class));
             }
         });
 

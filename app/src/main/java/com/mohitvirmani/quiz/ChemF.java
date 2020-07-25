@@ -55,7 +55,7 @@ public class ChemF extends AppCompatActivity implements Phy_Adapter.OnItemClickL
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ChemF.this, Main27Activity.class);
+                Intent intent = new Intent(ChemF.this, ChemistryCard.class);
                 startActivity(intent);
             }
         });

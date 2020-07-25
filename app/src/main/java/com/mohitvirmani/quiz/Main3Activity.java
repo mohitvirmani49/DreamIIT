@@ -128,14 +128,14 @@ public class Main3Activity extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Main3Activity.this, Main26Activity.class);
+                Intent intent = new Intent(Main3Activity.this, PhysicsCard.class);
                 startActivity(intent);
             }
         });
         check.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Main3Activity.this, Main37Activity.class);
+                Intent intent = new Intent(Main3Activity.this, PhyResultVerify.class);
                 startActivity(intent);
 
             }
@@ -190,7 +190,7 @@ public class Main3Activity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent intent = new Intent(Main3Activity.this, Main26Activity.class);
+        Intent intent = new Intent(Main3Activity.this, PhysicsCard.class);
         startActivity(intent);
     }
 }

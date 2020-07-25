@@ -52,7 +52,7 @@ public class InorganicChallenge extends AppCompatActivity implements Phy_Adapter
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(InorganicChallenge.this, Main27Activity.class);
+                Intent intent = new Intent(InorganicChallenge.this, ChemistryCard.class);
                 startActivity(intent);
             }
         });

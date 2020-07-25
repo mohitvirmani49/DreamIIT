@@ -7,7 +7,7 @@
     android:background="#fff"
     android:orientation="vertical"
     android:weightSum="5"
-    tools:context=".Main26Activity">
+    tools:context=".PhysicsCard">
 
     <RelativeLayout
         android:id="@+id/my_layout"

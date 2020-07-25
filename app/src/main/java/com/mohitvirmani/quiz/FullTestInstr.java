@@ -38,7 +38,7 @@ public class FullTestInstr extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(FullTestInstr.this, Main26Activity.class);
+                Intent intent = new Intent(FullTestInstr.this, PhysicsCard.class);
                 startActivity(intent);
             }
         });

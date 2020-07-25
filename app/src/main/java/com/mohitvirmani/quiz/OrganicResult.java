@@ -129,7 +129,7 @@ public class OrganicResult extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(OrganicResult.this, Main27Activity.class);
+                Intent intent = new Intent(OrganicResult.this, ChemistryCard.class);
                 startActivity(intent);
             }
         });
@@ -192,6 +192,6 @@ public class OrganicResult extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(this, Main27Activity.class));
+        startActivity(new Intent(this, ChemistryCard.class));
     }
 }

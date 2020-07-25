@@ -54,7 +54,7 @@ public class PhysicalChallenge extends AppCompatActivity implements Phy_Adapter.
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(PhysicalChallenge.this, Main27Activity.class);
+                Intent intent = new Intent(PhysicalChallenge.this, ChemistryCard.class);
                 startActivity(intent);
             }
         });

@@ -135,7 +135,7 @@ public class MathsChallengeResult extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MathsChallengeResult.this, Main28Activity.class);
+                Intent intent = new Intent(MathsChallengeResult.this, MathsCard.class);
                 startActivity(intent);
             }
         });
@@ -199,6 +199,6 @@ public class MathsChallengeResult extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(this, Main28Activity.class));
+        startActivity(new Intent(this, MathsCard.class));
     }
 }

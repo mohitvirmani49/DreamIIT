@@ -35,7 +35,7 @@ public class PhysicalPracticeInstr extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(PhysicalPracticeInstr.this, Main27Activity.class);
+                Intent intent = new Intent(PhysicalPracticeInstr.this, ChemistryCard.class);
                 startActivity(intent);
             }
         });
@@ -54,7 +54,7 @@ public class PhysicalPracticeInstr extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent intent = new Intent(PhysicalPracticeInstr.this, Main27Activity.class);
+        Intent intent = new Intent(PhysicalPracticeInstr.this, ChemistryCard.class);
         startActivity(intent);
     }
 }

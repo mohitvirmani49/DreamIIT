@@ -50,7 +50,7 @@ public class MathsChallengeInstr extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MathsChallengeInstr.this, Main26Activity.class);
+                Intent intent = new Intent(MathsChallengeInstr.this, PhysicsCard.class);
                 startActivity(intent);
             }
         });

@@ -59,7 +59,7 @@ public class OverallRank extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(OverallRank.this, Main13Activity.class));
+                startActivity(new Intent(OverallRank.this, Profile.class));
             }
         });
 
@@ -69,6 +69,6 @@ public class OverallRank extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(OverallRank.this, Main13Activity.class));
+        startActivity(new Intent(OverallRank.this, Profile.class));
     }
 }

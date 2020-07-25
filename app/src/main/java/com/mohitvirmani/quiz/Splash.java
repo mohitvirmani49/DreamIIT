@@ -13,7 +13,7 @@ import org.apache.commons.io.IOUtils;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class Main11Activity extends AppCompatActivity {
+public class Splash extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,8 +33,8 @@ public class Main11Activity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Main11Activity.this.startActivity(new Intent(Main11Activity.this, Main12Activity.class));
-                Main11Activity.this.finish();
+                Splash.this.startActivity(new Intent(Splash.this, Login.class));
+                Splash.this.finish();
             }
         }, 1800);
 
