@@ -4,5 +4,4 @@ The App consists of more than 15000 practice questions from Physics, Chemistry a
 
 Feel free to rate/review the app or to contribute via pull requests !
 
-© Mohit Virmani
-Licensed under [MIT License](LICENSE)
+
